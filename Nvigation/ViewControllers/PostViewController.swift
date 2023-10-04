@@ -10,30 +10,33 @@ import UIKit
 class PostViewController: UIViewController {
     
     var post: Post?
+    
+    private static let defaultTitle = "Post"
+    private static let infoButtonImage = UIImage(systemName: "arrowshape.turn.up.forward.circle")
 
+    // Создаем кнопку в навигационной панели с иконкой
+    
+        lazy var infoButton: UIBarButtonItem = {
+            let button = UIBarButtonItem(
+                image: PostViewController.infoButtonImage,
+                style: .plain,
+                target: self,
+                action: #selector(showInfoViewController(_:)))
+            return button
+        }()
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Устанавливаем заголовок контроллера, используя заголовок поста (если он есть)
-        
-        self.title = post?.title ?? "Post"
-        //Меняем цвет view
-        self.view.backgroundColor = .systemGray6
-        
-        // Создаем кнопку в навигационной панели с иконкой
-        
-        let button = UIBarButtonItem(
-            image: UIImage(systemName: "arrowshape.turn.up.forward.circle"),
-            style: .plain,
-            target: self,
-            action: #selector(buttonTapped(_:)))
+            super.viewDidLoad()
+            
+            self.title = post?.title ?? PostViewController.defaultTitle
+            self.view.backgroundColor = .systemGray6
         
         // Устанавливаем созданную кнопку как правую кнопку в навигационной панели
         
-        self.navigationItem.rightBarButtonItem = button
-    }
+            self.navigationItem.rightBarButtonItem = infoButton
+        }
 
-    @objc func buttonTapped(_ sender: UIBarButtonItem) {
+    @objc func showInfoViewController(_ sender: UIBarButtonItem) {
         let infoViewController = InfoViewController()
         
         infoViewController.modalTransitionStyle = .coverVertical

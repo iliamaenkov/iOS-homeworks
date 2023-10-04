@@ -24,29 +24,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Создаем контроллер представления для ленты новостей и соответствующий навигационный контроллер
         
-        let feedViewController = FeedViewController()
-        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
-        feedViewController.tabBarItem = UITabBarItem(
-            title: "Feed",
-            image: UIImage(systemName: "newspaper"),
-            tag: 0
-        )
+        let feedViewController: FeedViewController = {
+            let viewController = FeedViewController()
+            viewController.tabBarItem = UITabBarItem(
+                title: "Feed",
+                image: UIImage(systemName: "newspaper"),
+                tag: 0
+            )
+            return viewController
+        }()
         
         // Создаем контроллер представления для профиля и соответствующий навигационный контроллер
         
-        let profileViewController = ProfileViewController()
+        let profileViewController: ProfileViewController = {
+            let viewController = ProfileViewController()
+            viewController.tabBarItem = UITabBarItem(
+                title: "Profile",
+                image: UIImage(systemName: "person.circle"),
+                tag: 1
+            )
+            return viewController
+        }()
+        
+        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
-        profileViewController.tabBarItem = UITabBarItem(
-            title: "Profile",
-            image: UIImage(systemName: "person.circle"),
-            tag: 1
-        )
         
-        let tabBarController = UITabBarController()
-        
-        let controllers = [feedNavigationController, profileNavigationController]
-        tabBarController.viewControllers = controllers
-        
+        let tabBarController: UITabBarController = {
+            let controller = UITabBarController()
+            controller.viewControllers = [feedNavigationController, profileNavigationController]
+            return controller
+        }()
         
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()

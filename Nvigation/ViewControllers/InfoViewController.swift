@@ -11,26 +11,30 @@ class InfoViewController: UIViewController {
     
     var post: Post?
     
+    // Создаем кнопку "Show Alert"
+    
+    lazy var showAlert: UIButton = {
+            let button = UIButton(type: .system)
+            button.setTitle("Show Alert", for: .normal)
+            button.addTarget(self, action: #selector(showAlert(_:)), for: .touchUpInside)
+            return button
+        }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+    
+        view.addSubview(showAlert)
         
-        // Создаем кнопку "Show Alert"
-        
-        let showAlertButton = UIButton(type: .system)
-        showAlertButton.setTitle("Show Alert", for: .normal)
-        showAlertButton.addTarget(self, action: #selector(showAlertTapped(_:)), for: .touchUpInside)
-        
-        showAlertButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(showAlertButton)
+        showAlert.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            showAlertButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            showAlertButton.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            showAlert.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            showAlert.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
-    @objc func showAlertTapped(_ sender: UIButton) {
+    @objc func showAlert(_ sender: UIButton) {
         
         // Создаем экземпляр UIAlertController для отображения всплывающего сообщения
         
@@ -40,7 +44,7 @@ class InfoViewController: UIViewController {
             preferredStyle: .alert
         )
         
-        // Создаем кнопки "OK" и "Cancel" для UIAlertController, а также два безымянных замыкания для вывода сообщений в консоль при нажатии на соответствующие кнопки
+        // Создаем кнопки "OK" и "Cancel" для UIAlertController, которые будут выводить соответствующие сообщения в консоль
         
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             print("OK button tapped")

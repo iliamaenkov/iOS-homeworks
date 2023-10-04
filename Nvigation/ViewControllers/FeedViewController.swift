@@ -11,19 +11,23 @@ class FeedViewController: UIViewController {
     
     let post = Post(title: "New Post")
     
+    //Добавляем кнопку для показа деталей поста
+    
+    lazy var showPostButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Show Post", for: .normal)
+        button.addTarget(self, action: #selector(showPostTapped), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGray5
         self.title = "Feed"
-        
-        //Добавляем кнопку для показа деталей поста
-        
-        let showPostButton = UIButton(type: .system)
-        showPostButton.setTitle("Show Post", for: .normal)
-        showPostButton.addTarget(self, action: #selector(showPostTapped), for: .touchUpInside)
+
+        view.addSubview(showPostButton)
         
         showPostButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(showPostButton)
         
         NSLayoutConstraint.activate([
             showPostButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -34,7 +38,7 @@ class FeedViewController: UIViewController {
     @objc func showPostTapped() {
         let postViewController = PostViewController()
         postViewController.post = post
-        
+
         // Помещаем PostViewController в стек навигации для отображения
         
         self.navigationController?.pushViewController(postViewController, animated: true)
