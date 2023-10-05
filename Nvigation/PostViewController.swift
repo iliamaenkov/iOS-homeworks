@@ -13,29 +13,29 @@ class PostViewController: UIViewController {
     
     private static let defaultTitle = "Post"
     private static let infoButtonImage = UIImage(systemName: "arrowshape.turn.up.forward.circle")
-
+    
     // Создаем кнопку в навигационной панели с иконкой
     
-        lazy var infoButton: UIBarButtonItem = {
-            let button = UIBarButtonItem(
-                image: PostViewController.infoButtonImage,
-                style: .plain,
-                target: self,
-                action: #selector(showInfoViewController(_:)))
-            return button
-        }()
+    private lazy var infoButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            image: PostViewController.infoButtonImage,
+            style: .plain,
+            target: self,
+            action: #selector(showInfoViewController(_:)))
+        return button
+    }()
     
     override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            self.title = post?.title ?? PostViewController.defaultTitle
-            self.view.backgroundColor = .systemGray6
+        super.viewDidLoad()
+        
+        self.title = post?.title ?? PostViewController.defaultTitle
+        self.view.backgroundColor = .systemGray6
         
         // Устанавливаем созданную кнопку как правую кнопку в навигационной панели
         
-            self.navigationItem.rightBarButtonItem = infoButton
-        }
-
+        self.navigationItem.rightBarButtonItem = infoButton
+    }
+    
     @objc func showInfoViewController(_ sender: UIBarButtonItem) {
         let infoViewController = InfoViewController()
         
