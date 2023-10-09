@@ -13,17 +13,17 @@ class InfoViewController: UIViewController {
     
     // Создаем кнопку "Show Alert"
     
-    lazy var showAlert: UIButton = {
-            let button = UIButton(type: .system)
-            button.setTitle("Show Alert", for: .normal)
-            button.addTarget(self, action: #selector(showAlert(_:)), for: .touchUpInside)
-            return button
-        }()
+    private lazy var showAlert: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Show Alert", for: .normal)
+        button.addTarget(self, action: #selector(showAlert(_:)), for: .touchUpInside)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-    
+        
         view.addSubview(showAlert)
         
         showAlert.translatesAutoresizingMaskIntoConstraints = false
@@ -53,12 +53,12 @@ class InfoViewController: UIViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
             print("Cancel button tapped")
         }
-
+        
         // Добавляем созданные кнопки к UIAlertController
         
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
-
+        
         self.present(alertController, animated: true, completion: nil)
     }
 }

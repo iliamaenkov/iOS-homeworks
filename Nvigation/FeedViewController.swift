@@ -13,7 +13,7 @@ class FeedViewController: UIViewController {
     
     //Добавляем кнопку для показа деталей поста
     
-    lazy var showPostButton: UIButton = {
+    private lazy var showPostButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Show Post", for: .normal)
         button.addTarget(self, action: #selector(showPostTapped), for: .touchUpInside)
@@ -24,7 +24,7 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .systemGray5
         self.title = "Feed"
-
+        
         view.addSubview(showPostButton)
         
         showPostButton.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ class FeedViewController: UIViewController {
     @objc func showPostTapped() {
         let postViewController = PostViewController()
         postViewController.post = post
-
+        
         // Помещаем PostViewController в стек навигации для отображения
         
         self.navigationController?.pushViewController(postViewController, animated: true)
