@@ -9,11 +9,11 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    private var statusText: String = ""
+    private var statusTextField: String = ""
     
     //MARK: - Creating UI Elements
     
-    private let avatarImage: UIImageView = {
+    private let avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Kenobi")
         imageView.layer.cornerRadius = 50
@@ -23,7 +23,7 @@ class ProfileHeaderView: UIView {
         return imageView
     }()
     
-    private let profileNameLabel: UILabel = {
+    private let fullNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Jedi Master Obi-Van Kenobi"
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
@@ -39,7 +39,7 @@ class ProfileHeaderView: UIView {
         return label
     }()
     
-    private let statusButton: UIButton = {
+    private let setStatusButton: UIButton = {
         let button = UIButton()
         button.setTitle("Show status", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -73,85 +73,65 @@ class ProfileHeaderView: UIView {
         commonInit()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    
+    private func commonInit() {
+        
+        setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        paddedTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        
+        addSubview(avatarImageView)
+        addSubview(fullNameLabel)
+        addSubview(statusLabel)
+        addSubview(setStatusButton)
+        addSubview(paddedTextField)
+        
         setupConstraints()
     }
     
-    private func commonInit() {
-        statusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        paddedTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        
-        addSubview(avatarImage)
-        addSubview(profileNameLabel)
-        addSubview(statusLabel)
-        addSubview(statusButton)
-        addSubview(paddedTextField)
-    }
-    
     @objc func buttonPressed() {
-        statusLabel.text = statusText
+        statusLabel.text = statusTextField
     }
     
     @objc func statusTextChanged(_ textField: UITextField) {
-        statusText = textField.text ?? ""
+        statusTextField = textField.text ?? ""
     }
     
     //MARK: - Setting constraints
     
     private func setupConstraints() {
-        let safeAreaInsets = self.safeAreaInsets
-        let viewWidth = self.bounds.size.width
-        let viewHeight = self.bounds.size.height
-        let padding: CGFloat = 16
-        let paddingOrientation: CGFloat = viewWidth > viewHeight ? 100 : 0
         
-        avatarImage.frame = CGRect(
-            x: safeAreaInsets.left + padding,
-            y: safeAreaInsets.top + padding,
-            width: 100,
-            height: 100
-        )
+        let safeAreaGuide = self.safeAreaLayoutGuide
         
-        statusButton.frame = CGRect(
-            x: safeAreaInsets.left + padding,
-            y: avatarImage.frame.maxY + padding + 20,
-            width: viewWidth - padding * 2 - paddingOrientation,
-            height: 50
-        )
+        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+        setStatusButton.translatesAutoresizingMaskIntoConstraints = false
+        fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        paddedTextField.translatesAutoresizingMaskIntoConstraints = false
         
-        profileNameLabel.frame = CGRect(
-            x: avatarImage.frame.maxX + padding,
-            y: safeAreaInsets.top + 27,
-            width: viewWidth - avatarImage.frame.maxX - 2 * padding,
-            height: profileNameLabel.font.lineHeight
-        )
-        
-        statusLabel.frame = CGRect(
-            x: avatarImage.frame.maxX + padding,
-            y: statusButton.frame.minY - 54 - statusLabel.font.lineHeight,
-            width: profileNameLabel.frame.width,
-            height: statusLabel.font.lineHeight
-        )
-        
-        paddedTextField.frame = CGRect(
-            x: avatarImage.frame.maxX + padding,
-            y: statusButton.frame.minY - 50,
-            width: profileNameLabel.frame.width,
-            height: 40
-        )
+        NSLayoutConstraint.activate([
+            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16),
+            avatarImageView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
+            
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 26),
+            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            fullNameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
+            
+            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 16),
+            statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            statusLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
+            
+            paddedTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
+            paddedTextField.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
+            paddedTextField.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16)
+        ])
     }
 }
 
-class TextFieldWithPadding: UITextField {
-    var textPadding = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
-    
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: textPadding)
-    }
-    
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: textPadding)
-    }
-}
 
