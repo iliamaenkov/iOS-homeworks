@@ -11,15 +11,6 @@ class FeedViewController: UIViewController {
     
     let post = Post(title: "New Post")
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .systemGray5
-        self.title = "Feed"
-        
-        view.addSubview(stackView)
-        setupContraints()
-    }
-    
     private lazy var stackView: UIStackView = { [unowned self] in
         let stackView = UIStackView()
         
@@ -114,7 +105,16 @@ class FeedViewController: UIViewController {
         ])
     }
     
-    @objc private func showPostButtonTapped() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .systemGray5
+        self.title = "Feed"
+        
+        view.addSubview(stackView)
+        setupContraints()
+    }
+    
+    @objc func showPostButtonTapped() {
         let postViewController = PostViewController()
         postViewController.post = post
         self.navigationController?.pushViewController(postViewController, animated: true)
