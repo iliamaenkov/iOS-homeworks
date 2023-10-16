@@ -84,7 +84,7 @@ class LogInViewController: UIViewController {
     
     
     
-    //MARK: - Lyfecycle
+    //MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,7 +168,7 @@ class LogInViewController: UIViewController {
         stackView.addArrangedSubview(passwordTextField)
     }
     
-    // Constraints
+    //MARK: - Setting constraints
     
     private func setupConstraints() {
         let safeAreaGuide = view.safeAreaLayoutGuide

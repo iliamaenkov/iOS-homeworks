@@ -9,9 +9,9 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
-    var post: Post?
+    var postTitle: PostTitle?
     
-    // Создаем кнопку "Show Alert"
+    //MARK: - UI Elements
     
     private lazy var showAlert: UIButton = {
         let button = UIButton(type: .system)
@@ -19,6 +19,8 @@ class InfoViewController: UIViewController {
         button.addTarget(self, action: #selector(showAlert(_:)), for: .touchUpInside)
         return button
     }()
+    
+    //MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +36,11 @@ class InfoViewController: UIViewController {
         ])
     }
     
+    //MARK: - Actions
+    
     @objc func showAlert(_ sender: UIButton) {
         
-        // Создаем экземпляр UIAlertController для отображения всплывающего сообщения
+        // Create an instance of UIAlertController to display a pop-up message
         
         let alertController = UIAlertController(
             title: "Alert Window",
@@ -44,7 +48,7 @@ class InfoViewController: UIViewController {
             preferredStyle: .alert
         )
         
-        // Создаем кнопки "OK" и "Cancel" для UIAlertController, которые будут выводить соответствующие сообщения в консоль
+        // Create "OK" and "Cancel" buttons for the UIAlertController, which will display corresponding messages in the console
         
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             print("OK button tapped")
@@ -54,7 +58,7 @@ class InfoViewController: UIViewController {
             print("Cancel button tapped")
         }
         
-        // Добавляем созданные кнопки к UIAlertController
+        // Add the created buttons to the UIAlertController
         
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)

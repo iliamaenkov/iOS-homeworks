@@ -68,6 +68,8 @@ class ProfileHeaderView: UIView {
         return textField
     }()
     
+    // MARK: - Initialization
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -94,7 +96,7 @@ class ProfileHeaderView: UIView {
         setupConstraints()
     }
     
-    //MARK: -Actions
+    //MARK: - Actions
     
     @objc func buttonPressed() {
             statusLabel.text = statusTextField

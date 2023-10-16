@@ -9,9 +9,14 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    let post = Post(title: "New Post")
+    // MARK: - Properties
     
-    private lazy var stackView: UIStackView = { [unowned self] in
+    let postTitle = PostTitle(title: "New Post")
+    
+    // MARK: - UI Elements
+    
+    private lazy var stackView: UIStackView = { [weak self] in
+        guard let self = self else { return UIStackView() }
         let stackView = UIStackView()
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -76,8 +81,28 @@ class FeedViewController: UIViewController {
         return view
     }()
     
+    // MARK: - View Controller Lifecycle
     
-    private func setupContraints() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .systemGray5
+        self.title = "Feed"
+        
+        view.addSubview(stackView)
+        setupConstraints()
+    }
+    
+    // MARK: - Actions
+    
+    @objc func showPostButtonTapped() {
+        let postViewController = PostViewController()
+        postViewController.postTitle = postTitle
+        self.navigationController?.pushViewController(postViewController, animated: true)
+    }
+    
+    // MARK: - Setting constraints
+    
+    private func setupConstraints() {
         
         let safeAreaGuide = self.view.safeAreaLayoutGuide
         
@@ -85,7 +110,6 @@ class FeedViewController: UIViewController {
         let safeAreaGuideView2 = self.viewSecondButton.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            
             stackView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
             stackView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
@@ -100,23 +124,7 @@ class FeedViewController: UIViewController {
             secondButton.leadingAnchor.constraint(equalTo: safeAreaGuideView2.leadingAnchor, constant: 16),
             secondButton.trailingAnchor.constraint(equalTo: safeAreaGuideView2.trailingAnchor, constant: -16),
             secondButton.heightAnchor.constraint(equalToConstant: 50)
-            
-            
         ])
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .systemGray5
-        self.title = "Feed"
-        
-        view.addSubview(stackView)
-        setupContraints()
-    }
-    
-    @objc func showPostButtonTapped() {
-        let postViewController = PostViewController()
-        postViewController.post = post
-        self.navigationController?.pushViewController(postViewController, animated: true)
-    }
 }
+
