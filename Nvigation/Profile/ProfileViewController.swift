@@ -8,63 +8,49 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
     
-    private lazy var profileHeaderView: ProfileHeaderView = { [weak self] in
-        guard let self = self else { return ProfileHeaderView() }
-        let profileHeaderView = ProfileHeaderView()
+    //MARK: - UI Elements
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView.init(
+            frame: .zero,
+            style: .grouped
+        )
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         
-        profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return profileHeaderView
+        return tableView
     }()
     
-    private lazy var titleButton: UIButton = {
-        
-        let titleButton = UIButton()
-        titleButton.setTitle("Set title", for: .normal)
-        titleButton.setTitleColor(.white, for: .normal)
-        
-        titleButton.backgroundColor = .systemRed
-        titleButton.layer.cornerRadius = 4
-        titleButton.layer.shadowRadius = 4
-        titleButton.layer.shadowColor = UIColor.black.cgColor
-        titleButton.layer.shadowOffset.width = 4
-        titleButton.layer.shadowOffset.height = 4
-        titleButton.layer.shadowOpacity = 0.7
-        titleButton.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
-        
-        titleButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        return titleButton
-    }()
-        
-    //MARK: - Lifecycle
+    //MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Profile"
-        self.view.backgroundColor = .lightGray
         
-        view.addSubview(profileHeaderView)
-        view.addSubview(titleButton)
+        view.addSubview(tableView)
+        
+        tuneTableView()
+        setupConstraints()
     }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    
+    //MARK: - Private
+    
+    private func tuneTableView() {
         
-        let safeAreaGuide = view.safeAreaLayoutGuide
-
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
-            profileHeaderView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
-            profileHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            profileHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            
-            titleButton.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
-            titleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            titleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            titleButton.heightAnchor.constraint(equalToConstant: 50)
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    
 }
+

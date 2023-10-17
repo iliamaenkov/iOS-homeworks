@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F060EAA2ADC6A93000ACC49 /* ProfilePosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F060EA92ADC6A93000ACC49 /* ProfilePosts.swift */; };
+		3F060EAD2ADC79E3000ACC49 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F060EAC2ADC79E3000ACC49 /* PostTableViewCell.swift */; };
 		3F1223792ACAC1F6006DEA3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1223782ACAC1F6006DEA3F /* AppDelegate.swift */; };
 		3F12237B2ACAC1F6006DEA3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12237A2ACAC1F6006DEA3F /* SceneDelegate.swift */; };
 		3F1223822ACAC1F7006DEA3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F1223812ACAC1F7006DEA3F /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F060EA92ADC6A93000ACC49 /* ProfilePosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePosts.swift; sourceTree = "<group>"; };
+		3F060EAC2ADC79E3000ACC49 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		3F1223752ACAC1F6006DEA3F /* Nvigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nvigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F1223782ACAC1F6006DEA3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F12237A2ACAC1F6006DEA3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 				3F1223E02ACD88E8006DEA3F /* ProfileHeaderView.swift */,
 				3F1223922ACB5DD7006DEA3F /* ProfileViewController.swift */,
 				3F2459982AD47E29009F0110 /* LogInViewController.swift */,
+				3F060EA92ADC6A93000ACC49 /* ProfilePosts.swift */,
+				3F060EAC2ADC79E3000ACC49 /* PostTableViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -127,7 +133,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					3F1223742ACAC1F6006DEA3F = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -176,6 +182,8 @@
 				3F12238D2ACB5D9A006DEA3F /* FeedViewController.swift in Sources */,
 				3F12237B2ACAC1F6006DEA3F /* SceneDelegate.swift in Sources */,
 				3F1223962ACB5E53006DEA3F /* Post.swift in Sources */,
+				3F060EAD2ADC79E3000ACC49 /* PostTableViewCell.swift in Sources */,
+				3F060EAA2ADC6A93000ACC49 /* ProfilePosts.swift in Sources */,
 				3F1223912ACB5DB4006DEA3F /* InfoViewController.swift in Sources */,
 				3F2459CB2AD87F27009F0110 /* CustomButton.swift in Sources */,
 				3F2459972AD02E9F009F0110 /* TextFieldWithPadding.swift in Sources */,
@@ -234,6 +242,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -248,7 +257,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -294,6 +303,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -302,7 +312,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

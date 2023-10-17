@@ -4,6 +4,7 @@
 //
 //  Created by Ilya Maenkov on 02.10.2023.
 //
+
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -16,11 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         
+        // MARK: - App Appearance
+        
         UIView.appearance().tintColor = UIColor(named: "AppElementsColor")
+        
+        // MARK: - Window Setup
         
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
 
+        // MARK: - View Controllers
         
         let feedViewController: FeedViewController = {
             let viewController = FeedViewController()
@@ -32,8 +38,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return viewController
         }()
         
+        // Creating ProfileViewController
         
-        let profileViewController: ProfileViewController = {
+        let _: ProfileViewController = {
             let viewController = ProfileViewController()
             return viewController
         }()
@@ -48,19 +55,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return viewController
         }()
         
+        // MARK: - Navigation Controllers
+        
         let loginNavigationController = UINavigationController(rootViewController: loginViewController)
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
-        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        
+        // MARK: - Tab Bar Controller
         
         let tabBarController: UITabBarController = {
             let controller = UITabBarController()
             controller.viewControllers = [
                 feedNavigationController,
-                profileNavigationController,
                 loginNavigationController
             ]
             return controller
         }()
+        
+        // MARK: - Set Root View Controller
         
         window.rootViewController = tabBarController
         window.makeKeyAndVisible()
