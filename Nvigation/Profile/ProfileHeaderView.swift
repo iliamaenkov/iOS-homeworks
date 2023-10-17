@@ -11,7 +11,7 @@ class ProfileHeaderView: UIView {
     
     private var statusTextField: String = ""
     
-    //MARK: - Creating UI Elements
+    //MARK: - UI Elements
     
     private let avatarImageView: UIImageView = {
         let imageView = UIImageView()
@@ -20,6 +20,7 @@ class ProfileHeaderView: UIView {
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.masksToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -28,6 +29,7 @@ class ProfileHeaderView: UIView {
         label.text = "Jedi Master Obi-Van Kenobi"
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -36,6 +38,7 @@ class ProfileHeaderView: UIView {
         label.text = "May the Force be with you..."
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -49,6 +52,7 @@ class ProfileHeaderView: UIView {
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
         button.layer.shadowOpacity = 0.7
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -60,6 +64,7 @@ class ProfileHeaderView: UIView {
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.black.cgColor
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -73,6 +78,7 @@ class ProfileHeaderView: UIView {
         commonInit()
     }
     
+    //MARK: - Private
     
     private func commonInit() {
         
@@ -88,8 +94,10 @@ class ProfileHeaderView: UIView {
         setupConstraints()
     }
     
+    //MARK: -Actions
+    
     @objc func buttonPressed() {
-        statusLabel.text = statusTextField
+            statusLabel.text = statusTextField
     }
     
     @objc func statusTextChanged(_ textField: UITextField) {
@@ -102,12 +110,6 @@ class ProfileHeaderView: UIView {
         
         let safeAreaGuide = self.safeAreaLayoutGuide
         
-        avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        setStatusButton.translatesAutoresizingMaskIntoConstraints = false
-        fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        paddedTextField.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             avatarImageView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16),
             avatarImageView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 16),
@@ -119,11 +121,11 @@ class ProfileHeaderView: UIView {
             setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             
-            fullNameLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor),
+            fullNameLabel.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 27),
             fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
             fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
             
-            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 16),
+            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -64),
             statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
             statusLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
             

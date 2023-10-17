@@ -10,8 +10,8 @@ import UIKit
 class ProfileViewController: UIViewController {
 
     
-    private lazy var profileHeaderView: ProfileHeaderView = { [unowned self] in
-        //        guard let self = self else { return ProfileHeaderView() }
+    private lazy var profileHeaderView: ProfileHeaderView = { [weak self] in
+        guard let self = self else { return ProfileHeaderView() }
         let profileHeaderView = ProfileHeaderView()
         
         profileHeaderView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +39,8 @@ class ProfileViewController: UIViewController {
         return titleButton
     }()
         
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
