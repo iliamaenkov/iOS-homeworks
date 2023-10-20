@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LogInViewController: UIViewController {
+final class LogInViewController: UIViewController {
     
     
     //MARK: - UI Elements
@@ -90,13 +90,6 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        
-        contentView.addSubview(logoImageView)
-        contentView.addSubview(stackView)
-        contentView.addSubview(logInButton)
-        
         setupLogInButton()
         addSubviews()
         setupConstraints()
@@ -163,6 +156,11 @@ class LogInViewController: UIViewController {
     }
     
     private func addSubviews() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(logoImageView)
+        contentView.addSubview(stackView)
+        contentView.addSubview(logInButton)
         stackView.addArrangedSubview(logInTextField)
         stackView.addArrangedSubview(separatorView)
         stackView.addArrangedSubview(passwordTextField)

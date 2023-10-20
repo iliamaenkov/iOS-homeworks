@@ -19,10 +19,18 @@
 		3F1223932ACB5DD7006DEA3F /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1223922ACB5DD7006DEA3F /* ProfileViewController.swift */; };
 		3F1223962ACB5E53006DEA3F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1223952ACB5E53006DEA3F /* Post.swift */; };
 		3F1223E12ACD88E8006DEA3F /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1223E02ACD88E8006DEA3F /* ProfileHeaderView.swift */; };
+		3F176F1B2ADFC39A00012995 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F1A2ADFC39A00012995 /* PhotosViewController.swift */; };
+		3F176F1E2AE0321E00012995 /* PreviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F1D2AE0321E00012995 /* PreviewCollectionViewCell.swift */; };
+		3F176F212AE1C0EA00012995 /* LogInViewController_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F202AE1C0EA00012995 /* LogInViewController_Extensions.swift */; };
+		3F176F232AE1C1CC00012995 /* ProfileViewController_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F222AE1C1CC00012995 /* ProfileViewController_Extensions.swift */; };
+		3F176F252AE1C1FB00012995 /* PhotosTableViewCell_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F242AE1C1FB00012995 /* PhotosTableViewCell_Extensions.swift */; };
+		3F176F272AE2759300012995 /* PhotosViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F262AE2759300012995 /* PhotosViewController_Extension.swift */; };
+		3F176F292AE2A44400012995 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F282AE2A44400012995 /* PhotosCollectionViewCell.swift */; };
 		3F2459972AD02E9F009F0110 /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2459962AD02E9F009F0110 /* TextFieldWithPadding.swift */; };
 		3F2459992AD47E29009F0110 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2459982AD47E29009F0110 /* LogInViewController.swift */; };
 		3F2459CB2AD87F27009F0110 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2459CA2AD87F27009F0110 /* CustomButton.swift */; };
-		3F2459FD2AD94280009F0110 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2459FC2AD94280009F0110 /* Extensions.swift */; };
+		3F463EEE2ADD414A00FA4414 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F463EED2ADD414A00FA4414 /* PhotosTableViewCell.swift */; };
+		3F463EF22ADF2A3300FA4414 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F463EF12ADF2A3300FA4414 /* Photo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,10 +48,18 @@
 		3F1223922ACB5DD7006DEA3F /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3F1223952ACB5E53006DEA3F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3F1223E02ACD88E8006DEA3F /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		3F176F1A2ADFC39A00012995 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		3F176F1D2AE0321E00012995 /* PreviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCollectionViewCell.swift; sourceTree = "<group>"; };
+		3F176F202AE1C0EA00012995 /* LogInViewController_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController_Extensions.swift; sourceTree = "<group>"; };
+		3F176F222AE1C1CC00012995 /* ProfileViewController_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController_Extensions.swift; sourceTree = "<group>"; };
+		3F176F242AE1C1FB00012995 /* PhotosTableViewCell_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell_Extensions.swift; sourceTree = "<group>"; };
+		3F176F262AE2759300012995 /* PhotosViewController_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController_Extension.swift; sourceTree = "<group>"; };
+		3F176F282AE2A44400012995 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F2459962AD02E9F009F0110 /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
 		3F2459982AD47E29009F0110 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		3F2459CA2AD87F27009F0110 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
-		3F2459FC2AD94280009F0110 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		3F463EED2ADD414A00FA4414 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		3F463EF12ADF2A3300FA4414 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,15 +96,16 @@
 				3F12237A2ACAC1F6006DEA3F /* SceneDelegate.swift */,
 				3F1223812ACAC1F7006DEA3F /* Assets.xcassets */,
 				3F1223832ACAC1F7006DEA3F /* LaunchScreen.storyboard */,
-				3F1223952ACB5E53006DEA3F /* Post.swift */,
 				3F1223862ACAC1F7006DEA3F /* Info.plist */,
 				3F12238C2ACB5D9A006DEA3F /* FeedViewController.swift */,
 				3F12238E2ACB5DA4006DEA3F /* PostViewController.swift */,
 				3F1223902ACB5DB4006DEA3F /* InfoViewController.swift */,
+				3F176F1C2ADFE17800012995 /* Structures */,
+				3F176F192ADFC34500012995 /* Photos */,
 				3F1223DF2ACD88A4006DEA3F /* Profile */,
 				3F2459962AD02E9F009F0110 /* TextFieldWithPadding.swift */,
 				3F2459CA2AD87F27009F0110 /* CustomButton.swift */,
-				3F2459FC2AD94280009F0110 /* Extensions.swift */,
+				3F176F1F2AE1C0BF00012995 /* Extensions */,
 			);
 			path = Nvigation;
 			sourceTree = "<group>";
@@ -103,6 +120,37 @@
 				3F060EAC2ADC79E3000ACC49 /* PostTableViewCell.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		3F176F192ADFC34500012995 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				3F463EED2ADD414A00FA4414 /* PhotosTableViewCell.swift */,
+				3F176F1A2ADFC39A00012995 /* PhotosViewController.swift */,
+				3F176F1D2AE0321E00012995 /* PreviewCollectionViewCell.swift */,
+				3F176F282AE2A44400012995 /* PhotosCollectionViewCell.swift */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
+		3F176F1C2ADFE17800012995 /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				3F1223952ACB5E53006DEA3F /* Post.swift */,
+				3F463EF12ADF2A3300FA4414 /* Photo.swift */,
+			);
+			path = Structures;
+			sourceTree = "<group>";
+		};
+		3F176F1F2AE1C0BF00012995 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3F176F202AE1C0EA00012995 /* LogInViewController_Extensions.swift */,
+				3F176F222AE1C1CC00012995 /* ProfileViewController_Extensions.swift */,
+				3F176F242AE1C1FB00012995 /* PhotosTableViewCell_Extensions.swift */,
+				3F176F262AE2759300012995 /* PhotosViewController_Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,18 +223,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F2459FD2AD94280009F0110 /* Extensions.swift in Sources */,
+				3F463EF22ADF2A3300FA4414 /* Photo.swift in Sources */,
+				3F176F1B2ADFC39A00012995 /* PhotosViewController.swift in Sources */,
+				3F463EEE2ADD414A00FA4414 /* PhotosTableViewCell.swift in Sources */,
+				3F176F212AE1C0EA00012995 /* LogInViewController_Extensions.swift in Sources */,
+				3F176F232AE1C1CC00012995 /* ProfileViewController_Extensions.swift in Sources */,
+				3F176F292AE2A44400012995 /* PhotosCollectionViewCell.swift in Sources */,
 				3F1223932ACB5DD7006DEA3F /* ProfileViewController.swift in Sources */,
+				3F176F252AE1C1FB00012995 /* PhotosTableViewCell_Extensions.swift in Sources */,
 				3F12238F2ACB5DA4006DEA3F /* PostViewController.swift in Sources */,
 				3F1223792ACAC1F6006DEA3F /* AppDelegate.swift in Sources */,
 				3F12238D2ACB5D9A006DEA3F /* FeedViewController.swift in Sources */,
 				3F12237B2ACAC1F6006DEA3F /* SceneDelegate.swift in Sources */,
 				3F1223962ACB5E53006DEA3F /* Post.swift in Sources */,
 				3F060EAD2ADC79E3000ACC49 /* PostTableViewCell.swift in Sources */,
+				3F176F1E2AE0321E00012995 /* PreviewCollectionViewCell.swift in Sources */,
 				3F060EAA2ADC6A93000ACC49 /* ProfilePosts.swift in Sources */,
 				3F1223912ACB5DB4006DEA3F /* InfoViewController.swift in Sources */,
 				3F2459CB2AD87F27009F0110 /* CustomButton.swift in Sources */,
 				3F2459972AD02E9F009F0110 /* TextFieldWithPadding.swift in Sources */,
+				3F176F272AE2759300012995 /* PhotosViewController_Extension.swift in Sources */,
 				3F2459992AD47E29009F0110 /* LogInViewController.swift in Sources */,
 				3F1223E12ACD88E8006DEA3F /* ProfileHeaderView.swift in Sources */,
 			);
@@ -329,6 +385,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7KU2658YA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Nvigation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -356,6 +413,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M7KU2658YA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Nvigation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

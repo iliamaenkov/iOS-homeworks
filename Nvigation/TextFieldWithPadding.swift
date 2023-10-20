@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - TextFieldWithPadding
 
-class TextFieldWithPadding: UITextField {
+final class TextFieldWithPadding: UITextField {
     
     // Properties
     
