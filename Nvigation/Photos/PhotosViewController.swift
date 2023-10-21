@@ -40,6 +40,17 @@ class PhotosViewController: UIViewController {
         setupConstraints()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { [unowned self] context in
+    
+            self.photosCollectionView.collectionViewLayout.invalidateLayout()
+        }, completion: { context in })
+    }
+
+    
+    
     // MARK: - Setting constraints
     
     private func setupConstraints() {

@@ -41,6 +41,7 @@ final class ProfileViewController: UIViewController {
   
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
+    
     //MARK: - Private
     
     private func tuneTableView() {

@@ -20,7 +20,7 @@ final class PhotosTableViewCell: UITableViewCell {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(PreviewCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell") // Register cell here
+        collectionView.register(PreviewCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell")
         
         return collectionView
     }()
@@ -58,6 +58,12 @@ final class PhotosTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+
     // MARK: - Configuration
     
     func setup(with photos: [Photo]) {

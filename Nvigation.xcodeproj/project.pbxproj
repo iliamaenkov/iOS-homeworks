@@ -24,7 +24,7 @@
 		3F176F212AE1C0EA00012995 /* LogInViewController_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F202AE1C0EA00012995 /* LogInViewController_Extensions.swift */; };
 		3F176F232AE1C1CC00012995 /* ProfileViewController_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F222AE1C1CC00012995 /* ProfileViewController_Extensions.swift */; };
 		3F176F252AE1C1FB00012995 /* PhotosTableViewCell_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F242AE1C1FB00012995 /* PhotosTableViewCell_Extensions.swift */; };
-		3F176F272AE2759300012995 /* PhotosViewController_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F262AE2759300012995 /* PhotosViewController_Extension.swift */; };
+		3F176F272AE2759300012995 /* PhotosViewController_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F262AE2759300012995 /* PhotosViewController_Extensions.swift */; };
 		3F176F292AE2A44400012995 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F176F282AE2A44400012995 /* PhotosCollectionViewCell.swift */; };
 		3F2459972AD02E9F009F0110 /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2459962AD02E9F009F0110 /* TextFieldWithPadding.swift */; };
 		3F2459992AD47E29009F0110 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2459982AD47E29009F0110 /* LogInViewController.swift */; };
@@ -53,7 +53,7 @@
 		3F176F202AE1C0EA00012995 /* LogInViewController_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController_Extensions.swift; sourceTree = "<group>"; };
 		3F176F222AE1C1CC00012995 /* ProfileViewController_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController_Extensions.swift; sourceTree = "<group>"; };
 		3F176F242AE1C1FB00012995 /* PhotosTableViewCell_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell_Extensions.swift; sourceTree = "<group>"; };
-		3F176F262AE2759300012995 /* PhotosViewController_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController_Extension.swift; sourceTree = "<group>"; };
+		3F176F262AE2759300012995 /* PhotosViewController_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController_Extensions.swift; sourceTree = "<group>"; };
 		3F176F282AE2A44400012995 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F2459962AD02E9F009F0110 /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
 		3F2459982AD47E29009F0110 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 				3F176F202AE1C0EA00012995 /* LogInViewController_Extensions.swift */,
 				3F176F222AE1C1CC00012995 /* ProfileViewController_Extensions.swift */,
 				3F176F242AE1C1FB00012995 /* PhotosTableViewCell_Extensions.swift */,
-				3F176F262AE2759300012995 /* PhotosViewController_Extension.swift */,
+				3F176F262AE2759300012995 /* PhotosViewController_Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -242,7 +242,7 @@
 				3F1223912ACB5DB4006DEA3F /* InfoViewController.swift in Sources */,
 				3F2459CB2AD87F27009F0110 /* CustomButton.swift in Sources */,
 				3F2459972AD02E9F009F0110 /* TextFieldWithPadding.swift in Sources */,
-				3F176F272AE2759300012995 /* PhotosViewController_Extension.swift in Sources */,
+				3F176F272AE2759300012995 /* PhotosViewController_Extensions.swift in Sources */,
 				3F2459992AD47E29009F0110 /* LogInViewController.swift in Sources */,
 				3F1223E12ACD88E8006DEA3F /* ProfileHeaderView.swift in Sources */,
 			);

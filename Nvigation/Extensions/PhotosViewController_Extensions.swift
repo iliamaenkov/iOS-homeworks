@@ -23,6 +23,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         let widthItem = (accessibleWidth / countItem)
         return CGSize(width: widthItem, height: widthItem)
     }
+    
 }
 
 extension PhotosViewController: UICollectionViewDataSource {
