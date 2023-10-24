@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - CustomButton
 
-class CustomButton: UIButton {
+final class CustomButton: UIButton {
     
     private let cornerRadius: CGFloat = 10
 

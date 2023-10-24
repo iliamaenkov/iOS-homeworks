@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PostTableViewCell: UITableViewCell {
+final class PostTableViewCell: UITableViewCell {
     
     // MARK: - UI Elements
     
@@ -82,7 +82,7 @@ class PostTableViewCell: UITableViewCell {
     
     // MARK: - Configuration
     
-    func configure(with post: Post) {
+    func setup(with post: Post) {
         authorLabel.text = post.author
         descriptionText.text = post.description
         postImageView.image = UIImage(named: post.image ?? "Empty_Post")

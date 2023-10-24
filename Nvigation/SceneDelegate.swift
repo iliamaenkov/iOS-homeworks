@@ -45,6 +45,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return viewController
         }()
         
+        // Creating PhotosViewController
+        
+        let photosViewController: PhotosViewController = {
+            let viewController = PhotosViewController()
+            return viewController
+        }()
+        
         let loginViewController: LogInViewController = {
             let viewController = LogInViewController()
             viewController.tabBarItem = UITabBarItem(
@@ -59,13 +66,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let loginNavigationController = UINavigationController(rootViewController: loginViewController)
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
-        
+        let photosNavigationController = UINavigationController(rootViewController: photosViewController)
         // MARK: - Tab Bar Controller
         
         let tabBarController: UITabBarController = {
             let controller = UITabBarController()
             controller.viewControllers = [
                 feedNavigationController,
+                photosNavigationController,
                 loginNavigationController
             ]
             return controller

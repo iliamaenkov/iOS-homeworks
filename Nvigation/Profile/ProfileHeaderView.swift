@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+final class ProfileHeaderView: UIView {
     
     private var statusTextField: String = ""
     
@@ -26,7 +26,7 @@ class ProfileHeaderView: UIView {
     
     private let fullNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Jedi Master Obi-Van Kenobi"
+        label.text = "Obi-Van Kenobi"
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -67,6 +67,7 @@ class ProfileHeaderView: UIView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
+    
     
     // MARK: - Initialization
     
@@ -133,7 +134,8 @@ class ProfileHeaderView: UIView {
             
             paddedTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
             paddedTextField.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            paddedTextField.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16)
+            paddedTextField.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
+            
         ])
     }
 }
