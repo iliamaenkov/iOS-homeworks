@@ -21,6 +21,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         let countItem: CGFloat = 3
         let accessibleWidth = collectionView.frame.width - 32
         let widthItem = (accessibleWidth / countItem)
+        
         return CGSize(width: widthItem, height: widthItem)
     }
     

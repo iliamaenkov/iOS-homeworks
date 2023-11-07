@@ -10,19 +10,26 @@ import UIKit
 final class PhotosTableViewCell: UITableViewCell {
     
     private var photos: [Photo] = []
+    static let id = "PhotoTableCell"
+    
     
     // MARK: - UI Elements
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        
+
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(PreviewCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell")
-        
+ 
         return collectionView
+    }()
+    
+    private lazy var titleView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private lazy var titleLabel: UILabel = {
@@ -39,8 +46,6 @@ final class PhotosTableViewCell: UITableViewCell {
         let arrow = UIImageView()
         arrow.translatesAutoresizingMaskIntoConstraints = false
         arrow.image = UIImage(systemName: "arrow.forward")?.withTintColor(.black, renderingMode: .alwaysOriginal)
-        arrow.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        arrow.heightAnchor.constraint(equalToConstant: 24).isActive = true
         arrow.contentMode = .scaleAspectFit
         return arrow
     }()
@@ -60,9 +65,9 @@ final class PhotosTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         collectionView.collectionViewLayout.invalidateLayout()
     }
+    
 
     // MARK: - Configuration
     
@@ -74,41 +79,43 @@ final class PhotosTableViewCell: UITableViewCell {
     // MARK: - Setting up UI
     
     private func setupUI() {
-        addSubview(titleLabel)
-        addSubview(arrowImage)
-        addSubview(collectionView)
+        titleView.addSubview(titleLabel)
+        titleView.addSubview(arrowImage)
+        contentView.addSubview(titleView)
+        contentView.addSubview(collectionView)
         
-        setupCollectionView()
-    }
-    
-    private func setupCollectionView() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        collectionView.collectionViewLayout = layout
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.register(PreviewCollectionViewCell.self, forCellWithReuseIdentifier: PhotosTableViewCell.id)
     }
-    
+
     // MARK: - Setting constraints
     
     private func setupConstraints() {
+        
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: arrowImage.leadingAnchor, constant: -12),
             
-            arrowImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            titleView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            titleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            titleView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: 0),
+            
+            titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 12),
+            titleLabel.topAnchor.constraint(equalTo: titleView.topAnchor, constant: 6),
+            titleLabel.bottomAnchor.constraint(equalTo: titleView.bottomAnchor, constant: -6),
+            
+            arrowImage.trailingAnchor.constraint(equalTo: titleView.trailingAnchor, constant: -12),
             arrowImage.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            arrowImage.widthAnchor.constraint(equalToConstant: 40),
-            arrowImage.heightAnchor.constraint(equalToConstant: 40),
-            
-            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
-            collectionView.heightAnchor.constraint(equalToConstant: 80)
+            arrowImage.bottomAnchor.constraint(equalTo: titleView.bottomAnchor, constant: -6),
+           
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            collectionView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 0),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+            collectionView.heightAnchor.constraint(equalTo: collectionView.widthAnchor, multiplier: 1.0 / 4, constant: -8)
+
         ])
     }
+
 }
 
