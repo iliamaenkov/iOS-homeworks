@@ -21,6 +21,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addSubview(photo)
         setupConstraints()
     }
 
@@ -31,13 +32,12 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     // MARK: - Setting constraints
     
     private func setupConstraints() {
-        self.contentView.addSubview(photo)
         
         NSLayoutConstraint.activate([
-            photo.topAnchor.constraint(equalTo: contentView.topAnchor),
-            photo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            photo.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            photo.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            photo.topAnchor.constraint(equalTo: topAnchor),
+            photo.leadingAnchor.constraint(equalTo: leadingAnchor),
+            photo.trailingAnchor.constraint(equalTo: trailingAnchor),
+            photo.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }

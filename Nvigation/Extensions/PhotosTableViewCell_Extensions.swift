@@ -25,7 +25,7 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "PhotoCell",
+            withReuseIdentifier: PhotosTableViewCell.id,
             for: indexPath
         ) as! PreviewCollectionViewCell
         
@@ -34,6 +34,7 @@ extension PhotosTableViewCell: UICollectionViewDataSource {
         
         return cell
     }
+
 }
 
 extension PhotosTableViewCell: UICollectionViewDelegate {
@@ -41,10 +42,11 @@ extension PhotosTableViewCell: UICollectionViewDelegate {
     //MARK: - UICollectionViewDelegate Methods
     
 }
-
-extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
     
+extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
+
     //MARK: - UICollectionViewDelegateFlowLayout Methods
+
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
@@ -53,11 +55,9 @@ extension PhotosTableViewCell: UICollectionViewDelegateFlowLayout {
         let numberOfItemsPerRow: CGFloat = 4
         let spacingBetweenItems: CGFloat = 8
         let totalSpacing = (numberOfItemsPerRow) * spacingBetweenItems
-        let width = (collectionView.bounds.width - totalSpacing) / 4
-        let height = width
-
+        let height = (collectionView.bounds.width - totalSpacing) / 4
+        let width = height
+        
         return CGSize(width: width, height: height)
     }
-    
-
 }

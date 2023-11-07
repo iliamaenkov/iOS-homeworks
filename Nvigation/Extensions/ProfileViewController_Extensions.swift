@@ -12,13 +12,6 @@ import UIKit
 extension ProfileViewController: UITableViewDelegate {
     
     // MARK: UITableViewDelegate Methods
-
-    func tableView(
-        _ tableView: UITableView,
-        heightForRowAt indexPath: IndexPath
-    ) -> CGFloat {
-        return UITableView.automaticDimension
-    }
     
     func tableView(
         _ tableView: UITableView,
@@ -27,15 +20,13 @@ extension ProfileViewController: UITableViewDelegate {
         return section == 0 ? ProfileHeaderView() : nil
     }
     
-    func tableView(
-        _ tableView: UITableView,
-        heightForHeaderInSection section: Int
-    ) -> CGFloat {
-         return section == 0 ? 220 : 0
-     }
 }
 
 extension ProfileViewController: UITableViewDataSource {
+
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
     
     // MARK: UITableViewDataSource Methods
     
@@ -59,11 +50,12 @@ extension ProfileViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             
             let cell = tableView.dequeueReusableCell(
-                withIdentifier: "PhotosCell",
+                withIdentifier: PhotosTableViewCell.id,
                 for: indexPath
             ) as! PhotosTableViewCell
             
             cell.setup(with: photos)
+            
             return cell
             
         } else if indexPath.section == 1 {
@@ -78,6 +70,7 @@ extension ProfileViewController: UITableViewDataSource {
         }
         return UITableViewCell()
     }
+
     
     func tableView(
         _ tableView: UITableView,

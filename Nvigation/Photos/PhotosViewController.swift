@@ -32,33 +32,45 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = "Photo Gallery"
-        self.view.addSubview(photosCollectionView)
-        self.photosCollectionView.dataSource = self
-        self.photosCollectionView.delegate = self
+
+        setupUI()
         setupConstraints()
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(
+        to size: CGSize, 
+        with coordinator: UIViewControllerTransitionCoordinator
+    ) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        coordinator.animate(alongsideTransition: { [unowned self] context in
-    
+        coordinator.animate(alongsideTransition: { [weak self] context in
+            guard let self = self else {
+                return
+            }
+            
             self.photosCollectionView.collectionViewLayout.invalidateLayout()
         }, completion: { context in })
     }
 
     
     
+   //MARK: - Private
+    
+    private func setupUI() {
+        title = "Photo Gallery"
+        view.addSubview(photosCollectionView)
+        photosCollectionView.dataSource = self
+        photosCollectionView.delegate = self
+    }
+    
     // MARK: - Setting constraints
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            photosCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            photosCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            photosCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            photosCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            photosCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            photosCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            photosCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            photosCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 

@@ -67,12 +67,7 @@ final class PostTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.addSubview(authorLabel)
-        contentView.addSubview(postImageView)
-        contentView.addSubview(descriptionText)
-        contentView.addSubview(likesLabel)
-        contentView.addSubview(viewsLabel)
-        
+        setupUI()
         setupConstraints()
     }
 
@@ -81,6 +76,14 @@ final class PostTableViewCell: UITableViewCell {
     }
     
     // MARK: - Configuration
+    
+    func setupUI() {
+        contentView.addSubview(authorLabel)
+        contentView.addSubview(postImageView)
+        contentView.addSubview(descriptionText)
+        contentView.addSubview(likesLabel)
+        contentView.addSubview(viewsLabel)
+    }
     
     func setup(with post: Post) {
         authorLabel.text = post.author
@@ -112,10 +115,8 @@ final class PostTableViewCell: UITableViewCell {
             
             viewsLabel.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
             viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
     }
 
-    
 }

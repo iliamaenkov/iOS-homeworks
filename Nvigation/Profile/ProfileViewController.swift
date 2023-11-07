@@ -28,6 +28,8 @@ final class ProfileViewController: UIViewController {
         
         tuneTableView()
         setupConstraints()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 200
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,11 +38,6 @@ final class ProfileViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-  
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
     
     //MARK: - Private
     
@@ -48,12 +45,12 @@ final class ProfileViewController: UIViewController {
         
         view.addSubview(tableView)
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
-        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
         
         tableView.delegate = self
         tableView.dataSource = self
+
     }
-    
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([

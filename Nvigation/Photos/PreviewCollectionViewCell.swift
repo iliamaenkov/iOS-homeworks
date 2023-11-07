@@ -14,9 +14,9 @@ class PreviewCollectionViewCell: UICollectionViewCell {
     var photo: UIImageView = {
         let photos = UIImageView()
         photos.translatesAutoresizingMaskIntoConstraints = false
-        photos.contentMode = .scaleAspectFit
         photos.clipsToBounds = true
         photos.layer.cornerRadius = 6
+        
         return photos
     }()
     
@@ -24,7 +24,6 @@ class PreviewCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-
         addSubview(photo)
         setupConstraints()
     }
@@ -37,9 +36,9 @@ class PreviewCollectionViewCell: UICollectionViewCell {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            photo.topAnchor.constraint(equalTo: contentView.topAnchor),
-            photo.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            photo.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            photo.topAnchor.constraint(equalTo: topAnchor),
+            photo.leadingAnchor.constraint(equalTo: leadingAnchor),
+            photo.trailingAnchor.constraint(equalTo: trailingAnchor),
             photo.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
