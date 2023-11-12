@@ -9,6 +9,8 @@ import UIKit
 
 final class PostTableViewCell: UITableViewCell {
     
+    static let id = "PostCell"
+    
     // MARK: - UI Elements
     
     private lazy var authorLabel: UILabel = {
