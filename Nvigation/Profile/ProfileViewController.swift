@@ -11,12 +11,14 @@ final class ProfileViewController: UIViewController {
     
     //MARK: - UI Elements
     
-    private lazy var tableView: UITableView = {
+    static var tableView: UITableView = {
         let tableView = UITableView.init(
             frame: .zero,
             style: .grouped
         )
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
         
         return tableView
     }()
@@ -28,8 +30,6 @@ final class ProfileViewController: UIViewController {
         
         tuneTableView()
         setupConstraints()
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 200
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,21 +43,19 @@ final class ProfileViewController: UIViewController {
     
     private func tuneTableView() {
         
-        view.addSubview(tableView)
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
-        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
+        view.addSubview( ProfileViewController.tableView)
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        ProfileViewController.tableView.delegate = self
+        ProfileViewController.tableView.dataSource = self
 
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            ProfileViewController.tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            ProfileViewController.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            ProfileViewController.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            ProfileViewController.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     

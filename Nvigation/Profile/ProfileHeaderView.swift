@@ -9,20 +9,15 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
     
+    var avatarImageView = UIImageView()
+    var returnAvatarButton = UIButton()
+    var avatarBackground = UIView()
+    
     private var statusTextField: String = ""
     
-    //MARK: - UI Elements
+    private var avatarOriginPoint = CGPoint()
     
-    private let avatarImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "Kenobi")
-        imageView.layer.cornerRadius = 50
-        imageView.layer.borderWidth = 3
-        imageView.layer.borderColor = UIColor.white.cgColor
-        imageView.layer.masksToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    //MARK: - UI Elements
     
     private let fullNameLabel: UILabel = {
         let label = UILabel()
@@ -83,6 +78,52 @@ final class ProfileHeaderView: UIView {
     
     //MARK: - Private
     
+    private func setupAvatarImage() {
+            avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+            avatarImageView.image = UIImage(named: "Kenobi")
+            avatarImageView.layer.cornerRadius = 50
+            avatarImageView.layer.borderWidth = 3
+            avatarImageView.layer.borderColor = UIColor.white.cgColor
+            avatarImageView.clipsToBounds = true
+            
+            // Guesture recognizer for avatar
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapOnAvatar))
+            tapGesture.numberOfTapsRequired = 1
+            tapGesture.numberOfTouchesRequired = 1
+            avatarImageView.isUserInteractionEnabled = true
+            avatarImageView.addGestureRecognizer(tapGesture)
+            
+            // Cancel button
+            returnAvatarButton.translatesAutoresizingMaskIntoConstraints = false
+            returnAvatarButton.alpha = 0
+            returnAvatarButton.backgroundColor = .clear
+            returnAvatarButton.contentMode = .scaleToFill
+            returnAvatarButton.setImage(UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))?.withTintColor(.black, renderingMode: .automatic), for: .normal)
+            returnAvatarButton.tintColor = .black
+            returnAvatarButton.addTarget(self, action: #selector(returnAvatarToOrigin), for: .touchUpInside)
+            
+            // Set background
+            avatarBackground = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+            avatarBackground.backgroundColor = .darkGray
+            avatarBackground.isHidden = true
+            avatarBackground.alpha = 0
+            
+        addSubview(avatarBackground)
+        addSubview(avatarImageView)
+        addSubview(returnAvatarButton)
+            
+            NSLayoutConstraint.activate([
+                avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+                avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+                avatarImageView.widthAnchor.constraint(equalToConstant: 128),
+                avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
+                
+                returnAvatarButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+                returnAvatarButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            ])
+        
+        }
+    
     private func commonInit() {
         
         setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
@@ -94,10 +135,51 @@ final class ProfileHeaderView: UIView {
         addSubview(setStatusButton)
         addSubview(paddedTextField)
         
+        setupAvatarImage()
         setupConstraints()
     }
     
     //MARK: - Actions
+    
+    @objc private func tapOnAvatar() {
+        // Animation
+        avatarImageView.isUserInteractionEnabled = false
+        
+        ProfileViewController.tableView.isScrollEnabled = false
+        ProfileViewController.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = false
+        
+        avatarOriginPoint = avatarImageView.center
+        let scale = UIScreen.main.bounds.width / avatarImageView.bounds.width
+        
+        UIView.animate(withDuration: 0.5) {
+            self.avatarImageView.center = CGPoint(x: UIScreen.main.bounds.midX,
+                                                  y: UIScreen.main.bounds.midY - self.avatarOriginPoint.y)
+            self.avatarImageView.transform = CGAffineTransform(scaleX: scale, y: scale)
+            self.avatarImageView.layer.cornerRadius = 0
+            self.avatarBackground.isHidden = false
+            self.avatarBackground.alpha = 0.7
+        } completion: { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.returnAvatarButton.alpha = 1
+            }
+        }
+    }
+    
+    @objc private func returnAvatarToOrigin() {
+        UIImageView.animate(withDuration: 0.5) {
+            UIImageView.animate(withDuration: 0.5) {
+                self.returnAvatarButton.alpha = 0
+                self.avatarImageView.center = self.avatarOriginPoint
+                self.avatarImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.width / 2
+                self.avatarBackground.alpha = 0
+            }
+        } completion: { _ in
+            ProfileViewController.tableView.isScrollEnabled = true
+            ProfileViewController.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = true
+            self.avatarImageView.isUserInteractionEnabled = true
+        }
+    }
     
     @objc func buttonPressed() {
             statusLabel.text = statusTextField

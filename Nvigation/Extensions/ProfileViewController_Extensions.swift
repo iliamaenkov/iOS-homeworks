@@ -23,10 +23,6 @@ extension ProfileViewController: UITableViewDelegate {
 }
 
 extension ProfileViewController: UITableViewDataSource {
-
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
     
     // MARK: UITableViewDataSource Methods
     
