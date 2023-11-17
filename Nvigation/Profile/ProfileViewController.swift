@@ -11,7 +11,7 @@ final class ProfileViewController: UIViewController {
     
     //MARK: - UI Elements
     
-    static var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView.init(
             frame: .zero,
             style: .grouped
@@ -30,6 +30,12 @@ final class ProfileViewController: UIViewController {
         
         tuneTableView()
         setupConstraints()
+        
+        #if DEBUG
+        tableView.backgroundColor = .systemGray
+        #else
+        tableView.backgroundColor = .white
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,19 +49,19 @@ final class ProfileViewController: UIViewController {
     
     private func tuneTableView() {
         
-        view.addSubview( ProfileViewController.tableView)
+        view.addSubview( tableView)
         
-        ProfileViewController.tableView.delegate = self
-        ProfileViewController.tableView.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
 
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            ProfileViewController.tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            ProfileViewController.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            ProfileViewController.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            ProfileViewController.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     

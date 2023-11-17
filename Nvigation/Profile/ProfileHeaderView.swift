@@ -145,8 +145,8 @@ final class ProfileHeaderView: UIView {
         // Animation
         avatarImageView.isUserInteractionEnabled = false
         
-        ProfileViewController.tableView.isScrollEnabled = false
-        ProfileViewController.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = false
+//        ProfileViewController.tableView.isScrollEnabled = false
+//        ProfileViewController.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = false
         
         avatarOriginPoint = avatarImageView.center
         let scale = UIScreen.main.bounds.width / avatarImageView.bounds.width
@@ -175,8 +175,8 @@ final class ProfileHeaderView: UIView {
                 self.avatarBackground.alpha = 0
             }
         } completion: { _ in
-            ProfileViewController.tableView.isScrollEnabled = true
-            ProfileViewController.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = true
+//            ProfileViewController.tableView.isScrollEnabled = true
+//            ProfileViewController.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = true
             self.avatarImageView.isUserInteractionEnabled = true
         }
     }

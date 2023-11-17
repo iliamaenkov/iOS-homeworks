@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class PhotosViewController: UIViewController {
 
     // MARK: Visual objects
