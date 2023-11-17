@@ -32,7 +32,7 @@ final class ProfileViewController: UIViewController {
         setupConstraints()
         
         #if DEBUG
-        tableView.backgroundColor = .systemGray
+        tableView.backgroundColor = .systemRed
         #else
         tableView.backgroundColor = .white
         #endif
