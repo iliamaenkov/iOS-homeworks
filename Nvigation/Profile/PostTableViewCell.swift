@@ -7,10 +7,14 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 final class PostTableViewCell: UITableViewCell {
     
     static let id = "PostCell"
+    
+    ///ImageProcessor
+    let imageProcessor = ImageProcessor()
     
     // MARK: - UI Elements
     
@@ -43,7 +47,7 @@ final class PostTableViewCell: UITableViewCell {
         imageView.clipsToBounds = true
         imageView.backgroundColor = .black
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        
+    
         return imageView
     }()
     
@@ -91,10 +95,27 @@ final class PostTableViewCell: UITableViewCell {
     func setup(with post: Post) {
         authorLabel.text = post.author
         descriptionText.text = post.description
-        postImageView.image = UIImage(named: post.image ?? "Empty_Post")
+        
+        if let originalImageName = post.image, let originalImage = UIImage(
+            named: originalImageName
+        ) {
+            postImageView.image = originalImage
+            // Apply the filter
+            imageProcessor.processImage(
+                sourceImage: originalImage,
+                filter: ColorFilter.transfer
+            ) { filteredImage in
+                self.postImageView.image = filteredImage
+            }
+        } else {
+            // Default
+            postImageView.image = UIImage(named: "Empty_Post")
+        }
+        
         likesLabel.text = "Likes: \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
     }
+    
     
     // MARK: - Setting constraints
     

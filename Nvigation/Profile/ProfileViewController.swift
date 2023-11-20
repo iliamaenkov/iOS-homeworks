@@ -16,6 +16,7 @@ final class ProfileViewController: UIViewController {
             frame: .zero,
             style: .grouped
         )
+        tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.id)
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
@@ -39,7 +40,8 @@ final class ProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        self.beginAppearanceTransition(true, animated: true)
+        self.endAppearanceTransition()
   
         navigationController?.setNavigationBarHidden(true, animated: true)
     }

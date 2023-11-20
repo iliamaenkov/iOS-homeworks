@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 final class ProfileHeaderView: UIView {
     
@@ -111,16 +112,6 @@ final class ProfileHeaderView: UIView {
         addSubview(avatarBackground)
         addSubview(avatarImageView)
         addSubview(returnAvatarButton)
-            
-            NSLayoutConstraint.activate([
-                avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-                avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                avatarImageView.widthAnchor.constraint(equalToConstant: 128),
-                avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
-                
-                returnAvatarButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-                returnAvatarButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            ])
         
         }
     
@@ -128,8 +119,7 @@ final class ProfileHeaderView: UIView {
         
         setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         paddedTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-        
-        addSubview(avatarImageView)
+
         addSubview(fullNameLabel)
         addSubview(statusLabel)
         addSubview(setStatusButton)
@@ -189,37 +179,51 @@ final class ProfileHeaderView: UIView {
         statusTextField = textField.text ?? ""
     }
     
-    //MARK: - Setting constraints
+    //MARK: - SnapKit constraints
     
     private func setupConstraints() {
         
-        let safeAreaGuide = self.safeAreaLayoutGuide
+        let safeArea = self.safeAreaLayoutGuide
         
-        NSLayoutConstraint.activate([
-            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16),
-            avatarImageView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
+        ///avatarImage
+        avatarImageView.snp.makeConstraints { make in
+            make.left.equalTo(safeArea.snp.left).inset(16)
+            make.top.equalTo(safeArea.snp.top).inset(16)
+            make.width.equalTo(100)
+            make.height.equalTo(avatarImageView.snp.width)
+        }
+        ///returnButton
+        returnAvatarButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(16)
+            make.right.equalToSuperview().inset(16)
+        }
+        ///statusButton
+        setStatusButton.snp.makeConstraints { make in
+            make.top.equalTo(avatarImageView.snp.bottom).inset(-26)
+            make.left.equalTo(safeArea.snp.left).inset(16)
+            make.right.equalTo(safeArea.snp.right).inset(16)
+            make.height.equalTo(50)
+            make.bottom.equalToSuperview().inset(16)
+        }
+        ///fullName
+        fullNameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(27)
+            make.left.equalTo(avatarImageView.snp.right).inset(-16)
+            make.right.equalTo(safeArea.snp.right).inset(16)
+        }
+        ///statusLabel
+        statusLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(setStatusButton.snp.top).inset(-64)
+            make.left.equalTo(avatarImageView.snp.right).inset(-16)
+            make.right.equalTo(safeArea.snp.right).inset(16)
+        }
+        ///textField
+        paddedTextField.snp.makeConstraints { make in
+            make.top.equalTo(statusLabel.snp.bottom).inset(-10)
+            make.left.equalTo(avatarImageView.snp.right).inset(-16)
+            make.right.equalTo(safeArea.snp.right).inset(16)
+        }
             
-            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 26),
-            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            
-            fullNameLabel.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
-            
-            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -64),
-            statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            statusLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
-            
-            paddedTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
-            paddedTextField.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            paddedTextField.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
-            
-        ])
     }
 }
 

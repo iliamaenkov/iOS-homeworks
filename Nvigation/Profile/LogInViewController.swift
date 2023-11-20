@@ -178,7 +178,6 @@ final class LogInViewController: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
             
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
@@ -202,7 +201,6 @@ final class LogInViewController: UIViewController {
             
             
             logInTextField.heightAnchor.constraint(equalToConstant: 50),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
             
             separatorView.heightAnchor.constraint(equalToConstant: 0.5),
         ])
