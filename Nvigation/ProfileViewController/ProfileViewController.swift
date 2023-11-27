@@ -7,7 +7,37 @@
 
 import UIKit
 
+protocol profileVIewControllerDelegate: AnyObject {
+    func scrollOn()
+    func scrollOff()
+}
+
+extension ProfileViewController: profileVIewControllerDelegate {
+
+    func scrollOn() {
+        self.tableView.isScrollEnabled = true
+        self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = true
+    }
+    
+    func scrollOff() {
+        self.tableView.isScrollEnabled = false
+        self.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = false
+    }
+}
+
 final class ProfileViewController: UIViewController {
+    
+    var currentUser: User?
+    var profileHeader: ProfileHeaderView?
+    
+    init(currentUser: User?) {
+        self.currentUser = currentUser
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - UI Elements
     
@@ -30,22 +60,30 @@ final class ProfileViewController: UIViewController {
         
         tuneTableView()
         setupConstraints()
+        setupHeader()
         
         #if DEBUG
         tableView.backgroundColor = .systemRed
         #else
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .systemGray6
         #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-  
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
+          self.beginAppearanceTransition(true, animated: true)
+          self.endAppearanceTransition()
+    
+          navigationController?.setNavigationBarHidden(true, animated: true)
+      }
     
     
     //MARK: - Private
+    
+    private func setupHeader() {
+        profileHeader = ProfileHeaderView()
+        profileHeader?.currentUser = currentUser
+        profileHeader?.profileVC = self
+    }
     
     private func tuneTableView() {
         

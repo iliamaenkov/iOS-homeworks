@@ -91,7 +91,7 @@ final class PostTableViewCell: UITableViewCell {
     func setup(with post: Post) {
         authorLabel.text = post.author
         descriptionText.text = post.description
-        postImageView.image = UIImage(named: post.image ?? "Empty_Post")
+        postImageView.image = UIImage(named: post.image ?? "Empty")
         likesLabel.text = "Likes: \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
     }
