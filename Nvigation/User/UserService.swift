@@ -25,7 +25,7 @@ class CurrentUserService: UserService {
     
     func checkUser(_ userLogin: String) -> User? {
         if let user = currentUser, user.logIn == userLogin {
-            print("User Found: \(user.logIn)")
+            print("User Found: \(user.fullName)")
             return user
         }
         print("User Not Found")
@@ -47,7 +47,7 @@ class TestUserService: UserService {
     
     func checkUser(_ userLogin: String) -> User? {
         if let user = currentUser, user.logIn == userLogin {
-            print("User Found: \(user.logIn)")
+            print("User Found: \(user.fullName)")
             return user
         }
         print("User Not Found")
