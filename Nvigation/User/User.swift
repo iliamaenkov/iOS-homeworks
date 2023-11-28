@@ -9,19 +9,19 @@ import UIKit
 
 public class User {
     
-    var logIn: String
+    var login: String
     var fullName: String
     var avatar: UIImage
     var status: String
     
     init(
-        logIn: String,
+        login: String,
         fullName: String,
         avatar: UIImage,
         status: String
     )
     {
-        self.logIn = logIn
+        self.login = login
         self.fullName = fullName
         self.avatar = avatar
         self.status = status

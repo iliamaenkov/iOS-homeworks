@@ -216,40 +216,23 @@ final class LogInViewController: UIViewController {
     @objc private func tapLogIn() {
         
         guard let userLogin = logInTextField.text, !userLogin.isEmpty else {
-            showAlert(message: "Введите логин.")
-            return
+            return print("Enter login")
         }
-        let userService: UserService = {
+        
             #if DEBUG
-            return TestUserService()
+            let service: UserService = TestUserService()
             #else
-            return CurrentUserService()
+            let service: UserService = CurrentUserService()
             #endif
-        }()
 
-            if let user = userService.checkUser(userLogin) {
+            if let user = service.checkUser(login: userLogin) {
                 let profileViewController = ProfileViewController(currentUser: user)
                 navigationController?.pushViewController(profileViewController, animated: true)
             } else {
-                showAlert(message: "Неверный логин, пользователь не найден.")
+                print("Error. bad login.")
             }
     }
 
-    private func showAlert(message: String) {
-        let alertController = UIAlertController(
-            title: "Ошибка",
-            message: message,
-            preferredStyle: .alert
-        )
-        let okAction = UIAlertAction(
-            title: "OK",
-            style: .default,
-            handler: nil
-        )
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
     @objc func willShowKeyboard(_ notification: NSNotification) {
         if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
             scrollView.contentInset.bottom = keyboardHeight

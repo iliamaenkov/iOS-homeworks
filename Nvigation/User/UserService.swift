@@ -8,49 +8,47 @@
 import UIKit
 
 protocol UserService {
-    func checkUser(_ userLogin: String) -> User?
+    var user: User { get set }
+    func checkUser(login: String) -> User?
+}
+extension UserService {
+    func checkUser(login: String) -> User? {
+        return login == user.login ? user : nil
+    }
 }
 
 class CurrentUserService: UserService {
     
-    private var currentUser: User?
+    var user = User(
+        login: "Kenobi",
+        fullName: "Obi Van Kenobi",
+        avatar: UIImage(named: "Kenobi")!,
+        status: "Online"
+    )
     
     init() {
-        self.currentUser = User(
-            logIn: "Kenobi",
+        self.user = User(
+            login: "Kenobi",
             fullName: "Obi Van Kenobi",
-            avatar: UIImage(named: "Kenobi") ?? UIImage(named: "No_avatar")!,
+            avatar: UIImage(named: "Kenobi")!,
             status: "Online")
-    }
-    
-    func checkUser(_ userLogin: String) -> User? {
-        if let user = currentUser, user.logIn == userLogin {
-            print("User Found: \(user.fullName)")
-            return user
-        }
-        print("User Not Found")
-        return nil
     }
 }
 
 class TestUserService: UserService {
     
-    private var currentUser: User?
+    var user = User(
+        login: "Test",
+        fullName: "Test_User",
+        avatar: UIImage(named: "No_avatar")!,
+        status: "DEBUG"
+    )
     
     init() {
-        self.currentUser = User(
-            logIn: "Test",
-            fullName: "Test User",
+        self.user = User(
+            login: "Test",
+            fullName: "Test_User",
             avatar: UIImage(named: "No_avatar")!,
-            status: "Debug mode")
-    }
-    
-    func checkUser(_ userLogin: String) -> User? {
-        if let user = currentUser, user.logIn == userLogin {
-            print("User Found: \(user.fullName)")
-            return user
-        }
-        print("User Not Found")
-        return nil
+            status: "DEBUG")
     }
 }
