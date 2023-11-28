@@ -25,12 +25,16 @@ final class CustomButton: UIButton {
         setup()
     }
 
-    // Private Methods
+    // Setup button
     
     private func setup() {
         layer.cornerRadius = cornerRadius
         clipsToBounds = true
         let backgroundImage = UIImage(named: "blue_pixel")
+        let titleColor = UIColor.white
+        autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
+        translatesAutoresizingMaskIntoConstraints = false
         setBackgroundImage(backgroundImage, for: .normal)
+        setTitleColor(titleColor, for: .normal)
     }
 }

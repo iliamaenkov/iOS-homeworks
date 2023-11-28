@@ -8,6 +8,14 @@
 import UIKit
 
 final class ProfileHeaderView: UIView {
+
+    weak var profileVC: profileVIewControllerDelegate?
+    
+    weak var currentUser: User? {
+        didSet {
+            setUserInfo()
+        }
+    }
     
     var avatarImageView = UIImageView()
     var returnAvatarButton = UIButton()
@@ -21,7 +29,6 @@ final class ProfileHeaderView: UIView {
     
     private let fullNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Obi-Van Kenobi"
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +37,6 @@ final class ProfileHeaderView: UIView {
     
     private let statusLabel: UILabel = {
         let label = UILabel()
-        label.text = "May the Force be with you..."
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = .gray
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -78,6 +84,14 @@ final class ProfileHeaderView: UIView {
     
     //MARK: - Private
     
+    private func setUserInfo() {
+        guard let currentUser = currentUser else { return }
+        fullNameLabel.text = currentUser.fullName
+        statusLabel.text = currentUser.status
+        avatarImageView.image = currentUser.avatar
+    }
+    
+    
     private func setupAvatarImage() {
             avatarImageView.translatesAutoresizingMaskIntoConstraints = false
             avatarImageView.image = UIImage(named: "Kenobi")
@@ -115,7 +129,7 @@ final class ProfileHeaderView: UIView {
             NSLayoutConstraint.activate([
                 avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
                 avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                avatarImageView.widthAnchor.constraint(equalToConstant: 128),
+                avatarImageView.widthAnchor.constraint(equalToConstant: 100),
                 avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
                 
                 returnAvatarButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -137,17 +151,15 @@ final class ProfileHeaderView: UIView {
         
         setupAvatarImage()
         setupConstraints()
+        setUserInfo()
     }
     
     //MARK: - Actions
     
     @objc private func tapOnAvatar() {
+        profileVC?.scrollOff()
+
         // Animation
-        avatarImageView.isUserInteractionEnabled = false
-        
-        ProfileViewController.tableView.isScrollEnabled = false
-        ProfileViewController.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = false
-        
         avatarOriginPoint = avatarImageView.center
         let scale = UIScreen.main.bounds.width / avatarImageView.bounds.width
         
@@ -166,6 +178,8 @@ final class ProfileHeaderView: UIView {
     }
     
     @objc private func returnAvatarToOrigin() {
+        profileVC?.scrollOn()
+        
         UIImageView.animate(withDuration: 0.5) {
             UIImageView.animate(withDuration: 0.5) {
                 self.returnAvatarButton.alpha = 0
@@ -175,8 +189,6 @@ final class ProfileHeaderView: UIView {
                 self.avatarBackground.alpha = 0
             }
         } completion: { _ in
-            ProfileViewController.tableView.isScrollEnabled = true
-            ProfileViewController.tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = true
             self.avatarImageView.isUserInteractionEnabled = true
         }
     }
@@ -196,10 +208,6 @@ final class ProfileHeaderView: UIView {
         let safeAreaGuide = self.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16),
-            avatarImageView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
             
             setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 26),
             setStatusButton.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16),

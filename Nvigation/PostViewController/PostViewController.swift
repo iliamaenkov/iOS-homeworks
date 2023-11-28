@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import StorageService
 
 final class PostViewController: UIViewController {
     
+
+
     var postTitle: PostTitle?
     
     private static let defaultTitle = "Post"

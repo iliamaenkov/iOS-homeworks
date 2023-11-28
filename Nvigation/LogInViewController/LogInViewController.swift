@@ -8,8 +8,7 @@
 import UIKit
 
 final class LogInViewController: UIViewController {
-    
-    
+
     //MARK: - UI Elements
     
     private let scrollView: UIScrollView = {
@@ -57,7 +56,15 @@ final class LogInViewController: UIViewController {
     private let logInTextField: TextFieldWithPadding = {
         let textField = TextFieldWithPadding()
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Email or phone"
+        textField.placeholder = "User login"
+        
+        //Autofill login for Debug and Release
+        #if DEBUG
+        textField.text = "Test"
+        #else
+        textField.text = "Kenobi"
+        #endif
+        
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -75,10 +82,7 @@ final class LogInViewController: UIViewController {
     private let logInButton: CustomButton = {
         let button = CustomButton()
         button.setTitle("Log In", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 10
-        button.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
-        button.translatesAutoresizingMaskIntoConstraints = false
+
         return button
     }()
     
@@ -178,7 +182,6 @@ final class LogInViewController: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
             
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
@@ -202,7 +205,6 @@ final class LogInViewController: UIViewController {
             
             
             logInTextField.heightAnchor.constraint(equalToConstant: 50),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
             
             separatorView.heightAnchor.constraint(equalToConstant: 0.5),
         ])
@@ -210,13 +212,42 @@ final class LogInViewController: UIViewController {
     }
     
     // MARK: - Actions
-    
+
     @objc private func tapLogIn() {
-        let profileViewController = ProfileViewController()
         
-        if let navigationController = self.navigationController {
-            navigationController.pushViewController(profileViewController, animated: true)
+        guard let userLogin = logInTextField.text, !userLogin.isEmpty else {
+            showAlert(message: "Введите логин.")
+            return
         }
+        let userService: UserService = {
+            #if DEBUG
+            return TestUserService()
+            #else
+            return CurrentUserService()
+            #endif
+        }()
+
+            if let user = userService.checkUser(userLogin) {
+                let profileViewController = ProfileViewController(currentUser: user)
+                navigationController?.pushViewController(profileViewController, animated: true)
+            } else {
+                showAlert(message: "Неверный логин, пользователь не найден.")
+            }
+    }
+
+    private func showAlert(message: String) {
+        let alertController = UIAlertController(
+            title: "Ошибка",
+            message: message,
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(
+            title: "OK",
+            style: .default,
+            handler: nil
+        )
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     @objc func willShowKeyboard(_ notification: NSNotification) {

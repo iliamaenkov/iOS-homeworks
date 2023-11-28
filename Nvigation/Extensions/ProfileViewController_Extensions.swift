@@ -17,9 +17,8 @@ extension ProfileViewController: UITableViewDelegate {
         _ tableView: UITableView,
         viewForHeaderInSection section: Int
     ) -> UIView? {
-        return section == 0 ? ProfileHeaderView() : nil
+        return section == 0 ? profileHeader : nil
     }
-    
 }
 
 extension ProfileViewController: UITableViewDataSource {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageService
 
     // Creating an array of Post objects.
 
