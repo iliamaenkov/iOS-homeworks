@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate {
+    func check(login: String, password: String) -> User?
+}
+
 final class LogInViewController: UIViewController {
 
+    var loginDelegate: LoginViewControllerDelegate?
+    
     //MARK: - UI Elements
     
     private let scrollView: UIScrollView = {
@@ -59,11 +65,11 @@ final class LogInViewController: UIViewController {
         textField.placeholder = "User login"
         
         //Autofill login for Debug and Release
-        #if DEBUG
+#if DEBUG
         textField.text = "Test"
-        #else
+#else
         textField.text = "Kenobi"
-        #endif
+#endif
         
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -212,27 +218,45 @@ final class LogInViewController: UIViewController {
     }
     
     // MARK: - Actions
-
+    
     @objc private func tapLogIn() {
-        
         guard let userLogin = logInTextField.text, !userLogin.isEmpty else {
-            return print("Enter login")
+            return displayErrorAlert(message: "Введите логин")
+        }
+        guard let userPassword = passwordTextField.text, !userPassword.isEmpty else {
+            return displayErrorAlert(message: "Введите пароль")
         }
         
-            #if DEBUG
-            let service: UserService = TestUserService()
-            #else
-            let service: UserService = CurrentUserService()
-            #endif
-
-            if let user = service.checkUser(login: userLogin) {
-                let profileViewController = ProfileViewController(currentUser: user)
-                navigationController?.pushViewController(profileViewController, animated: true)
-            } else {
-                print("Error. bad login.")
-            }
+        if let validUser = loginDelegate?.check(login: userLogin, password: userPassword) {
+            navigateToProfile(user: validUser)
+        } else {
+            displayErrorAlert(message: "Неверный логин или пароль")
+        }
     }
 
+    private func navigateToProfile(user: User) {
+        let profileViewController = ProfileViewController(user: user)
+        navigationController?.pushViewController(profileViewController, animated: true)
+    }
+
+    private func displayErrorAlert(message: String) {
+        let alert = UIAlertController(
+            title: "Ошибка",
+            message: message,
+            preferredStyle: .alert
+        )
+
+        let okAction = UIAlertAction(
+            title: "OK",
+            style: .default,
+            handler: nil
+        )
+
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    ///Keyboard
     @objc func willShowKeyboard(_ notification: NSNotification) {
         if let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height {
             scrollView.contentInset.bottom = keyboardHeight

@@ -20,18 +20,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        window.rootViewController = createTabBarController()
+        window.rootViewController = createTabBarController(with: MyLoginFactory())
         
         window.makeKeyAndVisible()
         self.window = window
         self.window?.overrideUserInterfaceStyle = .light
-
     }
 }
 
     //MARK: - Private
 
-    private func createTabBarController() -> UITabBarController {
+    private func createTabBarController(with factory: LoginFactory) -> UITabBarController {
         
         let tabBarController = UITabBarController()
         
@@ -52,29 +51,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         tabBarController.tabBar.isTranslucent = false
         
-        tabBarController.viewControllers = (0...1)
-            .map { index in
-                let viewController: UIViewController
-                let imageName: String
-                let title: String
-                
-                if index == 0 {
-                    viewController = FeedViewController()
-                    imageName = "house.fill"
-                    title = "Feed"
-                } else {
-                    viewController = LogInViewController()
-                    imageName = "person.fill"
-                    title = "Profile"
-                }
-                
-                viewController.tabBarItem.image = UIImage(systemName: imageName)
-                viewController.title = title
-                
-                return UINavigationController(rootViewController: viewController)
-            }
+        let feedViewController = FeedViewController()
+        feedViewController.tabBarItem.image = UIImage(systemName: "house.fill")
+        feedViewController.title = "Feed"
+
+        let profileViewController = LogInViewController()
+        profileViewController.tabBarItem.image = UIImage(systemName: "person.fill")
+        profileViewController.title = "Profile"
         
-        
+        profileViewController.loginDelegate = factory.makeLoginInspector()
+
+        tabBarController.viewControllers = [
+            UINavigationController(rootViewController: feedViewController),
+            UINavigationController(rootViewController: profileViewController)
+        ]
+
         return tabBarController
     }
 

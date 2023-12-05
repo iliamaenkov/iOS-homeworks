@@ -39,6 +39,8 @@
 		3F9CAE322B07BE3200CB4D43 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CAE082B07B47C00CB4D43 /* Post.swift */; };
 		3F9CAE382B0B8CB900CB4D43 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CAE372B0B8CB900CB4D43 /* User.swift */; };
 		3F9CAE3A2B0BA76000CB4D43 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CAE392B0BA76000CB4D43 /* UserService.swift */; };
+		3FE255392B168590008AAB02 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE255382B168590008AAB02 /* Checker.swift */; };
+		3FE2553E2B17AC6C008AAB02 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE2553D2B17AC6C008AAB02 /* LoginFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,8 @@
 		3F9CAE292B07BDF700CB4D43 /* Nvigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nvigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9CAE372B0B8CB900CB4D43 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3F9CAE392B0BA76000CB4D43 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		3FE255382B168590008AAB02 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		3FE2553D2B17AC6C008AAB02 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				3F1223772ACAC1F6006DEA3F /* Nvigation */,
+				3FE2553C2B17AC4B008AAB02 /* Factory */,
 				3F9CAE122B07BDF700CB4D43 /* StorageService.framework */,
 				3F9CAE132B07BDF700CB4D43 /* StorageService */,
 				3F9CAE1B2B07BDF700CB4D43 /* StorageServiceTests.xctest */,
@@ -272,6 +277,7 @@
 			children = (
 				3F9CAE372B0B8CB900CB4D43 /* User.swift */,
 				3F9CAE392B0BA76000CB4D43 /* UserService.swift */,
+				3FE255382B168590008AAB02 /* Checker.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -291,6 +297,14 @@
 				3F12238E2ACB5DA4006DEA3F /* PostViewController.swift */,
 			);
 			path = PostViewController;
+			sourceTree = "<group>";
+		};
+		3FE2553C2B17AC4B008AAB02 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				3FE2553D2B17AC6C008AAB02 /* LoginFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +463,8 @@
 				3F1223792ACAC1F6006DEA3F /* AppDelegate.swift in Sources */,
 				3F9CAE382B0B8CB900CB4D43 /* User.swift in Sources */,
 				3F12238D2ACB5D9A006DEA3F /* FeedViewController.swift in Sources */,
+				3FE255392B168590008AAB02 /* Checker.swift in Sources */,
+				3FE2553E2B17AC6C008AAB02 /* LoginFactory.swift in Sources */,
 				3F12237B2ACAC1F6006DEA3F /* SceneDelegate.swift in Sources */,
 				3F060EAD2ADC79E3000ACC49 /* PostTableViewCell.swift in Sources */,
 				3F176F1E2AE0321E00012995 /* PreviewCollectionViewCell.swift in Sources */,

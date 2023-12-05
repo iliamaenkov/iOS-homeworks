@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol profileVIewControllerDelegate: AnyObject {
+protocol ProfileVIewControllerDelegate: AnyObject {
     func scrollOn()
     func scrollOff()
 }
 
-extension ProfileViewController: profileVIewControllerDelegate {
+extension ProfileViewController: ProfileVIewControllerDelegate {
 
     func scrollOn() {
         self.tableView.isScrollEnabled = true
@@ -27,11 +27,11 @@ extension ProfileViewController: profileVIewControllerDelegate {
 
 final class ProfileViewController: UIViewController {
     
-    var currentUser: User?
+    var user: User?
     var profileHeader: ProfileHeaderView?
     
-    init(currentUser: User?) {
-        self.currentUser = currentUser
+    init(user: User?) {
+        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -62,11 +62,11 @@ final class ProfileViewController: UIViewController {
         setupConstraints()
         setupHeader()
         
-        #if DEBUG
+#if DEBUG
         tableView.backgroundColor = .systemRed
-        #else
+#else
         tableView.backgroundColor = .systemGray6
-        #endif
+#endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,7 +81,7 @@ final class ProfileViewController: UIViewController {
     
     private func setupHeader() {
         profileHeader = ProfileHeaderView()
-        profileHeader?.currentUser = currentUser
+        profileHeader?.user = user
         profileHeader?.profileVC = self
     }
     

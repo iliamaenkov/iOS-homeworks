@@ -9,9 +9,9 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
 
-    weak var profileVC: profileVIewControllerDelegate?
+    weak var profileVC: ProfileVIewControllerDelegate?
     
-    weak var currentUser: User? {
+    weak var user: User? {
         didSet {
             setUserInfo()
         }
@@ -85,7 +85,7 @@ final class ProfileHeaderView: UIView {
     //MARK: - Private
     
     private func setUserInfo() {
-        guard let currentUser = currentUser else { return }
+        guard let currentUser = user else { return }
         fullNameLabel.text = currentUser.fullName
         statusLabel.text = currentUser.status
         avatarImageView.image = currentUser.avatar
