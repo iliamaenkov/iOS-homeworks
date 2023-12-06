@@ -37,4 +37,6 @@ final class CustomButton: UIButton {
         setBackgroundImage(backgroundImage, for: .normal)
         setTitleColor(titleColor, for: .normal)
     }
+    
+    @objc private func buttonTapped() {}
 }
