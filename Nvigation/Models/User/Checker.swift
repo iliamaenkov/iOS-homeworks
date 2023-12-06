@@ -9,8 +9,8 @@ import UIKit
 
 final class Checker {
     
-    let userLogin: String?
-    let userPassword: String?
+    let login: String?
+    let password: String?
     
     var service: UserService
     static let shared = Checker()
@@ -21,21 +21,18 @@ final class Checker {
 #else
         service = CurrentUserService()
 #endif
-        userLogin = service.user.login
-        userPassword = service.user.password
+        login = service.getUser().login
+        password = service.getUser().password
     }
     
     func check(login: String, password: String) -> Bool {
-        return service.checkUser(login: login)?.password == password
+        login == self.login && password == self.password
     }
 }
 
 struct LoginInspector: LoginViewControllerDelegate {
     
-    func check(login: String, password: String) -> User? {
-        if Checker.shared.check(login: login, password: password) {
-            return Checker.shared.service.checkUser(login: login)
-        }
-        return nil
-    }
+    func check(_ login: String, _ password: String) -> Bool {
+         Checker.shared.check(login: login, password: password)
+     } 
 }

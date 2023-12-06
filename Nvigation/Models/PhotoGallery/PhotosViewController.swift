@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import iOSIntPackage
 
+final class PhotosViewController: UIViewController {
 
-class PhotosViewController: UIViewController {
-
+//    let publisher = ImagePublisherFacade()
+    
     // MARK: Visual objects
     
     lazy var layout: UICollectionViewFlowLayout = {

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginViewControllerDelegate {
-    func check(login: String, password: String) -> User?
+    func check(_ login: String, _ password: String) -> Bool
 }
 
 final class LogInViewController: UIViewController {
@@ -80,6 +80,13 @@ final class LogInViewController: UIViewController {
         textField.backgroundColor = .systemGray6
         textField.placeholder = "Password"
         textField.isSecureTextEntry = true
+        
+        //Autofill login for Debug and Release
+#if DEBUG
+        textField.text = "12345"
+#else
+        textField.text = "yoda"
+#endif
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -227,14 +234,21 @@ final class LogInViewController: UIViewController {
             return displayErrorAlert(message: "Введите пароль")
         }
         
-        if let validUser = loginDelegate?.check(login: userLogin, password: userPassword) {
-            navigateToProfile(user: validUser)
+        if loginDelegate?.check(_: userLogin, _: userPassword) == true {
+            navigateToProfile()
         } else {
             displayErrorAlert(message: "Неверный логин или пароль")
         }
     }
 
-    private func navigateToProfile(user: User) {
+    private func navigateToProfile() {
+        #if DEBUG
+        let service = TestUserService()
+        #else
+        let service = CurrentUserService()
+        #endif
+        let user = service.getUser()
+        
         let profileViewController = ProfileViewController(user: user)
         navigationController?.pushViewController(profileViewController, animated: true)
     }

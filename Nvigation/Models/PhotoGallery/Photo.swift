@@ -5,7 +5,7 @@
 //  Created by Ilya Maenkov on 17.10.2023.
 //
 
-import Foundation
+import UIKit
 
 struct Photo {
     

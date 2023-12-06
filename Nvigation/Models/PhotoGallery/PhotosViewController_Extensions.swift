@@ -6,6 +6,14 @@
 //
 
 import UIKit
+import iOSIntPackage
+
+//extension PhotosViewController: ImageLibrarySubscriber {
+//    func receive(images: [UIImage]) {
+//        <#code#>
+//    }
+//
+//}
 
 // MARK: - PhotosViewController Extensions
 

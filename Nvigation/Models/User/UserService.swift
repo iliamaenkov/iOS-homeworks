@@ -16,6 +16,7 @@ extension UserService {
     func checkUser(login: String) -> User? {
         return login == user.login ? user : nil
     }
+    func getUser() -> User { user }
 }
 
 class CurrentUserService: UserService {
