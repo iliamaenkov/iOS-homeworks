@@ -42,5 +42,6 @@ class PreviewCollectionViewCell: UICollectionViewCell {
             photo.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
+
 }
 

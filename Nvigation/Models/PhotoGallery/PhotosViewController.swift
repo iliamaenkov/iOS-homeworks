@@ -10,7 +10,10 @@ import iOSIntPackage
 
 final class PhotosViewController: UIViewController {
 
-//    let publisher = ImagePublisherFacade()
+    let facade = ImagePublisherFacade()
+    
+    var galleryImages: [UIImage] = []
+    var photoGallery = Photo.makeImages()
     
     // MARK: Visual objects
     
@@ -38,6 +41,13 @@ final class PhotosViewController: UIViewController {
 
         setupUI()
         setupConstraints()
+        
+        facade.subscribe(self)
+        facade.addImagesWithTimer(time: 0.5, repeat: 20, userImages: photoGallery)
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        facade.removeSubscription(for: self)
     }
     
     override func viewWillTransition(

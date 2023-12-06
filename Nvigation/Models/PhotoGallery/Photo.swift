@@ -8,30 +8,43 @@
 import UIKit
 
 struct Photo {
-    
     var image: String
-    
 }
 
-var photos: [Photo] = [
-    Photo(image: "Image1"),
-    Photo(image: "Image2"),
-    Photo(image: "Image3"),
-    Photo(image: "Image4"),
-    Photo(image: "Image5"),
-    Photo(image: "Image6"),
-    Photo(image: "Image7"),
-    Photo(image: "Image8"),
-    Photo(image: "Image9"),
-    Photo(image: "Image10"),
-    Photo(image: "Image12"),
-    Photo(image: "Image13"),
-    Photo(image: "Image14"),
-    Photo(image: "Image15"),
-    Photo(image: "Image16"),
-    Photo(image: "Image17"),
-    Photo(image: "Image18"),
-    Photo(image: "Image19"),
-    Photo(image: "Image20")
-]
+extension Photo {
+    
+    static func makeImages() -> [UIImage] {
+        let photos = self.make()
+        
+        var images: [UIImage] =
+        photos.compactMap { UIImage(named: $0.image) }
+        
+        return images
+    }
+    
+    static func make() -> [Photo] {
+        [
+        Photo(image: "Image1"),
+        Photo(image: "Image2"),
+        Photo(image: "Image3"),
+        Photo(image: "Image4"),
+        Photo(image: "Image5"),
+        Photo(image: "Image6"),
+        Photo(image: "Image7"),
+        Photo(image: "Image8"),
+        Photo(image: "Image9"),
+        Photo(image: "Image10"),
+        Photo(image: "Image12"),
+        Photo(image: "Image13"),
+        Photo(image: "Image14"),
+        Photo(image: "Image15"),
+        Photo(image: "Image16"),
+        Photo(image: "Image17"),
+        Photo(image: "Image18"),
+        Photo(image: "Image19"),
+        Photo(image: "Image20")
+        ]
+    }
+}
 
+var photos: [Photo] = Photo.make()

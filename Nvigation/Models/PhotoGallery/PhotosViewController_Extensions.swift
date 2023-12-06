@@ -8,13 +8,6 @@
 import UIKit
 import iOSIntPackage
 
-//extension PhotosViewController: ImageLibrarySubscriber {
-//    func receive(images: [UIImage]) {
-//        <#code#>
-//    }
-//
-//}
-
 // MARK: - PhotosViewController Extensions
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
@@ -43,7 +36,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return photos.count
+        return galleryImages.count
     }
 
     func collectionView(
@@ -55,10 +48,17 @@ extension PhotosViewController: UICollectionViewDataSource {
             for: indexPath
         ) as? PhotosCollectionViewCell else { return UICollectionViewCell()}
         
-        let photo = photos[indexPath.item]
-        cell.photo.image = UIImage(named: photo.image)
+        let image = galleryImages[indexPath.item]
+        cell.setup(with: image)
         return cell
+        
     }
 
 }
 
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        galleryImages = images
+        photosCollectionView.reloadData()
+    }
+}
