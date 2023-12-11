@@ -10,7 +10,7 @@ import StorageService
 
 final class PostViewController: UIViewController {
     
-
+    weak var feedViewController: FeedViewController?
 
     var postTitle: PostTitle?
     
@@ -34,13 +34,24 @@ final class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = postTitle?.title ?? PostViewController.defaultTitle
-        self.view.backgroundColor = .systemGray6
-        
-        // Set the created button as the right button in the navigation bar
-        
-        self.navigationItem.rightBarButtonItem = infoButton
+        title = postTitle?.title ?? PostViewController.defaultTitle
+        view.backgroundColor = .systemGray6
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.rightBarButtonItem = infoButton
+        navigationController?.navigationBar.tintColor = .black
+        navigationController?.isNavigationBarHidden = false
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        //Возвращаем состояние лэйбла проверки в исходное состояние, очищаем поле для секретного слова
+        feedViewController?.feedView.resultLabel.backgroundColor = .black
+        feedViewController?.feedView.guessTextField.text = ""
+        feedViewController?.feedView.setButtonInteractionEnabled(false)
     }
     
     // MARK: - Actions

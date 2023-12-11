@@ -12,22 +12,17 @@ import UIKit
 final class CustomButton: UIButton {
     
     private let cornerRadius: CGFloat = 10
+    private var action: (() -> Void)?
 
-    // Initializers
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
-
-    // Setup button
-    
-    private func setup() {
+    init(title: String, titleColor: UIColor, action: (() -> Void)?) {
+        super.init(frame: .zero)
+        
+        setTitle(title, for: .normal)
+        setTitleColor(titleColor, for: .normal)
+        self.action = action
+        
+        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        
         layer.cornerRadius = cornerRadius
         clipsToBounds = true
         let backgroundImage = UIImage(named: "blue_pixel")
@@ -38,5 +33,11 @@ final class CustomButton: UIButton {
         setTitleColor(titleColor, for: .normal)
     }
     
-    @objc private func buttonTapped() {}
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc private func buttonTapped() {
+        action?()
+    }
 }

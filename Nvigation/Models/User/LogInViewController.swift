@@ -91,15 +91,12 @@ final class LogInViewController: UIViewController {
         return textField
     }()
     
-    
-    private let logInButton: CustomButton = {
-        let button = CustomButton()
-        button.setTitle("Log In", for: .normal)
-
+    private lazy var logInButton: CustomButton = {
+        let button = CustomButton(title: "Log In", titleColor: .white) { [weak self] in
+            self?.tapLogIn()
+        }
         return button
     }()
-    
-    
     
     //MARK: - View Controller Lifecycle
     
@@ -107,7 +104,6 @@ final class LogInViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
-        setupLogInButton()
         addSubviews()
         setupConstraints()
         
@@ -130,24 +126,6 @@ final class LogInViewController: UIViewController {
     }
     
     //MARK: - Private
-    
-    private func setupLogInButton() {
-        logInButton.addTarget(self, action: #selector(tapLogIn), for: .touchUpInside)
-        
-        switch logInButton.state {
-        case .normal:
-            logInButton.alpha = 1
-        case .disabled:
-            logInButton.alpha = 0.8
-        case .selected:
-            logInButton.alpha = 0.8
-        case .highlighted:
-            logInButton.alpha = 0.8
-        default:
-            logInButton.alpha = 0.8
-        }
-        
-    }
     
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
@@ -226,7 +204,7 @@ final class LogInViewController: UIViewController {
     
     // MARK: - Actions
     
-    @objc private func tapLogIn() {
+    private func tapLogIn() {
         guard let userLogin = logInTextField.text, !userLogin.isEmpty else {
             return displayErrorAlert(message: "Введите логин")
         }
@@ -285,3 +263,14 @@ final class LogInViewController: UIViewController {
     
 }
 
+//MARK: - LogInViewController Extensions
+
+extension LogInViewController: UITextFieldDelegate {
+    
+    // MARK: UITextFieldDelegate Methods
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}

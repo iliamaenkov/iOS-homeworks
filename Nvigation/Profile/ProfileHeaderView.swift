@@ -43,17 +43,10 @@ final class ProfileHeaderView: UIView {
         return label
     }()
     
-    private let setStatusButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Show status", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 4
-        button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowOpacity = 0.7
-        button.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var setStatusButton: CustomButton = {
+        let button = CustomButton(title: "Set status", titleColor: .white) { [weak self] in
+            self?.buttonPressed()
+        }
         return button
     }()
     
@@ -139,8 +132,6 @@ final class ProfileHeaderView: UIView {
         }
     
     private func commonInit() {
-        
-        setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         paddedTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
         
         addSubview(avatarImageView)

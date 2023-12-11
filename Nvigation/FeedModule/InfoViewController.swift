@@ -17,6 +17,7 @@ final class InfoViewController: UIViewController {
     private lazy var showAlert: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Show Alert", for: .normal)
+        button.tintColor = .black
         button.addTarget(self, action: #selector(showAlert(_:)), for: .touchUpInside)
         return button
     }()
