@@ -10,7 +10,7 @@ import UIKit
 protocol UserService: AnyObject {
     var user: User { get set }
     func checkUser(login: String) -> User?
-    func getUser(completion: @escaping (Result<User, Error>) -> Void)
+    func getCurrentUser(completion: @escaping (Result<User, Error>) -> Void)
 }
 
 extension UserService {
@@ -42,7 +42,7 @@ class CurrentUserService: UserService {
         )
     }
     
-    func getUser(completion: @escaping (Result<User, Error>) -> Void) {
+    func getCurrentUser(completion: @escaping (Result<User, Error>) -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: { [weak self] in
             guard let self = self else { return }
             completion(.success(self.user))
@@ -72,7 +72,7 @@ class TestUserService: UserService {
         )
     }
     
-    func getUser(completion: @escaping (Result<User, Error>) -> Void) {
+    func getCurrentUser(completion: @escaping (Result<User, Error>) -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: { [weak self] in
             guard let self = self else { return }
             completion(.success(self.user))

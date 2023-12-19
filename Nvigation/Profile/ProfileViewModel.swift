@@ -43,7 +43,7 @@ final class ProfileViewModel: ProfileViewModelOutput {
     
     func changeStateIfNeeded() {
         state = .loading
-        service.getUser { [weak self] result in
+        service.getCurrentUser { [weak self] result in
             guard let self else { return }
             switch result {
                 case .success(let users):
