@@ -27,10 +27,14 @@ extension ProfileViewController: ProfileVIewControllerDelegate {
 
 final class ProfileViewController: UIViewController {
     
+    private var viewModel: ProfileViewModel
     var user: User?
-    var profileHeader: ProfileHeaderView?
+    var profileHeader = ProfileHeaderView()
     
-    init(user: User?) {
+    // MARK: - Init
+    
+    init(user: User?, viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
         self.user = user
         super.init(nibName: nil, bundle: nil)
     }
@@ -79,10 +83,35 @@ final class ProfileViewController: UIViewController {
     
     //MARK: - Private
     
+    private func bindViewModel() {
+        viewModel.currentState = { [weak self] state in
+            guard let self else { return }
+            switch state {
+                case .initial:
+                    print("initial")
+                case .loading:
+                
+                    profileHeader.activityIndicator.isHidden = false
+                
+                case .loaded(let user):
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self else { return }
+                        self.user = user
+                        profileHeader.activityIndicator.isHidden = true
+                        tableView.reloadData()
+                        
+                        print("loaded")
+                        
+                    }
+                case .error:
+                    print("error")
+            }
+        }
+    }
+    
     private func setupHeader() {
-        profileHeader = ProfileHeaderView()
-        profileHeader?.user = user
-        profileHeader?.profileVC = self
+        profileHeader.user = user
+        profileHeader.profileVC = self
     }
     
     private func tuneTableView() {

@@ -220,14 +220,16 @@ final class LogInViewController: UIViewController {
     }
 
     private func navigateToProfile() {
-        #if DEBUG
+#if DEBUG
         let service = TestUserService()
-        #else
+#else
         let service = CurrentUserService()
-        #endif
+#endif
         let user = service.getUser()
         
-        let profileViewController = ProfileViewController(user: user)
+        let viewProfileModel = ProfileViewModel()
+        viewProfileModel.changeStateIfNeeded()
+        let profileViewController = ProfileViewController(user: user, viewModel: viewProfileModel)
         navigationController?.pushViewController(profileViewController, animated: true)
     }
 

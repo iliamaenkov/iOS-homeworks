@@ -21,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         window.rootViewController = createTabBarController(with: MyLoginFactory())
-        
         window.makeKeyAndVisible()
         self.window = window
         self.window?.overrideUserInterfaceStyle = .light

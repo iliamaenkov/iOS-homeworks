@@ -37,9 +37,6 @@ final class FeedViewController: UIViewController {
         feedView.onResultLabelTapped = { [weak self] in
             self?.handleResultLabelTapped()
         }
-        feed.onCheckResult = { [weak self] isCorrect in
-            self?.handleCheckResult(isCorrect: isCorrect)
-        }
     }
     
     // Проверка слова
@@ -50,10 +47,7 @@ final class FeedViewController: UIViewController {
             feedView.setButtonInteractionEnabled(false)
             return
         }
-        feed.check(word)
-    }
-    // Обрабатываем результата проверки
-    private func handleCheckResult(isCorrect: Bool) {
+        let isCorrect = feed.check(word)
         feedView.resultLabel.backgroundColor = isCorrect ? .green : .red
         feedView.setButtonInteractionEnabled(isCorrect)
     }

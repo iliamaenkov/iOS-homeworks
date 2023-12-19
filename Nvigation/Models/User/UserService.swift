@@ -7,9 +7,10 @@
 
 import UIKit
 
-protocol UserService {
+protocol UserService: AnyObject {
     var user: User { get set }
     func checkUser(login: String) -> User?
+    func getUser(completion: @escaping (Result<User, Error>) -> Void)
 }
 
 extension UserService {
@@ -20,6 +21,9 @@ extension UserService {
 }
 
 class CurrentUserService: UserService {
+
+    static let shared = CurrentUserService()
+    var currentUser: User?
     
     var user = User(
         login: "Kenobi",
@@ -37,9 +41,19 @@ class CurrentUserService: UserService {
             status: "Online"
         )
     }
+    
+    func getUser(completion: @escaping (Result<User, Error>) -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: { [weak self] in
+            guard let self = self else { return }
+            completion(.success(self.user))
+        })
+    }
 }
 
 class TestUserService: UserService {
+    
+    static let shared = TestUserService()
+    var currentUser: User?
     
     var user = User(
         login: "Test",
@@ -56,5 +70,12 @@ class TestUserService: UserService {
             avatar: UIImage(named: "No_avatar")!,
             status: "DEBUG"
         )
+    }
+    
+    func getUser(completion: @escaping (Result<User, Error>) -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: { [weak self] in
+            guard let self = self else { return }
+            completion(.success(self.user))
+        })
     }
 }

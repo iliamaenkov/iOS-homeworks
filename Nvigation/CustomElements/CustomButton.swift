@@ -12,15 +12,17 @@ import UIKit
 final class CustomButton: UIButton {
     
     private let cornerRadius: CGFloat = 10
-    private var action: (() -> Void)?
+    
+    typealias Action = () -> Void
+    
+    var buttonAction: Action
 
-    init(title: String, titleColor: UIColor, action: (() -> Void)?) {
-        super.init(frame: .zero)
+    init(title: String, titleColor: UIColor = .white, action: @escaping Action) {
+            buttonAction = action
+            super.init(frame: .zero)
         
         setTitle(title, for: .normal)
         setTitleColor(titleColor, for: .normal)
-        self.action = action
-        
         addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         
         layer.cornerRadius = cornerRadius
@@ -38,6 +40,6 @@ final class CustomButton: UIButton {
     }
     
     @objc private func buttonTapped() {
-        action?()
+        buttonAction()
     }
 }
