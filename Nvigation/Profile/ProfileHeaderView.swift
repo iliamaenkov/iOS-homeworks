@@ -130,7 +130,7 @@ final class ProfileHeaderView: UIView {
                 avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
                 avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
                 avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-                avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
+                avatarImageView.heightAnchor.constraint(equalToConstant: 100),
                 
                 returnAvatarButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
                 returnAvatarButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),

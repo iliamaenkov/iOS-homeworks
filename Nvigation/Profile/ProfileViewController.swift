@@ -65,6 +65,7 @@ final class ProfileViewController: UIViewController {
         tuneTableView()
         setupConstraints()
         setupHeader()
+        bindViewModel()
         
 #if DEBUG
         tableView.backgroundColor = .systemRed
@@ -87,27 +88,21 @@ final class ProfileViewController: UIViewController {
         viewModel.currentState = { [weak self] state in
             guard let self else { return }
             switch state {
-                case .initial:
-                    print("initial")
-                case .loading:
-                
-                    profileHeader.activityIndicator.isHidden = false
-                
-                case .loaded(let user):
-                    DispatchQueue.main.async { [weak self] in
-                        guard let self else { return }
-                        self.user = user
-                        profileHeader.activityIndicator.isHidden = true
-                        tableView.reloadData()
-                        
-                        print("loaded")
-                        
-                    }
-                case .error:
-                    print("error")
+            case .initial:
+                print("initial")
+            case .loading:
+                print("loading")
+            case .loaded(let user):
+                self.user = user
+                tableView.reloadData()
+                print("loaded loaded")
+            case .error:
+                print("error")
             }
+            
         }
     }
+
     
     private func setupHeader() {
         profileHeader.user = user

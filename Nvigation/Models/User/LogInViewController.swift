@@ -227,8 +227,8 @@ final class LogInViewController: UIViewController {
 #endif
         let user = service.getUser()
         
-        let viewProfileModel = ProfileViewModel()
-        viewProfileModel.changeStateIfNeeded()
+        let viewProfileModel = ProfileViewModel(service: service)
+        viewProfileModel.loadUser()
         let profileViewController = ProfileViewController(user: user, viewModel: viewProfileModel)
         navigationController?.pushViewController(profileViewController, animated: true)
     }

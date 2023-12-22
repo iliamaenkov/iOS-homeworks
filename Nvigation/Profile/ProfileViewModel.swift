@@ -11,7 +11,7 @@ import Foundation
 protocol ProfileViewModelOutput {
     var state: State { get set }
     var currentState: ((State) -> Void)? { get set }
-    func changeStateIfNeeded()
+    func loadUser()
 }
 
 enum State {
@@ -33,24 +33,20 @@ final class ProfileViewModel: ProfileViewModelOutput {
         }
     }
     
-    init() {
-#if DEBUG
-        self.service = CurrentUserService.shared
-#else
-        self.service = TestUserService.shared
-#endif
+    init(service: UserService) {
+        self.service = service
     }
     
-    func changeStateIfNeeded() {
-        state = .loading
-        service.getCurrentUser { [weak self] result in
-            guard let self else { return }
-            switch result {
-                case .success(let users):
-                    state = .loaded(users)
-                case .failure(_):
-                    state = .error
-            }
-        }
-    }
+    func loadUser() {
+         state = .loading
+         service.getCurrentUser { [weak self] result in
+             guard let self = self else { return }
+             switch result {
+             case .success(let user):
+                 self.state = .loaded(user)
+             case .failure(_):
+                 self.state = .error
+             }
+         }
+     }
 }
