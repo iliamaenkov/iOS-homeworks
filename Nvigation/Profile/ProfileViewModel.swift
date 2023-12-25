@@ -8,12 +8,6 @@
 import UIKit
 import Foundation
 
-protocol ProfileViewModelOutput {
-    var state: State { get set }
-    var currentState: ((State) -> Void)? { get set }
-    func loadUser()
-}
-
 enum State {
     case initial
     case loading
@@ -21,7 +15,18 @@ enum State {
     case error
 }
 
+protocol ProfileViewModelOutput {
+    var state: State { get set }
+    var currentState: ((State) -> Void)? { get set }
+    func loadUser()
+    var showPhotoGallery: Action? { get set }
+    var showProfile: Action? { get set }
+}
+
 final class ProfileViewModel: ProfileViewModelOutput {
+    
+    var showProfile: Action?
+    var showPhotoGallery: Action?
     
     private let service: UserService
     var currentState: ((State) -> Void)?
@@ -33,8 +38,12 @@ final class ProfileViewModel: ProfileViewModelOutput {
         }
     }
     
-    init(service: UserService) {
-        self.service = service
+    init() {
+#if DEBUG
+        self.service = TestUserService.shared
+#else
+        self.service = CurrentUserService.shared
+#endif
     }
     
     func loadUser() {

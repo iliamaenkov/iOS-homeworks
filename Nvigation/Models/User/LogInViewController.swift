@@ -13,6 +13,7 @@ protocol LoginViewControllerDelegate {
 
 final class LogInViewController: UIViewController {
 
+    var viewModel: ProfileViewModel
     var loginDelegate: LoginViewControllerDelegate?
     
     //MARK: - UI Elements
@@ -97,6 +98,16 @@ final class LogInViewController: UIViewController {
         }
         return button
     }()
+    
+    // MARK: - Init
+    init(viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - View Controller Lifecycle
     
@@ -213,24 +224,12 @@ final class LogInViewController: UIViewController {
         }
         
         if loginDelegate?.check(_: userLogin, _: userPassword) == true {
-            navigateToProfile()
+            viewModel.loadUser()
+            viewModel.showProfile?()
+            
         } else {
             displayErrorAlert(message: "Неверный логин или пароль")
         }
-    }
-
-    private func navigateToProfile() {
-#if DEBUG
-        let service = TestUserService()
-#else
-        let service = CurrentUserService()
-#endif
-        let user = service.getUser()
-        
-        let viewProfileModel = ProfileViewModel(service: service)
-        viewProfileModel.loadUser()
-        let profileViewController = ProfileViewController(user: user, viewModel: viewProfileModel)
-        navigationController?.pushViewController(profileViewController, animated: true)
     }
 
     private func displayErrorAlert(message: String) {

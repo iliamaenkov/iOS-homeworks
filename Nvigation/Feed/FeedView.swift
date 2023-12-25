@@ -8,7 +8,7 @@
 import UIKit
 
 final class FeedView: UIView {
-    
+
     // Обработчик для кнопки проверки
     var onCheck: ((String) -> Void)?
     // Обработчик для тапа по результату

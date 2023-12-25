@@ -173,8 +173,7 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            let photosViewController = PhotosViewController()
-            self.navigationController?.pushViewController(photosViewController, animated: true)
+            viewModel.showPhotoGallery?()
         }
     }
 

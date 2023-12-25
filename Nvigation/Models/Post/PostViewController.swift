@@ -10,8 +10,6 @@ import StorageService
 
 final class PostViewController: UIViewController {
     
-    weak var feedViewController: FeedViewController?
-
     var postTitle: PostTitle?
     
     private static let defaultTitle = "Post"
@@ -36,6 +34,7 @@ final class PostViewController: UIViewController {
         super.viewDidLoad()
         title = postTitle?.title ?? PostViewController.defaultTitle
         view.backgroundColor = .systemGray6
+        tabBarController?.tabBar.barTintColor = UIColor.white
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,14 +43,6 @@ final class PostViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .black
         navigationController?.isNavigationBarHidden = false
 
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        //Возвращаем состояние лэйбла проверки в исходное состояние, очищаем поле для секретного слова
-        feedViewController?.feedView.resultLabel.backgroundColor = .black
-        feedViewController?.feedView.guessTextField.text = ""
-        feedViewController?.feedView.setButtonInteractionEnabled(false)
     }
     
     // MARK: - Actions

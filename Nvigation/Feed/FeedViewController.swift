@@ -11,12 +11,22 @@ import StorageService
 final class FeedViewController: UIViewController {
     
     // MARK: - Properties
-    
-    private let feed = FeedModedl(secretWord: "12")
+    private var viewModel: FeedViewModel
+    private let feed = FeedModel(secretWord: "12")
     lazy var feedView = FeedView()
     
-    let postTitle = PostTitle(title: "New Post")
+//    let postTitle = PostTitle(title: "New Post")
     
+    // MARK: - Init
+    
+    init(viewModel: FeedViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     // MARK: - View Controller Lifecycle
     
     override func loadView() {
@@ -28,6 +38,22 @@ final class FeedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupEvents()
+        bindViewModel()
+    }
+    
+    //MARK: - Private
+    
+    private func bindViewModel() {
+        viewModel.updateUI = { [weak self] in
+            self?.feedView.resultLabel.backgroundColor = self?.viewModel.isResultCorrect ?? false ? .green : .red
+            self?.feedView.setButtonInteractionEnabled(self?.viewModel.isResultCorrect ?? false)
+        }
+        
+        viewModel.resetFeed = { [weak self] in
+            self?.feedView.resultLabel.backgroundColor = .black
+            self?.feedView.guessTextField.text = ""
+            self?.feedView.setButtonInteractionEnabled(false)
+        }
     }
     
     private func setupEvents() {
@@ -54,10 +80,8 @@ final class FeedViewController: UIViewController {
     
     //Обрабатываем тап по результату
     private func handleResultLabelTapped() {
-        let postViewController = PostViewController()
-        postViewController.feedViewController = self
-        postViewController.postTitle = postTitle
-        navigationController?.pushViewController(postViewController, animated: true)
+        viewModel.showPost?()
+        viewModel.resetFeed?()
     }
     
     func showAlert(message: String) {
