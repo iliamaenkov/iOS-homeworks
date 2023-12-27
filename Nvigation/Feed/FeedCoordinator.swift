@@ -14,7 +14,7 @@ class FeedCoordinator: FeedBaseCoordinator {
     lazy var feedViewModel: FeedViewModel = FeedViewModel()
 
     func start() -> UIViewController {
-        feedViewModel.showPost = { [weak self] in
+        feedViewModel.show = { [weak self] in
             self?.showPost()
         }
 
@@ -38,4 +38,3 @@ class FeedCoordinator: FeedBaseCoordinator {
         navigationRootViewController?.pushViewController(postViewController, animated: true)
     }
 }
-

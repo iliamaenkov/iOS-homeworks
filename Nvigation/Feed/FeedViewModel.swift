@@ -21,12 +21,12 @@ final class FeedModel {
 }
 
 protocol FeedViewModelOutput {
-    var showPost: Action? { get set }
+    var show: Action? { get set }
 }
 
 final class FeedViewModel: FeedViewModelOutput {
     
-    var showPost: Action?
+    var show: Action?
     
     var updateUI: (() -> Void)?
     var resetFeed: (() -> Void)?

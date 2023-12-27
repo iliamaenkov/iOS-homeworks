@@ -9,11 +9,9 @@ import UIKit
 import iOSIntPackage
 
 final class PhotosViewController: UIViewController {
-
-    let facade = ImagePublisherFacade()
     
-    var galleryImages: [UIImage] = []
     var photoGallery = Photo.makeImages()
+    var imageProcessor = ImageProcessor()
     
     // MARK: Visual objects
     
@@ -38,16 +36,10 @@ final class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
         setupConstraints()
-        
-        facade.subscribe(self)
-        facade.addImagesWithTimer(time: 0.5, repeat: 20, userImages: photoGallery)
-        
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        facade.removeSubscription(for: self)
+        acceptProcessor()
     }
     
     override func viewWillTransition(
@@ -116,7 +108,7 @@ extension PhotosViewController: UICollectionViewDataSource {
     // MARK: UICollectionViewDataSource Methods
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return galleryImages.count
+        return photoGallery.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -124,20 +116,44 @@ extension PhotosViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let image = galleryImages[indexPath.item]
-        cell.setup(with: image)
+        let photo = photoGallery[indexPath.row]
+        cell.setup(with: photo)
+        
         return cell
         
     }
 
 }
 
-extension PhotosViewController: ImageLibrarySubscriber {
-    func receive(images: [UIImage]) {
-        galleryImages = images
-        photosCollectionView.reloadData()
+extension PhotosViewController {
+    
+    func acceptProcessor() {
+        
+        let start = Date()
+        
+        let qos: QualityOfService = .default
+        let filter: ColorFilter = .noir
+        
+        imageProcessor.processImagesOnThread(
+            sourceImages: photoGallery,
+            filter: filter,
+            qos: qos,
+            completion: { [weak self] photos in
+                
+                self?.photoGallery = photos.compactMap{ $0 }.map{ UIImage(cgImage: $0)}
+                let end = Date()
+                
+                DispatchQueue.main.async {
+                    self?.photosCollectionView.reloadData()
+                   
+                    let applyTime = end.timeIntervalSince(start)
+                    
+                    print("With \(qos.rawValue) QOS and \(filter) filter, applying time for \(photos.count) photos is \(applyTime) seconds")
+                }
+            }
+        )
     }
+    
 }
-
 
 

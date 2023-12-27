@@ -10,7 +10,9 @@ import StorageService
 
 final class PostViewController: UIViewController {
     
+    var coordinator: FeedCoordinator?
     var postTitle: PostTitle?
+    var post: Post?
     
     private static let defaultTitle = "Post"
     private static let infoButtonImage = UIImage(systemName: "arrowshape.turn.up.forward.circle")

@@ -10,12 +10,13 @@ import StorageService
 
 final class FeedViewController: UIViewController {
     
+    var coordinator: FeedCoordinator?
+    
     // MARK: - Properties
     private var viewModel: FeedViewModel
     private let feed = FeedModel(secretWord: "12")
     lazy var feedView = FeedView()
-    
-//    let postTitle = PostTitle(title: "New Post")
+
     
     // MARK: - Init
     
@@ -80,7 +81,7 @@ final class FeedViewController: UIViewController {
     
     //Обрабатываем тап по результату
     private func handleResultLabelTapped() {
-        viewModel.showPost?()
+        viewModel.show?()
         viewModel.resetFeed?()
     }
     
