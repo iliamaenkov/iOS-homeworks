@@ -131,7 +131,7 @@ extension PhotosViewController {
         
         let start = Date()
         
-        let qos: QualityOfService = .default
+        let qos: QualityOfService = .utility
         let filter: ColorFilter = .noir
         
         imageProcessor.processImagesOnThread(
