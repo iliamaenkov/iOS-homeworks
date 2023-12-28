@@ -11,6 +11,7 @@ protocol UserService: AnyObject {
     var user: User { get set }
     func checkUser(login: String) -> User?
     func getCurrentUser(completion: @escaping (Result<User, Error>) -> Void)
+    func updatePassword(_ password: String)
 }
 
 extension UserService {
@@ -22,6 +23,10 @@ extension UserService {
     
     func getCurrentUser(completion: @escaping (Result<User, Error>) -> Void) {
         completion(.success(self.user))
+    }
+    
+    func updatePassword(_ password: String) {
+        user.password = password
     }
 }
 

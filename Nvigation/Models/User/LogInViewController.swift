@@ -15,6 +15,7 @@ final class LogInViewController: UIViewController {
 
     var viewModel: ProfileViewModel
     var loginDelegate: LoginViewControllerDelegate?
+    var bruteForce = BruteForce()
     
     //MARK: - UI Elements
     
@@ -83,11 +84,6 @@ final class LogInViewController: UIViewController {
         textField.isSecureTextEntry = true
         
         //Autofill login for Debug and Release
-#if DEBUG
-        textField.text = "12345"
-#else
-        textField.text = "yoda"
-#endif
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -97,6 +93,20 @@ final class LogInViewController: UIViewController {
             self?.tapLogIn()
         }
         return button
+    }()
+    
+    private lazy var getPassword: CustomButton = {
+        let button = CustomButton(title: "Подобрать пароль", titleColor: .white) { [weak self] in
+            self?.bruteForceAction()
+        }
+        return button
+    }()
+    
+    let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        return indicator
     }()
     
     // MARK: - Init
@@ -167,6 +177,8 @@ final class LogInViewController: UIViewController {
         contentView.addSubview(logoImageView)
         contentView.addSubview(stackView)
         contentView.addSubview(logInButton)
+        contentView.addSubview(getPassword)
+        contentView.addSubview(activityIndicator)
         stackView.addArrangedSubview(logInTextField)
         stackView.addArrangedSubview(separatorView)
         stackView.addArrangedSubview(passwordTextField)
@@ -203,12 +215,21 @@ final class LogInViewController: UIViewController {
             logInButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            logInButton.bottomAnchor.constraint(equalTo: getPassword.topAnchor, constant: -16),
+            
+            getPassword.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            getPassword.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
+            getPassword.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
+            getPassword.heightAnchor.constraint(equalToConstant: 50),
+            getPassword.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             
             logInTextField.heightAnchor.constraint(equalToConstant: 50),
             
             separatorView.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
+            activityIndicator.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 65)
         ])
         
     }
@@ -229,6 +250,33 @@ final class LogInViewController: UIViewController {
             
         } else {
             displayErrorAlert(message: "Неверный логин или пароль")
+        }
+    }
+    
+    private func bruteForceAction() {
+        
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+        passwordTextField.placeholder = ""
+        
+        let dispatchQueueGlobal = DispatchQueue.global(qos: .background)
+        dispatchQueueGlobal.async {
+            let password = self.bruteForce.generatePassword()
+            
+            Checker.shared.password = password
+            
+            print("Random password: ", password)
+            let passwordBruteForce = self.bruteForce.bruteForce(passwordToUnlock: password)
+            
+            print("Password find: ", passwordBruteForce)
+            
+            let dispatchQueueMain = DispatchQueue.main
+            dispatchQueueMain.async {
+                self.passwordTextField.text = passwordBruteForce
+                self.passwordTextField.isSecureTextEntry = false
+                self.activityIndicator.isHidden = true
+                self.activityIndicator.stopAnimating()
+            }
         }
     }
 

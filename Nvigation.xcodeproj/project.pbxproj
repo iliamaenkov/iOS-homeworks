@@ -31,6 +31,7 @@
 		3F55383D2B35C3870069A076 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55383C2B35C3870069A076 /* BaseCoordinator.swift */; };
 		3F55383F2B35C6430069A076 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55383E2B35C6430069A076 /* ProfileCoordinator.swift */; };
 		3F5538412B35C6520069A076 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5538402B35C6520069A076 /* FeedCoordinator.swift */; };
+		3F5538432B3DA5120069A076 /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5538422B3DA5120069A076 /* BruteForce.swift */; };
 		3F9CAE162B07BDF700CB4D43 /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CAE152B07BDF700CB4D43 /* StorageService.docc */; };
 		3F9CAE1C2B07BDF700CB4D43 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9CAE122B07BDF700CB4D43 /* StorageService.framework */; };
 		3F9CAE232B07BDF700CB4D43 /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CAE222B07BDF700CB4D43 /* StorageServiceTests.swift */; };
@@ -111,6 +112,7 @@
 		3F55383C2B35C3870069A076 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		3F55383E2B35C6430069A076 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		3F5538402B35C6520069A076 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		3F5538422B3DA5120069A076 /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		3F9CAE082B07B47C00CB4D43 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3F9CAE122B07BDF700CB4D43 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9CAE142B07BDF700CB4D43 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				3F9CAE372B0B8CB900CB4D43 /* User.swift */,
 				3F9CAE392B0BA76000CB4D43 /* UserService.swift */,
 				3FE255382B168590008AAB02 /* Checker.swift */,
+				3F5538422B3DA5120069A076 /* BruteForce.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				3FE255392B168590008AAB02 /* Checker.swift in Sources */,
 				3F55383D2B35C3870069A076 /* BaseCoordinator.swift in Sources */,
 				3F55383F2B35C6430069A076 /* ProfileCoordinator.swift in Sources */,
+				3F5538432B3DA5120069A076 /* BruteForce.swift in Sources */,
 				3FE2553E2B17AC6C008AAB02 /* LoginFactory.swift in Sources */,
 				3F12237B2ACAC1F6006DEA3F /* SceneDelegate.swift in Sources */,
 				3F060EAD2ADC79E3000ACC49 /* PostTableViewCell.swift in Sources */,

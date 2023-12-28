@@ -10,7 +10,7 @@ import UIKit
 final class Checker {
     
     let login: String?
-    let password: String?
+    var password: String?
     
     var service: UserService
     static let shared = Checker()
