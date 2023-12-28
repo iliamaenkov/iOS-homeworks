@@ -255,12 +255,14 @@ final class LogInViewController: UIViewController {
     
     private func bruteForceAction() {
         
+        let start = Date()
+        
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         passwordTextField.placeholder = ""
         
-        let dispatchQueueGlobal = DispatchQueue.global(qos: .background)
-        dispatchQueueGlobal.async {
+        
+        DispatchQueue.global(qos: .utility).async {
             let password = self.bruteForce.generatePassword()
             
             Checker.shared.password = password
@@ -270,13 +272,17 @@ final class LogInViewController: UIViewController {
             
             print("Password find: ", passwordBruteForce)
             
-            let dispatchQueueMain = DispatchQueue.main
-            dispatchQueueMain.async {
+            let end = Date()
+            
+            DispatchQueue.main.async {
                 self.passwordTextField.text = passwordBruteForce
                 self.passwordTextField.isSecureTextEntry = false
                 self.activityIndicator.isHidden = true
                 self.activityIndicator.stopAnimating()
             }
+            
+            let findTime = end.timeIntervalSince(start)
+            print("Password finding time: \(findTime)")
         }
     }
 

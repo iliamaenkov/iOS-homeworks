@@ -53,12 +53,11 @@ class BruteForce {
     }
     
     func generatePassword() -> String {
-        let passwordLength = 3
         let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         
         var password = ""
         
-        for _ in 0..<passwordLength {
+        for _ in 0..<3 {
             let randomIndex = Int(arc4random_uniform(UInt32(characters.count)))
             let randomCharacter = characters[characters.index(characters.startIndex, offsetBy: randomIndex)]
             password.append(randomCharacter)
