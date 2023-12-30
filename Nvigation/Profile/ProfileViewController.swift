@@ -27,6 +27,8 @@ extension ProfileViewController: ProfileVIewControllerDelegate {
 
 final class ProfileViewController: UIViewController {
     
+    var timer: Timer?
+    
     private var viewModel: ProfileViewModel
     var user: User?
     var profileHeader = ProfileHeaderView()
@@ -81,6 +83,11 @@ final class ProfileViewController: UIViewController {
           navigationController?.setNavigationBarHidden(true, animated: true)
       }
     
+    override func viewDidAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { _ in
+            self.showBreakScreen()
+        })
+    }
     
     //MARK: - Private
     
@@ -127,6 +134,19 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
+    func showBreakScreen() {
+        let breakScreen = BreakScreenViewController()
+        
+        breakScreen.modalTransitionStyle = .coverVertical
+        breakScreen.modalPresentationStyle = .pageSheet
+        
+        present(breakScreen, animated: true)
+    }
+    
+    deinit {
+        timer?.invalidate()
+        timer = nil
+    }
 }
 
 //MARK: - ProfileViewController Extensions

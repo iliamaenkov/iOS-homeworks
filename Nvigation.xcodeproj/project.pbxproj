@@ -31,6 +31,7 @@
 		3F55383D2B35C3870069A076 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55383C2B35C3870069A076 /* BaseCoordinator.swift */; };
 		3F55383F2B35C6430069A076 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55383E2B35C6430069A076 /* ProfileCoordinator.swift */; };
 		3F5538412B35C6520069A076 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5538402B35C6520069A076 /* FeedCoordinator.swift */; };
+		3F5538482B3F17930069A076 /* BreakScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5538472B3F17930069A076 /* BreakScreenViewController.swift */; };
 		3F9CAE162B07BDF700CB4D43 /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CAE152B07BDF700CB4D43 /* StorageService.docc */; };
 		3F9CAE1C2B07BDF700CB4D43 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F9CAE122B07BDF700CB4D43 /* StorageService.framework */; };
 		3F9CAE232B07BDF700CB4D43 /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9CAE222B07BDF700CB4D43 /* StorageServiceTests.swift */; };
@@ -111,6 +112,7 @@
 		3F55383C2B35C3870069A076 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		3F55383E2B35C6430069A076 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		3F5538402B35C6520069A076 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		3F5538472B3F17930069A076 /* BreakScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakScreenViewController.swift; sourceTree = "<group>"; };
 		3F9CAE082B07B47C00CB4D43 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		3F9CAE122B07BDF700CB4D43 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9CAE142B07BDF700CB4D43 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				3FE2554E2B1F83B8008AAB02 /* PreviewGallery */,
 				3FE2554C2B1F7A07008AAB02 /* User */,
 				3FE255492B1F793E008AAB02 /* Post */,
+				3F5538472B3F17930069A076 /* BreakScreenViewController.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				3F463EF22ADF2A3300FA4414 /* Photo.swift in Sources */,
 				3F176F1B2ADFC39A00012995 /* PhotosViewController.swift in Sources */,
 				3F463EEE2ADD414A00FA4414 /* PhotosTableViewCell.swift in Sources */,
+				3F5538482B3F17930069A076 /* BreakScreenViewController.swift in Sources */,
 				3F9CAE3A2B0BA76000CB4D43 /* UserService.swift in Sources */,
 				3FE255552B21DCBA008AAB02 /* FeedViewModel.swift in Sources */,
 				3F176F292AE2A44400012995 /* PhotosCollectionViewCell.swift in Sources */,
