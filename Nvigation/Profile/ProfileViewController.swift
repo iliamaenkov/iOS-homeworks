@@ -142,11 +142,6 @@ final class ProfileViewController: UIViewController {
         
         present(breakScreen, animated: true)
     }
-    
-    deinit {
-        timer?.invalidate()
-        timer = nil
-    }
 }
 
 //MARK: - ProfileViewController Extensions
