@@ -27,8 +27,6 @@ extension ProfileViewController: ProfileVIewControllerDelegate {
 
 final class ProfileViewController: UIViewController {
     
-    var timer: Timer?
-    
     private var viewModel: ProfileViewModel
     var user: User?
     var profileHeader = ProfileHeaderView()
@@ -84,7 +82,7 @@ final class ProfileViewController: UIViewController {
       }
     
     override func viewDidAppear(_ animated: Bool) {
-        timer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { _ in
+        Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { _ in
             self.showBreakScreen()
         })
     }
