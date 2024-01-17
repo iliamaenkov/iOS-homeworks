@@ -116,7 +116,7 @@ final class ProfileViewController: UIViewController {
     
     private func tuneTableView() {
         
-        view.addSubview( tableView)
+        view.addSubview(tableView)
         
         tableView.delegate = self
         tableView.dataSource = self
