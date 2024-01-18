@@ -19,6 +19,7 @@ final class NetworkClient: INetworkClient {
                 DispatchQueue.main.async {
                     completion(.failure(.custom(description: error.localizedDescription)))
                 }
+                return
             }
 
             guard let data else {

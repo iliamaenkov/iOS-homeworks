@@ -10,6 +10,7 @@ import StorageService
 
 class InfoViewController: UIViewController {
     
+    private let lock = NSLock()
     private var residents: [Resident] = []
     private let networkClient: INetworkClient = NetworkClient()
     
@@ -161,42 +162,59 @@ class InfoViewController: UIViewController {
         networkClient.request(with: urlRequest) { [weak self] result in
             switch result {
             case .success(let data):
-                do {
-                    let planet = try JSONDecoder().decode(Planet.self, from: data)
-                    DispatchQueue.main.async {
+                DataMapper.map(Planet.self, from: data) { (result: Result<Planet, NetworkError>) in
+                    switch result {
+                    case .success(let planet):
                         self?.planetLabel.text = "Orbital Period: \(planet.orbitalPeriod)"
                         self?.fetchResidents(for: planet)
+                    case .failure(let error):
+                        print("Error decoding JSON: \(error)")
                     }
-                } catch {
-                    print("Error decoding JSON: \(error)")
                 }
             case .failure(let error):
                 print("Error fetching data: \(error)")
             }
         }
     }
+
     
     private func fetchResidents(for planet: Planet) {
         let group = DispatchGroup()
-        
+
         for url in planet.residents {
             guard let residentUrl = URL(string: url) else { continue }
-            
+            let urlRequest = URLRequest(url: residentUrl)
+
             group.enter()
-            URLSession.shared.dataTask(with: residentUrl) { [weak self] data, _, error in
+            networkClient.request(with: urlRequest) { [weak self] result in
                 defer { group.leave() }
-                
-                if let data = data, error == nil {
-                    if let resident = try? JSONDecoder().decode(Resident.self, from: data) {
-                        self?.residents.append(resident)
+
+                switch result {
+                case .success(let data):
+                    DataMapper.map(Resident.self, from: data) { result in
+                        switch result {
+                        case .success(let resident):
+                            self?.appendResident(resident)
+                        case .failure(let error):
+                            print("Error mapping data: \(error)")
+                        }
                     }
+                case .failure(let error):
+                    print("Error fetching data: \(error)")
                 }
-            }.resume()
+            }
         }
         group.notify(queue: .main) {
             self.tableView.reloadData()
         }
     }
+    
+    private func appendResident(_ resident: Resident) {
+        lock.lock()
+        self.residents.append(resident)
+        lock.unlock()
+    }
+
     
     // MARK: - Actions
     

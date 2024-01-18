@@ -37,8 +37,4 @@ struct Planet: Decodable {
 
 struct Resident: Decodable {
     let name: String
-
-    enum CodingKeys: String, CodingKey {
-        case name
-    }
 }
