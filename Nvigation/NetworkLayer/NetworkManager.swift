@@ -15,9 +15,8 @@ struct Response {
 
 struct NetworkManager {
     
-    static func request(for configuration: AppConfiguration, completion: @escaping (Result<Response, Error>) -> Void) {
-        let url = configuration.url
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+    static func request(url: URL, completion: @escaping (Result<Response, Error>) -> Void) {
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
@@ -40,17 +39,13 @@ struct NetworkManager {
     }
 }
 
-enum AppConfiguration {
+enum AppConfiguration: String, CaseIterable {
+    case people = "https://swapi.dev/api/people/8"
+    case starships = "https://swapi.dev/api/starships/3"
+    case planets = "https://swapi.dev/api/planets/5"
     
-    case people(URL)
-    case starships(URL)
-    case planets(URL)
-    
-    var url: URL {
-        switch self {
-        case .people(let url), .starships(let url), .planets(let url):
-            return url
-        }
+    var url: URL? {
+        URL(string: self.rawValue)
     }
 }
 

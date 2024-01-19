@@ -38,7 +38,8 @@ final class FeedView: UIView {
     
     let guessTextField: TextFieldWithPadding = {
         let textField = TextFieldWithPadding()
-        textField.placeholder = "Enter word"
+//        textField.placeholder = "Enter word"
+        textField.text = "12"
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 10
