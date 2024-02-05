@@ -27,8 +27,9 @@ final class ProfileViewModel: ProfileViewModelOutput {
     
     var showProfile: Action?
     var showPhotoGallery: Action?
+    var currentUser: User?
     
-    private let service: UserService
+    private let service: CheckerService
     var currentState: ((State) -> Void)?
     
     var state: State = .initial {
@@ -38,24 +39,17 @@ final class ProfileViewModel: ProfileViewModelOutput {
         }
     }
     
-    init() {
-#if DEBUG
-        self.service = TestUserService.shared
-#else
-        self.service = CurrentUserService.shared
-#endif
+    init(service: CheckerService) {
+        self.service = service
     }
     
     func loadUser() {
-         state = .loading
-         service.getCurrentUser { [weak self] result in
-             guard let self = self else { return }
-             switch result {
-             case .success(let user):
-                 self.state = .loaded(user)
-             case .failure(_):
-                 self.state = .error
-             }
-         }
-     }
+        state = .loading
+        if let currentUser = currentUser {
+            state = .loaded(currentUser)
+        } else {
+            let _ = NSError(domain: "YourDomain", code: 401, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
+            state = .error
+        }
+    }
 }

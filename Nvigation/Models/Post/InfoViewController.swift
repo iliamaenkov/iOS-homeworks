@@ -207,7 +207,6 @@ class InfoViewController: UIViewController {
         }
         group.notify(queue: .main) {
             self.tableView.reloadData()
-            print(self.residents)
         }
     }
 
