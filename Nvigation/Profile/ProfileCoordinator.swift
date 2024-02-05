@@ -9,9 +9,10 @@ import UIKit
 
 class ProfileCoordinator: ProfileBaseCoordinator {
     
+    let checkerService = CheckerService()
     var parentCoordinator: MainBaseCoordinator?
     lazy var rootViewController: UIViewController = UIViewController()
-    lazy var profileViewModel: ProfileViewModel = ProfileViewModel()
+    lazy var profileViewModel: ProfileViewModel = ProfileViewModel(service: checkerService)
     
     func start() -> UIViewController {
         profileViewModel.showProfile = { [weak self] in
@@ -24,7 +25,7 @@ class ProfileCoordinator: ProfileBaseCoordinator {
         let loginViewController = LogInViewController(viewModel: profileViewModel)
         loginViewController.view.backgroundColor = .systemBackground
         
-        let loginInspector = MyLoginFactory().makeLoginInspector()
+        let loginInspector = MyLoginFactory(checkerService: checkerService).makeLoginInspector()
         loginViewController.loginDelegate = loginInspector
         rootViewController = UINavigationController(
             rootViewController: loginViewController
@@ -34,17 +35,8 @@ class ProfileCoordinator: ProfileBaseCoordinator {
     }
     
     func showProfile() {
-        
-#if DEBUG
-        let service = TestUserService()
-#else
-        let service = CurrentUserService()
-#endif
-        let profileViewController = ProfileViewController(
-            user: service.user, viewModel: profileViewModel
-        )
+        let profileViewController = ProfileViewController(viewModel: profileViewModel)
         navigationRootViewController?.pushViewController(profileViewController, animated: true)
-        profileViewController.hidesBottomBarWhenPushed = false
     }
     
     func showPhotoGallery() {

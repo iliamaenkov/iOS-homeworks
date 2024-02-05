@@ -33,9 +33,8 @@ final class ProfileViewController: UIViewController {
     
     // MARK: - Init
     
-    init(user: User?, viewModel: ProfileViewModel) {
+    init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
-        self.user = user
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -110,7 +109,7 @@ final class ProfileViewController: UIViewController {
 
     
     private func setupHeader() {
-        profileHeader.user = user
+        profileHeader.user = viewModel.currentUser
         profileHeader.profileVC = self
     }
     

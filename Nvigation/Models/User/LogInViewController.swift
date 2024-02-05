@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 protocol LoginViewControllerDelegate {
-    func check(_ login: String, _ password: String) -> Bool
+    func check(login email: String, password: String, completion: @escaping (Result<Void, AuthError>) -> Void)
+    func signUp(_ login: String, _ password: String, completion: @escaping (Result<Void, AuthError>) -> Void)
 }
 
 final class LogInViewController: UIViewController {
-
+    
     var viewModel: ProfileViewModel
     var loginDelegate: LoginViewControllerDelegate?
     
@@ -63,15 +65,9 @@ final class LogInViewController: UIViewController {
     private let logInTextField: TextFieldWithPadding = {
         let textField = TextFieldWithPadding()
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "User login"
-        
-        //Autofill login for Debug and Release
-#if DEBUG
-        textField.text = "Test"
-#else
-        textField.text = "Kenobi"
-#endif
-        
+        textField.placeholder = "User email"
+        textField.keyboardType = .emailAddress
+       
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -81,13 +77,7 @@ final class LogInViewController: UIViewController {
         textField.backgroundColor = .systemGray6
         textField.placeholder = "Password"
         textField.isSecureTextEntry = true
-        
-        //Autofill login for Debug and Release
-#if DEBUG
-        textField.text = "12345"
-#else
-        textField.text = "yoda"
-#endif
+
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
@@ -95,6 +85,13 @@ final class LogInViewController: UIViewController {
     private lazy var logInButton: CustomButton = {
         let button = CustomButton(title: "Log In", titleColor: .white) { [weak self] in
             self?.tapLogIn()
+        }
+        return button
+    }()
+    
+    private lazy var signUpButton: CustomButton = {
+        let button = CustomButton(title: "Sign Up", titleColor: .white) { [weak self] in
+            self?.tapSignUp()
         }
         return button
     }()
@@ -120,7 +117,6 @@ final class LogInViewController: UIViewController {
         
         logInTextField.delegate = self
         passwordTextField.delegate = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -167,6 +163,7 @@ final class LogInViewController: UIViewController {
         contentView.addSubview(logoImageView)
         contentView.addSubview(stackView)
         contentView.addSubview(logInButton)
+        contentView.addSubview(signUpButton)
         stackView.addArrangedSubview(logInTextField)
         stackView.addArrangedSubview(separatorView)
         stackView.addArrangedSubview(passwordTextField)
@@ -203,8 +200,13 @@ final class LogInViewController: UIViewController {
             logInButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
+            signUpButton.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            signUpButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 8),
+            signUpButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
+            signUpButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
+            signUpButton.heightAnchor.constraint(equalToConstant: 50),
+            signUpButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             logInTextField.heightAnchor.constraint(equalToConstant: 50),
             
@@ -223,28 +225,71 @@ final class LogInViewController: UIViewController {
             return displayErrorAlert(message: "Введите пароль")
         }
         
-        if loginDelegate?.check(_: userLogin, _: userPassword) == true {
-            viewModel.loadUser()
-            viewModel.showProfile?()
-            
-        } else {
-            displayErrorAlert(message: "Неверный логин или пароль")
+        loginDelegate?.check(login: userLogin, password: userPassword) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                print("User Login:", userLogin)
+                print("User Password:", userPassword)
+                
+                let currentUser = User(login: userLogin, password: userPassword, fullName: "Kenobi", avatar: UIImage(named: "Kenobi")!, status: "Online")
+                self.viewModel.currentUser = currentUser
+                self.viewModel.showProfile?()
+                
+            case .failure(let error):
+                switch error {
+                case .invalidCredential:
+                    self.displayErrorAlert(message: "Некорректные данные")
+                case .unknown:
+                    self.displayErrorAlert(message: "Ошибка аутентификации")
+                }
+            }
         }
     }
 
-    private func displayErrorAlert(message: String) {
+
+    private func tapSignUp() {
+        guard let userLogin = logInTextField.text, !userLogin.isEmpty else {
+            return displayErrorAlert(message: "Введите логин")
+        }
+        guard let userPassword = passwordTextField.text, !userPassword.isEmpty else {
+            return displayErrorAlert(message: "Введите пароль")
+        }
+        
+        loginDelegate?.signUp(userLogin, userPassword) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success:
+                let currentUser = User(login: userLogin, password: userPassword, fullName: "Kenobi", avatar: UIImage(named: "Kenobi")!, status: "Online")
+                self.viewModel.currentUser = currentUser
+                self.viewModel.showProfile?()
+                
+            case .failure(let error):
+                switch error {
+                case .invalidCredential:
+                    self.displayErrorAlert(message: "Некорректные данные")
+                case .unknown:
+                    self.displayErrorAlert(message: "Ошибка аутентификации")
+                }
+            }
+        }
+    }
+
+
+
+    public func displayErrorAlert(message: String) {
         let alert = UIAlertController(
             title: "Ошибка",
             message: message,
             preferredStyle: .alert
         )
-
+        
         let okAction = UIAlertAction(
             title: "OK",
             style: .default,
             handler: nil
         )
-
+        
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
     }

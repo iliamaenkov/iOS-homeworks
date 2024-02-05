@@ -12,8 +12,15 @@ protocol LoginFactory {
 }
 
 struct MyLoginFactory: LoginFactory {
+    private let checkerService: CheckerService
+    
+    init(checkerService: CheckerService) {
+        self.checkerService = checkerService
+    }
+    
     func makeLoginInspector() -> LoginInspector {
-        return LoginInspector()
+        return LoginInspector(checkerService: checkerService)
     }
 }
-   
+
+

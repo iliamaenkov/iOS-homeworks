@@ -187,13 +187,13 @@ class InfoViewController: UIViewController {
 
             group.enter()
             networkClient.request(with: urlRequest) { [weak self] result in
-                defer { group.leave() }
-
                 switch result {
                 case .success(let data):
                     DataMapper.map(Resident.self, from: data) { result in
+                        defer { group.leave() }
                         switch result {
                         case .success(let resident):
+                            print("Fetching resident data from URL: \(residentUrl)")
                             self?.appendResident(resident)
                         case .failure(let error):
                             print("Error mapping data: \(error)")
@@ -201,6 +201,7 @@ class InfoViewController: UIViewController {
                     }
                 case .failure(let error):
                     print("Error fetching data: \(error)")
+                    group.leave()
                 }
             }
         }
@@ -208,6 +209,7 @@ class InfoViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
+
     
     private func appendResident(_ resident: Resident) {
         lock.lock()
