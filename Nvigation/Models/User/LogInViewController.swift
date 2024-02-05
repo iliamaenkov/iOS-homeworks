@@ -66,6 +66,7 @@ final class LogInViewController: UIViewController {
         let textField = TextFieldWithPadding()
         textField.backgroundColor = .systemGray6
         textField.placeholder = "User email"
+        textField.keyboardType = .emailAddress
        
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
