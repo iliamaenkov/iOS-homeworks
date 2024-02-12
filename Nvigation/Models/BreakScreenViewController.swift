@@ -41,23 +41,31 @@ class BreakScreenViewController: UIViewController {
         view.addSubview(breakImageView)
         view.addSubview(infoLabel)
         view.addSubview(closeButton)
+        
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
+        breakImageView.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.top)
+            make.left.equalTo(view.snp.left)
+            make.width.equalTo(view.snp.width)
+            make.height.equalTo(view.snp.height).multipliedBy(0.5)
+        }
 
-        NSLayoutConstraint.activate([
-            breakImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            breakImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            breakImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            breakImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+        infoLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(view.snp.centerX)
+            make.top.equalTo(breakImageView.snp.bottom).offset(20)
+            make.right.equalTo(view.snp.right).offset(-12)
+            make.left.equalTo(view.snp.left).offset(12)
+        }
 
-            infoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            infoLabel.topAnchor.constraint(equalTo: breakImageView.bottomAnchor, constant: 20),
-            infoLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12),
-            infoLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12),
-
-            closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            closeButton.topAnchor.constraint(equalTo: infoLabel.bottomAnchor, constant: 20),
-            closeButton.widthAnchor.constraint(equalToConstant: 120),
-            closeButton.heightAnchor.constraint(equalToConstant: 40),
-        ])
+        closeButton.snp.makeConstraints { make in
+            make.centerX.equalTo(view.snp.centerX)
+            make.top.equalTo(infoLabel.snp.bottom).offset(20)
+            make.width.equalTo(120)
+            make.height.equalTo(40)
+        }
     }
 
     @objc private func closeButtonTapped() {

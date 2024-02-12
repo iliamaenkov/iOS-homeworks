@@ -36,6 +36,7 @@
 		3F55383F2B35C6430069A076 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55383E2B35C6430069A076 /* ProfileCoordinator.swift */; };
 		3F5538412B35C6520069A076 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5538402B35C6520069A076 /* FeedCoordinator.swift */; };
 		3F5538482B3F17930069A076 /* BreakScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5538472B3F17930069A076 /* BreakScreenViewController.swift */; };
+		3F6359072B793FF000018BCD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F6359062B793FF000018BCD /* SnapKit */; };
 		3F884C852B56B30D006B0DCA /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F884C842B56B30D006B0DCA /* DataStructures.swift */; };
 		3F884C872B56BE37006B0DCA /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F884C862B56BE37006B0DCA /* NetworkClient.swift */; };
 		3F884C892B56BE57006B0DCA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F884C882B56BE57006B0DCA /* NetworkError.swift */; };
@@ -149,6 +150,7 @@
 				3FD288DA2B70B6DB001EEB1A /* FirebaseFirestore in Frameworks */,
 				3F418ABE2B5F9FCF00710FC4 /* FirebaseAuth in Frameworks */,
 				3FE255462B1F78CF008AAB02 /* iOSIntPackage in Frameworks */,
+				3F6359072B793FF000018BCD /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +375,7 @@
 				3FE255452B1F78CF008AAB02 /* iOSIntPackage */,
 				3F418ABD2B5F9FCF00710FC4 /* FirebaseAuth */,
 				3FD288D92B70B6DB001EEB1A /* FirebaseFirestore */,
+				3F6359062B793FF000018BCD /* SnapKit */,
 			);
 			productName = Nvigation;
 			productReference = 3F9CAE292B07BDF700CB4D43 /* Nvigation.app */;
@@ -423,7 +426,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					3F1223742ACAC1F6006DEA3F = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -449,6 +452,7 @@
 			packageReferences = (
 				3FE255432B1F7831008AAB02 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 				3F418ABA2B5EBCED00710FC4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3F6359052B793F9B00018BCD /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 3F12236C2ACAC1F6006DEA3F;
 			projectDirPath = "";
@@ -582,6 +586,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -643,6 +648,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -924,6 +930,14 @@
 				minimumVersion = 10.20.0;
 			};
 		};
+		3F6359052B793F9B00018BCD /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.0;
+			};
+		};
 		3FE255432B1F7831008AAB02 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
@@ -939,6 +953,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3F418ABA2B5EBCED00710FC4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		3F6359062B793FF000018BCD /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F6359052B793F9B00018BCD /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 		3FD288D92B70B6DB001EEB1A /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;

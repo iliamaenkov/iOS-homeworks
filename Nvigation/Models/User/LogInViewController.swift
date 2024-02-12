@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import SnapKit
 
 protocol LoginViewControllerDelegate {
     func check(login email: String, password: String, completion: @escaping (Result<Void, AuthError>) -> Void)
@@ -172,46 +173,49 @@ final class LogInViewController: UIViewController {
     //MARK: - Setting constraints
     
     private func setupConstraints() {
-        let safeAreaGuide = view.safeAreaLayoutGuide
         
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
-            
-            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            
-            logoImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 150),
-            logoImageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            logoImageView.widthAnchor.constraint(equalToConstant: 100),
-            logoImageView.heightAnchor.constraint(equalToConstant: 100),
-            
-            stackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
-            stackView.heightAnchor.constraint(equalToConstant: 100),
-            
-            logInButton.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            logInButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
-            logInButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            logInButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
-            logInButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            signUpButton.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            signUpButton.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 8),
-            signUpButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            signUpButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
-            signUpButton.heightAnchor.constraint(equalToConstant: 50),
-            signUpButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            
-            logInTextField.heightAnchor.constraint(equalToConstant: 50),
-            
-            separatorView.heightAnchor.constraint(equalToConstant: 0.5),
-        ])
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.equalTo(scrollView)
+        }
+
+        logoImageView.snp.makeConstraints { make in
+            make.top.equalTo(scrollView).offset(150)
+            make.centerX.equalTo(scrollView)
+            make.width.height.equalTo(100)
+        }
+
+        stackView.snp.makeConstraints { make in
+            make.top.equalTo(logoImageView.snp.bottom).offset(120)
+            make.leading.trailing.equalTo(scrollView).inset(16)
+            make.height.equalTo(100)
+        }
+
+        logInButton.snp.makeConstraints { make in
+            make.centerX.equalTo(scrollView)
+            make.top.equalTo(stackView.snp.bottom).offset(16)
+            make.leading.trailing.equalTo(scrollView).inset(16)
+            make.height.equalTo(50)
+        }
+
+        signUpButton.snp.makeConstraints { make in
+            make.centerX.equalTo(scrollView)
+            make.top.equalTo(logInButton.snp.bottom).offset(8)
+            make.leading.trailing.equalTo(scrollView).inset(16)
+            make.height.equalTo(50)
+            make.bottom.equalTo(scrollView)
+        }
+
+        logInTextField.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
+
+        separatorView.snp.makeConstraints { make in
+            make.height.equalTo(0.5)
+        }
         
     }
     

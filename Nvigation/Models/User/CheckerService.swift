@@ -56,10 +56,6 @@ final class CheckerService: CheckerServiceProtocol {
     }
 }
 
-
-
-
-
 struct LoginInspector: LoginViewControllerDelegate {
     
     private let checkerService: CheckerService

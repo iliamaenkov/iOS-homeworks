@@ -73,26 +73,29 @@ final class FeedView: UIView {
     }
     
     private func setupUI() {
-        
         addSubview(checkGuessButton)
         addSubview(guessTextField)
         addSubview(resultLabel)
-        
-        NSLayoutConstraint.activate([
-            guessTextField.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            guessTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-            guessTextField.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
-            guessTextField.heightAnchor.constraint(equalToConstant: 50),
-            
-            resultLabel.heightAnchor.constraint(equalToConstant: 50),
-            resultLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-            resultLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
-            resultLabel.bottomAnchor.constraint(equalTo: checkGuessButton.topAnchor, constant: -20),
-            
-            checkGuessButton.heightAnchor.constraint(equalToConstant: 50),
-            checkGuessButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-            checkGuessButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -20),
-            checkGuessButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20)
-        ])
+
+        guessTextField.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(20)
+            make.leading.equalTo(self).offset(20)
+            make.trailing.equalTo(self).offset(-20)
+            make.height.equalTo(50)
+        }
+
+        resultLabel.snp.makeConstraints { make in
+            make.height.equalTo(50)
+            make.leading.equalTo(self).offset(20)
+            make.trailing.equalTo(self).offset(-20)
+            make.bottom.equalTo(checkGuessButton.snp.top).offset(-20)
+        }
+
+        checkGuessButton.snp.makeConstraints { make in
+            make.height.equalTo(50)
+            make.leading.equalTo(self).offset(20)
+            make.trailing.equalTo(self).offset(-20)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).offset(-20)
+        }
     }
 }

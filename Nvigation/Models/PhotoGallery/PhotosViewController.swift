@@ -7,6 +7,7 @@
 
 import UIKit
 import iOSIntPackage
+import SnapKit
 
 final class PhotosViewController: UIViewController {
     
@@ -71,12 +72,9 @@ final class PhotosViewController: UIViewController {
     // MARK: - Setting constraints
     
     private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            photosCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            photosCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            photosCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            photosCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        photosCollectionView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

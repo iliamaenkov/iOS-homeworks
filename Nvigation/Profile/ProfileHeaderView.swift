@@ -202,30 +202,33 @@ final class ProfileHeaderView: UIView {
     //MARK: - Setting constraints
     
     private func setupConstraints() {
-        
         let safeAreaGuide = self.safeAreaLayoutGuide
         
-        NSLayoutConstraint.activate([
-            
-            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 26),
-            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            setStatusButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-            
-            fullNameLabel.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
-            
-            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -64),
-            statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            statusLabel.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
-            
-            paddedTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
-            paddedTextField.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16),
-            paddedTextField.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16),
-            
-        ])
+        setStatusButton.snp.makeConstraints { make in
+            make.top.equalTo(avatarImageView.snp.bottom).offset(26)
+            make.leading.equalTo(safeAreaGuide).offset(16)
+            make.trailing.equalTo(safeAreaGuide).offset(-16)
+            make.height.equalTo(50)
+            make.bottom.equalTo(self).offset(-16)
+        }
+        
+        fullNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaGuide).offset(27)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
+            make.trailing.equalTo(safeAreaGuide).offset(-16)
+        }
+        
+        statusLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(setStatusButton.snp.top).offset(-64)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
+            make.trailing.equalTo(safeAreaGuide).offset(-16)
+        }
+        
+        paddedTextField.snp.makeConstraints { make in
+            make.top.equalTo(statusLabel.snp.bottom).offset(10)
+            make.leading.equalTo(avatarImageView.snp.trailing).offset(16)
+            make.trailing.equalTo(safeAreaGuide).offset(-16)
+        }
     }
 }
 
