@@ -35,13 +35,9 @@ class PreviewCollectionViewCell: UICollectionViewCell {
     //MARK: - Setting constraints
     
     private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            photo.topAnchor.constraint(equalTo: topAnchor),
-            photo.leadingAnchor.constraint(equalTo: leadingAnchor),
-            photo.trailingAnchor.constraint(equalTo: trailingAnchor),
-            photo.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+        photo.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
-
 }
 

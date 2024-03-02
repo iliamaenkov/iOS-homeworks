@@ -16,6 +16,8 @@ public struct Post {
     public var image: String?
     public var likes: Int
     public var views: Int
+    public var isLiked: Bool = false
+    public var likeCount: Int = 0
     
     public init(
         author: String,

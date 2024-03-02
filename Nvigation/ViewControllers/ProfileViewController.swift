@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol ProfileVIewControllerDelegate: AnyObject {
     func scrollOn()
@@ -27,6 +28,7 @@ extension ProfileViewController: ProfileVIewControllerDelegate {
 
 final class ProfileViewController: UIViewController {
     
+    private let coreDataService = CoreDataService.shared
     private var viewModel: ProfileViewModel
     var user: User?
     var profileHeader = ProfileHeaderView()
@@ -80,12 +82,6 @@ final class ProfileViewController: UIViewController {
           navigationController?.setNavigationBarHidden(true, animated: true)
       }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        Timer.scheduledTimer(withTimeInterval: 10, repeats: false, block: { _ in
-//            self.showBreakScreen()
-//        })
-//    }
-    
     //MARK: - Private
     
     private func bindViewModel() {
@@ -106,7 +102,6 @@ final class ProfileViewController: UIViewController {
             
         }
     }
-
     
     private func setupHeader() {
         profileHeader.user = viewModel.currentUser
@@ -123,21 +118,9 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
-    }
-    
-    func showBreakScreen() {
-        let breakScreen = BreakScreenViewController()
-        
-        breakScreen.modalTransitionStyle = .coverVertical
-        breakScreen.modalPresentationStyle = .pageSheet
-        
-        present(breakScreen, animated: true)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalTo(view)
+        }
     }
 }
 
@@ -177,16 +160,68 @@ extension ProfileViewController: UITableViewDataSource {
             
             let post = posts[indexPath.row]
             cell.setup(with: post)
+            addDoubleTapGesture(to: cell)
+            
             return cell
         }
         return UITableViewCell()
     }
-
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             viewModel.showPhotoGallery?()
         }
     }
-
 }
+
+
+extension ProfileViewController: UIGestureRecognizerDelegate {
+
+    private func addDoubleTapGesture(to cell: UITableViewCell) {
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTapOnPost(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        doubleTapGesture.delegate = self
+        cell.addGestureRecognizer(doubleTapGesture)
+    }
+
+    @objc func handleDoubleTapOnPost(_ recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .recognized {
+            let touchPoint = recognizer.location(in: tableView)
+            if let indexPath = tableView.indexPathForRow(at: touchPoint), indexPath.section == 1 {
+                let postIndex = indexPath.row
+                coreDataService.saveLikedPostIndex(postIndex)
+                showHeartAnimation(at: indexPath, isLiked: true)
+            }
+        }
+    }
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+
+    private func showHeartAnimation(at indexPath: IndexPath, isLiked: Bool) {
+        let systemNameImage = "heart.fill"
+
+        let heartImageView = UIImageView(image: UIImage(systemName: systemNameImage))
+        heartImageView.tintColor = .red
+        heartImageView.frame = CGRect(x: 0, y: 0, width: 65, height: 50)
+        heartImageView.center = tableView.cellForRow(at: indexPath)?.center ?? view.center
+
+        tableView.addSubview(heartImageView)
+
+        let shakeAnimation = CABasicAnimation(keyPath: "position")
+        shakeAnimation.duration = 0.1
+        shakeAnimation.repeatCount = 2
+        shakeAnimation.autoreverses = true
+        shakeAnimation.fromValue = NSValue(cgPoint: CGPoint(x: heartImageView.center.x - 5, y: heartImageView.center.y))
+        shakeAnimation.toValue = NSValue(cgPoint: CGPoint(x: heartImageView.center.x + 5, y: heartImageView.center.y))
+        heartImageView.layer.add(shakeAnimation, forKey: "position")
+
+        UIView.animate(withDuration: 0.7, delay: 0.2, options: .curveEaseOut, animations: {
+            heartImageView.alpha = 0
+        }) { _ in
+            heartImageView.removeFromSuperview()
+        }
+    }
+}
+

@@ -92,34 +92,37 @@ final class PostTableViewCell: UITableViewCell {
         authorLabel.text = post.author
         descriptionText.text = post.description
         postImageView.image = UIImage(named: post.image ?? "Empty")
-        likesLabel.text = "Likes: \(post.likes)"
+        likesLabel.text = "Likes: \(post.likes + post.likeCount)"
         viewsLabel.text = "Views: \(post.views)"
     }
     
     // MARK: - Setting constraints
     
     private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            authorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            authorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            authorLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            
-            postImageView.topAnchor.constraint(equalTo: authorLabel.bottomAnchor, constant: 16),
-            postImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            postImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor),
-            
-            descriptionText.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 16),
-            descriptionText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            descriptionText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            
-            likesLabel.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
-            likesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            
-            viewsLabel.topAnchor.constraint(equalTo: descriptionText.bottomAnchor, constant: 16),
-            viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
-        ])
+        authorLabel.snp.makeConstraints { make in
+            make.leading.equalTo(contentView).offset(16)
+            make.trailing.equalTo(contentView).offset(-16)
+            make.top.equalTo(contentView).offset(16)
+        }
+        postImageView.snp.makeConstraints { make in
+            make.top.equalTo(authorLabel.snp.bottom).offset(16)
+            make.leading.equalTo(contentView)
+            make.trailing.equalTo(contentView)
+            make.height.equalTo(postImageView.snp.width)
+        }
+        descriptionText.snp.makeConstraints { make in
+            make.top.equalTo(postImageView.snp.bottom).offset(16)
+            make.leading.equalTo(contentView).offset(16)
+            make.trailing.equalTo(contentView).offset(-16)
+        }
+        likesLabel.snp.makeConstraints { make in
+            make.top.equalTo(descriptionText.snp.bottom).offset(16)
+            make.leading.equalTo(contentView).offset(16)
+        }
+        viewsLabel.snp.makeConstraints { make in
+            make.top.equalTo(descriptionText.snp.bottom).offset(16)
+            make.trailing.equalTo(contentView).offset(-16)
+            make.bottom.equalTo(contentView).offset(-16)
+        }
     }
-
 }

@@ -32,15 +32,14 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     // MARK: - Setting constraints
     
     private func setupConstraints() {
-        
-        NSLayoutConstraint.activate([
-            photo.topAnchor.constraint(equalTo: topAnchor),
-            photo.leadingAnchor.constraint(equalTo: leadingAnchor),
-            photo.trailingAnchor.constraint(equalTo: trailingAnchor),
-            photo.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+        photo.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
-    
+
     func setup(with image: UIImage) {
         photo.image = image
     }

@@ -7,22 +7,26 @@
 
 import UIKit
 
-class ProfileCoordinator: ProfileBaseCoordinator {
+final class ProfileCoordinator: ProfileBaseCoordinator {
     
+    var profileModel: ProfileViewModel
     let checkerService = CheckerService()
     var parentCoordinator: MainBaseCoordinator?
     lazy var rootViewController: UIViewController = UIViewController()
-    lazy var profileViewModel: ProfileViewModel = ProfileViewModel(service: checkerService)
+    
+    init (profileModel: ProfileViewModel){
+        self.profileModel = profileModel
+    }
     
     func start() -> UIViewController {
-        profileViewModel.showProfile = { [weak self] in
+        profileModel.showProfile = { [weak self] in
             self?.showProfile()
         }
-        profileViewModel.showPhotoGallery = { [weak self] in
+        profileModel.showPhotoGallery = { [weak self] in
             self?.showPhotoGallery()
         }
         
-        let loginViewController = LogInViewController(viewModel: profileViewModel)
+        let loginViewController = LogInViewController(viewModel: profileModel)
         loginViewController.view.backgroundColor = .systemBackground
         
         let loginInspector = MyLoginFactory(checkerService: checkerService).makeLoginInspector()
@@ -35,7 +39,7 @@ class ProfileCoordinator: ProfileBaseCoordinator {
     }
     
     func showProfile() {
-        let profileViewController = ProfileViewController(viewModel: profileViewModel)
+        let profileViewController = ProfileViewController(viewModel: profileModel)
         navigationRootViewController?.pushViewController(profileViewController, animated: true)
     }
     

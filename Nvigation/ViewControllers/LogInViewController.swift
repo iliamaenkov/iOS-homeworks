@@ -216,7 +216,6 @@ final class LogInViewController: UIViewController {
         separatorView.snp.makeConstraints { make in
             make.height.equalTo(0.5)
         }
-        
     }
     
     // MARK: - Actions
@@ -237,8 +236,11 @@ final class LogInViewController: UIViewController {
                 print("User Password:", userPassword)
                 
                 let currentUser = User(login: userLogin, password: userPassword, fullName: "Kenobi", avatar: UIImage(named: "Kenobi")!, status: "Online")
+                
                 self.viewModel.currentUser = currentUser
+                self.viewModel.state = .loaded(currentUser)
                 self.viewModel.showProfile?()
+                print("Current state: \(self.viewModel.state)")
                 
             case .failure(let error):
                 switch error {
@@ -250,7 +252,6 @@ final class LogInViewController: UIViewController {
             }
         }
     }
-
 
     private func tapSignUp() {
         guard let userLogin = logInTextField.text, !userLogin.isEmpty else {
@@ -266,6 +267,7 @@ final class LogInViewController: UIViewController {
             case .success:
                 let currentUser = User(login: userLogin, password: userPassword, fullName: "Kenobi", avatar: UIImage(named: "Kenobi")!, status: "Online")
                 self.viewModel.currentUser = currentUser
+                self.viewModel.state = .loaded(currentUser)
                 self.viewModel.showProfile?()
                 
             case .failure(let error):
@@ -278,8 +280,6 @@ final class LogInViewController: UIViewController {
             }
         }
     }
-
-
 
     public func displayErrorAlert(message: String) {
         let alert = UIAlertController(

@@ -26,6 +26,8 @@ protocol FeedViewModelOutput {
 
 final class FeedViewModel: FeedViewModelOutput {
     
+    static let shared = FeedViewModel()
+    
     var show: Action?
     
     var updateUI: (() -> Void)?

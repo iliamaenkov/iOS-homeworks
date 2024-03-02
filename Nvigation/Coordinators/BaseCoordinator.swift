@@ -41,8 +41,13 @@ protocol ProfileBaseCoordinator: Coordinator {
     func showPhotoGallery()
 }
 
+protocol LikedBaseCoordinator: Coordinator {
+
+}
+
 protocol MainBaseCoordinator: Coordinator {
     var feedCoordinator: FeedBaseCoordinator { get }
     var profileCoordinator: ProfileBaseCoordinator { get }
+    var likedCoordinator: LikedBaseCoordinator { get }
     func moveTo(flow: AppFlow)
 }

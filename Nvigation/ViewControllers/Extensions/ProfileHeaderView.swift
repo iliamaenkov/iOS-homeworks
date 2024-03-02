@@ -126,17 +126,18 @@ final class ProfileHeaderView: UIView {
         addSubview(avatarImageView)
         addSubview(returnAvatarButton)
             
-            NSLayoutConstraint.activate([
-                avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-                avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-                avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-                avatarImageView.heightAnchor.constraint(equalToConstant: 100),
-                
-                returnAvatarButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-                returnAvatarButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            ])
-        
+        avatarImageView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(16)
+            make.leading.equalTo(safeAreaLayoutGuide).offset(16)
+            make.width.height.equalTo(100)
         }
+
+        returnAvatarButton.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(16)
+            make.trailing.equalTo(safeAreaLayoutGuide).offset(-16)
+        }
+        
+    }
     
     private func commonInit() {
         paddedTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)

@@ -10,16 +10,28 @@ import UIKit
 enum AppFlow {
     case feed
     case profile
+    case liked
 }
 
-class MainCoordinator: MainBaseCoordinator {
+final class MainCoordinator: MainBaseCoordinator {
     
+    var profileModel: ProfileViewModel
+    var feedModel: FeedViewModel
     var parentCoordinator: MainBaseCoordinator?
     
-    lazy var feedCoordinator: FeedBaseCoordinator = FeedCoordinator()
-    lazy var profileCoordinator: ProfileBaseCoordinator = ProfileCoordinator()
+    var feedCoordinator: FeedBaseCoordinator
+    var profileCoordinator: ProfileBaseCoordinator
+    var likedCoordinator: LikedBaseCoordinator
     
     lazy var rootViewController: UIViewController = UITabBarController()
+    
+    init (profileModel: ProfileViewModel, feedModel: FeedViewModel) {
+        self.profileModel = profileModel
+        self.feedModel = feedModel
+        self.feedCoordinator = FeedCoordinator(feedViewModel: feedModel)
+        self.profileCoordinator = ProfileCoordinator(profileModel: profileModel)
+        self.likedCoordinator = LikedCoordinator(profileModel: profileModel)
+    }
     
     func start() -> UIViewController {
         let feedViewController = feedCoordinator.start()
@@ -39,8 +51,17 @@ class MainCoordinator: MainBaseCoordinator {
                 systemName: "person.fill"),
             tag: 1
         )
+        
+        let likedViewController = likedCoordinator.start()
+        likedCoordinator.parentCoordinator = self
+        likedViewController.tabBarItem = UITabBarItem(
+            title: "Liked",
+            image: UIImage(
+                systemName: "heart.circle.fill"),
+            tag: 2
+        )
         UITabBar.appearance().tintColor = .black
-        (rootViewController as? UITabBarController)?.viewControllers = [feedViewController, profileViewController]
+        (rootViewController as? UITabBarController)?.viewControllers = [feedViewController, profileViewController, likedViewController]
         
         return rootViewController
     }
@@ -51,6 +72,8 @@ class MainCoordinator: MainBaseCoordinator {
             (rootViewController as? UITabBarController)?.selectedIndex = 0
         case .profile:
             (rootViewController as? UITabBarController)?.selectedIndex = 1
+        case .liked:
+            (rootViewController as? UITabBarController)?.selectedIndex = 2
         }
     }
     

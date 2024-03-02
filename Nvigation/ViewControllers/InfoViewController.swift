@@ -75,32 +75,30 @@ class InfoViewController: UIViewController {
     // MARK: - Private
     
     private func setupConstraints() {
-        showAlertButton.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        planetLabel.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            showAlertButton.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 70),
-            showAlertButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            showAlertButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            showAlertButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: showAlertButton.bottomAnchor, constant: 20),
-            titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            titleLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            
-            planetLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            planetLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            planetLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            planetLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            
-            tableView.topAnchor.constraint(equalTo: planetLabel.bottomAnchor, constant: 20),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
-        ])
+        showAlertButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(70)
+            make.leading.equalTo(view).offset(16)
+            make.trailing.equalTo(view).offset(-16)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.top.equalTo(showAlertButton.snp.bottom).offset(20)
+            make.leading.equalTo(view).offset(16)
+            make.trailing.equalTo(view).offset(-16)
+        }
+        planetLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(view)
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.leading.equalTo(view).offset(16)
+            make.trailing.equalTo(view).offset(-16)
+        }
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(planetLabel.snp.bottom).offset(20)
+            make.leading.equalTo(view).offset(16)
+            make.trailing.equalTo(view).offset(-16)
+            make.bottom.equalTo(view).offset(-40)
+        }
     }
     
     private func createTableViewHeader() -> UIView {

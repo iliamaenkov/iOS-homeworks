@@ -7,12 +7,16 @@
 
 import UIKit
 
-class FeedCoordinator: FeedBaseCoordinator {
+final class FeedCoordinator: FeedBaseCoordinator {
 
     var parentCoordinator: MainBaseCoordinator?
     lazy var rootViewController: UIViewController = UIViewController()
-    lazy var feedViewModel: FeedViewModel = FeedViewModel()
+    var feedViewModel: FeedViewModel
 
+    init (feedViewModel: FeedViewModel){
+        self.feedViewModel = feedViewModel
+    }
+    
     func start() -> UIViewController {
         feedViewModel.show = { [weak self] in
             self?.showPost()

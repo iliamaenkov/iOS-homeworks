@@ -25,11 +25,13 @@ protocol ProfileViewModelOutput {
 
 final class ProfileViewModel: ProfileViewModelOutput {
     
+    static let shared = ProfileViewModel(service: CheckerService())
+    
     var showProfile: Action?
     var showPhotoGallery: Action?
     var currentUser: User?
     
-    private let service: CheckerService
+    private let service: CheckerService?
     var currentState: ((State) -> Void)?
     
     var state: State = .initial {
@@ -48,7 +50,6 @@ final class ProfileViewModel: ProfileViewModelOutput {
         if let currentUser = currentUser {
             state = .loaded(currentUser)
         } else {
-            let _ = NSError(domain: "YourDomain", code: 401, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
             state = .error
         }
     }

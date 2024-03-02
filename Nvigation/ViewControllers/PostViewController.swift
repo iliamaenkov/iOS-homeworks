@@ -10,7 +10,6 @@ import StorageService
 
 final class PostViewController: UIViewController {
     
-    var coordinator: FeedCoordinator?
     var postTitle: PostTitle?
     var post: Post?
     
@@ -54,9 +53,7 @@ final class PostViewController: UIViewController {
         
         infoViewController.modalTransitionStyle = .coverVertical
         infoViewController.modalPresentationStyle = .pageSheet
-        
-        // Display infoViewController modally
-        
+    
         present(infoViewController, animated: true)
     }
 }

@@ -92,31 +92,30 @@ final class PhotosTableViewCell: UITableViewCell {
     // MARK: - Setting constraints
     
     private func setupConstraints() {
-        
-        NSLayoutConstraint.activate([
-            
-            titleView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            titleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            titleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            titleView.bottomAnchor.constraint(equalTo: collectionView.topAnchor, constant: 0),
-            
-            titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 12),
-            titleLabel.topAnchor.constraint(equalTo: titleView.topAnchor, constant: 6),
-            titleLabel.bottomAnchor.constraint(equalTo: titleView.bottomAnchor, constant: -6),
-            
-            arrowImage.trailingAnchor.constraint(equalTo: titleView.trailingAnchor, constant: -12),
-            arrowImage.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            arrowImage.bottomAnchor.constraint(equalTo: titleView.bottomAnchor, constant: -6),
-           
-            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            collectionView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 0),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            collectionView.heightAnchor.constraint(equalTo: collectionView.widthAnchor, multiplier: 1.0 / 4, constant: -8)
-
-        ])
+        titleView.snp.makeConstraints { make in
+            make.top.equalTo(contentView)
+            make.leading.equalTo(contentView)
+            make.trailing.equalTo(contentView)
+            make.bottom.equalTo(collectionView.snp.top)
+        }
+        titleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(titleView).offset(12)
+            make.top.equalTo(titleView).offset(6)
+            make.bottom.equalTo(titleView).offset(-6)
+        }
+        arrowImage.snp.makeConstraints { make in
+            make.trailing.equalTo(titleView).offset(-12)
+            make.centerY.equalTo(titleLabel)
+            make.bottom.equalTo(titleView).offset(-6)
+        }
+        collectionView.snp.makeConstraints { make in
+            make.leading.equalTo(contentView).offset(12)
+            make.trailing.equalTo(contentView).offset(-12)
+            make.top.equalTo(titleView.snp.bottom)
+            make.bottom.equalTo(contentView).offset(-12)
+            make.height.equalTo(collectionView.snp.width).multipliedBy(1.0 / 4).offset(-8)
+        }
     }
-
 }
 
 //MARK: PhotosTableViewCell - Extensions
