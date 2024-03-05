@@ -14,7 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let mainCoordinator = MainCoordinator()
+        let profileModel = ProfileViewModel.shared
+        let feedModel = FeedViewModel.shared
+        
+        let mainCoordinator = MainCoordinator(profileModel: profileModel, feedModel: feedModel)
         let rootViewController = mainCoordinator.start()
 
         let window = UIWindow(windowScene: windowScene)
