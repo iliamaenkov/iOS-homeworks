@@ -7,12 +7,32 @@
 
 import UIKit
 import StorageService
+import CoreData
 
 final class PostTableViewCell: UITableViewCell {
     
+    private let coreDataService = CoreDataService.shared
+    
+    private var isLiked: Bool = false {
+        didSet {
+            updateLikeStatus()
+        }
+    }
     static let id = "PostCell"
     
     // MARK: - UI Elements
+    
+    private lazy var likeImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "heart.fill")
+        imageView.tintColor = .red
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isHidden = true
+        
+        return imageView
+    }()
     
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
@@ -86,17 +106,24 @@ final class PostTableViewCell: UITableViewCell {
         contentView.addSubview(descriptionText)
         contentView.addSubview(likesLabel)
         contentView.addSubview(viewsLabel)
+        contentView.addSubview(likeImageView)
     }
     
     func setup(with post: Post) {
         authorLabel.text = post.author
         descriptionText.text = post.description
         postImageView.image = UIImage(named: post.image ?? "Empty")
-        likesLabel.text = "Likes: \(post.likes + post.likeCount)"
+        likesLabel.text = "Likes: \(post.likes)"
         viewsLabel.text = "Views: \(post.views)"
+        isLiked = coreDataService.isPostSaved(post)
+        updateLikeStatus()
     }
     
     // MARK: - Setting constraints
+    
+    private func updateLikeStatus() {
+        likeImageView.isHidden = !isLiked
+    }
     
     private func setupConstraints() {
         authorLabel.snp.makeConstraints { make in
@@ -123,6 +150,10 @@ final class PostTableViewCell: UITableViewCell {
             make.top.equalTo(descriptionText.snp.bottom).offset(16)
             make.trailing.equalTo(contentView).offset(-16)
             make.bottom.equalTo(contentView).offset(-16)
+        }
+        likeImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(likesLabel)
+            make.leading.equalTo(likesLabel.snp.trailing).offset(8)
         }
     }
 }

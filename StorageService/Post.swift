@@ -10,22 +10,23 @@ import Foundation
 //MARK: - Post
 
 public struct Post {
-
+    
+    public var id: UUID
     public var author: String
     public var description: String
     public var image: String?
     public var likes: Int
     public var views: Int
-    public var isLiked: Bool = false
-    public var likeCount: Int = 0
     
     public init(
+        id: UUID,
         author: String,
         description: String,
         image: String? = nil,
         likes: Int,
         views: Int
     ) {
+        self.id = id
         self.author = author
         self.description = description
         self.image = image

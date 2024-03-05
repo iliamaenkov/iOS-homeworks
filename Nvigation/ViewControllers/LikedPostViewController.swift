@@ -14,8 +14,14 @@ final class LikedPostsViewController:UIViewController {
     //MARK:  Properties
     
     var profileViewModel: ProfileViewModel
-    var likedPostIndexes: [Int] {
-        return coreDataService.getLikedPostIndexes()
+    
+    private func fetchLikedPosts() {
+        likedPosts = coreDataService.fetchLikedPosts()
+        tableView.reloadData()
+        print("Saved posts id's:")
+        likedPosts.forEach { post in
+            print("\(post.id)")
+        }
     }
     
     private var bAuth: Bool = false
@@ -46,8 +52,9 @@ final class LikedPostsViewController:UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadUserInfo()
+        fetchLikedPosts()
     }
-    
+
     init(profileViewModel: ProfileViewModel) {
         self.profileViewModel = profileViewModel
         super.init(nibName: nil, bundle: nil)
@@ -79,35 +86,33 @@ final class LikedPostsViewController:UIViewController {
     //MARK: Extensions
 
 extension LikedPostsViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        bAuth ? max(likedPostIndexes.count, 1) : 1
+        return bAuth ? max(likedPosts.count, 1) : 1
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if !bAuth {
             let cell = UITableViewCell()
             cell.textLabel?.text = "Has to be logged in"
             return cell
         }
 
-        if likedPostIndexes.isEmpty {
+        if likedPosts.isEmpty {
             let cell = UITableViewCell()
             cell.textLabel?.text = "No posts liked"
             return cell
         }
 
-        let postIndex = likedPostIndexes[indexPath.row]
+        let post = likedPosts[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell else {
             fatalError("Can't find a cell")
         }
 
-        let post = posts[postIndex]
         cell.setup(with: post)
         return cell
     }
 }
+
 
 extension LikedPostsViewController: UITableViewDelegate {
     
@@ -124,14 +129,22 @@ extension LikedPostsViewController: UITableViewDelegate {
     //MARK: Double tap method
     
     @objc func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
-        if recognizer.state == .recognized {
-            let touchPoint = recognizer.location(in: tableView)
-            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-                coreDataService.deleteLikedPostIndex(likedPostIndexes[indexPath.row])
-                showHeartAnimation(at: indexPath, isLiked: false)
-            }
+        guard recognizer.state == .recognized else {
+            return
+        }
+
+        let touchPoint = recognizer.location(in: tableView)
+
+        if let indexPath = tableView.indexPathForRow(at: touchPoint) {
+            let postToDelete = likedPosts[indexPath.row]
+
+            coreDataService.deletePost(postToDelete)
+            likedPosts.remove(at: indexPath.row)
+            tableView.reloadData()
+            showHeartAnimation(at: indexPath, isLiked: false)
         }
     }
+
     
     //MARK: Animation
     

@@ -76,11 +76,11 @@ final class ProfileViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-          self.beginAppearanceTransition(true, animated: true)
-          self.endAppearanceTransition()
-    
-          navigationController?.setNavigationBarHidden(true, animated: true)
-      }
+        self.beginAppearanceTransition(true, animated: true)
+        self.endAppearanceTransition()
+        tableView.reloadData()
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     
     //MARK: - Private
     
@@ -185,18 +185,24 @@ extension ProfileViewController: UIGestureRecognizerDelegate {
     }
 
     @objc func handleDoubleTapOnPost(_ recognizer: UITapGestureRecognizer) {
-        if recognizer.state == .recognized {
-            let touchPoint = recognizer.location(in: tableView)
-            if let indexPath = tableView.indexPathForRow(at: touchPoint), indexPath.section == 1 {
-                let postIndex = indexPath.row
-                coreDataService.saveLikedPostIndex(postIndex)
-                showHeartAnimation(at: indexPath, isLiked: true)
-            }
+        guard recognizer.state == .recognized else {
+            return
         }
-    }
+        let touchPoint = recognizer.location(in: tableView)
 
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        if let indexPath = tableView.indexPathForRow(at: touchPoint), indexPath.section == 1 {
+            let postIndex = indexPath.row
+            let postToSave = posts[postIndex]
+
+            if coreDataService.isPostSaved(postToSave) {
+                print("Post with ID \(postToSave.id) is already saved.")
+                return
+            }
+            coreDataService.savePost(postToSave)
+            coreDataService.setPostLikedStatus(postIndex, isLiked: true)
+            showHeartAnimation(at: indexPath, isLiked: true)
+            tableView.reloadData()
+        }
     }
 
     private func showHeartAnimation(at indexPath: IndexPath, isLiked: Bool) {
