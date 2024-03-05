@@ -198,14 +198,14 @@ extension ProfileViewController: UIGestureRecognizerDelegate {
                 print("Post with ID \(postToSave.id) is already saved.")
                 return
             }
-            coreDataService.savePost(postToSave)
+            coreDataService.savePostInBackground(postToSave)
             coreDataService.setPostLikedStatus(postIndex, isLiked: true)
-            showHeartAnimation(at: indexPath, isLiked: true)
+            showHeartAnimation(at: indexPath)
             tableView.reloadData()
         }
     }
 
-    private func showHeartAnimation(at indexPath: IndexPath, isLiked: Bool) {
+    private func showHeartAnimation(at indexPath: IndexPath) {
         let systemNameImage = "heart.fill"
 
         let heartImageView = UIImageView(image: UIImage(systemName: systemNameImage))

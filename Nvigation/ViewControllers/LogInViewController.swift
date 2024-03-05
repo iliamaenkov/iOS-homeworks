@@ -118,6 +118,14 @@ final class LogInViewController: UIViewController {
         
         logInTextField.delegate = self
         passwordTextField.delegate = self
+        
+#if DEBUG
+        logInTextField.text = "Test@test.ru"
+        passwordTextField.text = "123123"
+#else
+        logInTextField.text = "Test@test.ru"
+        passwordTextField.text = "123123"
+#endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
