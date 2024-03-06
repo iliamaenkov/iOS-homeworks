@@ -14,16 +14,7 @@ final class LikedPostsViewController:UIViewController {
     //MARK:  Properties
     
     var profileViewModel: ProfileViewModel
-    
-    private func fetchLikedPosts() {
-        likedPosts = coreDataService.fetchLikedPosts()
-        tableView.reloadData()
-        print("Saved posts id's:")
-        likedPosts.forEach { post in
-            print("\(post.id)")
-        }
-    }
-    
+
     private var bAuth: Bool = false
     private var likedPosts: [Post] = []
     private let coreDataService = CoreDataService.shared
@@ -53,6 +44,7 @@ final class LikedPostsViewController:UIViewController {
         super.viewDidAppear(animated)
         loadUserInfo()
         fetchLikedPosts()
+        setupUI()
     }
 
     init(profileViewModel: ProfileViewModel) {
@@ -65,6 +57,29 @@ final class LikedPostsViewController:UIViewController {
     }
     
     //MARK: Private methods
+    
+    private func setupUI() {
+        let searchButton = UIBarButtonItem(title: "Search", style: .plain, target: self, action: #selector(showSearchAlert))
+        let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearFilter))
+        navigationItem.rightBarButtonItem = searchButton
+        navigationItem.leftBarButtonItem = clearButton
+    }
+    
+    private func fetchLikedPosts() {
+        coreDataService.fetchLikedPosts { [weak self] likedPosts in
+            guard let self = self else { return }
+
+            DispatchQueue.main.async {
+                self.likedPosts = likedPosts
+                self.tableView.reloadData()
+
+                print("Saved posts id's:")
+                likedPosts.forEach { post in
+                    print("\(post.id)")
+                }
+            }
+        }
+    }
     
     private func loadUserInfo() {
         bAuth = profileViewModel.currentUser != nil
@@ -81,6 +96,42 @@ final class LikedPostsViewController:UIViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    @objc private func showSearchAlert() {
+        let alertController = UIAlertController(title: "Search by Author", message: nil, preferredStyle: .alert)
+        alertController.addTextField { textField in
+            textField.placeholder = "Enter author's name"
+        }
+        
+        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self] _ in
+            guard let self = self,
+                  let authorName = alertController.textFields?.first?.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            else {
+                return
+            }
+            
+            if !authorName.isEmpty {
+                self.filterPosts(byAuthor: authorName)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(applyAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func filterPosts(byAuthor author: String) {
+        let filteredPosts = likedPosts.filter { $0.author.lowercased() == author.lowercased() }
+        self.likedPosts = filteredPosts
+        self.tableView.reloadData()
+    }
+    
+    @objc private func clearFilter() {
+        fetchLikedPosts()
     }
 }
     //MARK: Extensions
@@ -116,55 +167,25 @@ extension LikedPostsViewController: UITableViewDataSource {
 
 extension LikedPostsViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if bAuth {
-            let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
-            doubleTapGesture.numberOfTapsRequired = 2
-            
-            guard let cell = tableView.cellForRow(at: indexPath) as? PostTableViewCell else { return }
-            cell.contentView.addGestureRecognizer(doubleTapGesture)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
+            guard let self = self else { return }
+            let postToDelete = self.likedPosts[indexPath.row]
+
+            self.coreDataService.deletePostInBackground(postToDelete) {
+                DispatchQueue.main.async {
+                    self.likedPosts = self.likedPosts.filter { $0.id != postToDelete.id }
+                    self.tableView.reloadData()
+                }
+                
+                completionHandler(true)
+            }
         }
-    }
-    
-    //MARK: Double tap method
-    
-    @objc func handleDoubleTap(_ recognizer: UITapGestureRecognizer) {
-        guard recognizer.state == .recognized else {
-            return
-        }
+        deleteAction.backgroundColor = .red
 
-        let touchPoint = recognizer.location(in: tableView)
+        let swipeConfig = UISwipeActionsConfiguration(actions: [deleteAction])
+        swipeConfig.performsFirstActionWithFullSwipe = false
 
-        if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-            let postToDelete = likedPosts[indexPath.row]
-
-            coreDataService.deletePost(postToDelete)
-            likedPosts.remove(at: indexPath.row)
-            tableView.reloadData()
-            showHeartAnimation(at: indexPath, isLiked: false)
-        }
-    }
-
-    
-    //MARK: Animation
-    
-    private func showHeartAnimation(at indexPath: IndexPath, isLiked: Bool) {
-        let systemNameImage = "heart.fill"
-
-        let heartImageView = UIImageView(image: UIImage(systemName: systemNameImage))
-        heartImageView.tintColor = .gray
-        heartImageView.frame = CGRect(x: 0, y: 0, width: 65, height: 50)
-        heartImageView.center = tableView.cellForRow(at: indexPath)?.center ?? view.center
-        heartImageView.alpha = 1
-
-        tableView.addSubview(heartImageView)
-
-        UIView.animate(withDuration: 1.0, animations: {
-            heartImageView.center.y += 50
-            heartImageView.tintColor = .systemGray
-        }) { _ in
-            heartImageView.removeFromSuperview()
-            self.tableView.reloadData()
-        }
+        return swipeConfig
     }
 }
