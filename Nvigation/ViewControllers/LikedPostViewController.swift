@@ -9,6 +9,46 @@ import CoreData
 import UIKit
 import StorageService
 
+extension PostEntity {
+    func toPost() -> Post? {
+        guard let id = self.id,
+              let author = self.author,
+              let description = self.postText,
+              let image = self.image 
+        else {
+            return nil
+        }
+
+        return Post(id: id,
+                    author: author,
+                    description: description,
+                    image: image,
+                    likes: Int(self.likes),
+                    views: Int(self.views))
+    }
+}
+
+extension LikedPostsViewController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            self.likedPosts.remove(at: indexPath.row)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        default:
+            break
+        }
+    }
+}
+
 final class LikedPostsViewController:UIViewController {
     
     //MARK:  Properties
@@ -29,6 +69,21 @@ final class LikedPostsViewController:UIViewController {
         return tableView
     }()
     
+    private lazy var fetchedResultsController: NSFetchedResultsController<PostEntity> = {
+        let fetchRequest: NSFetchRequest<PostEntity> = PostEntity.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "isLiked == true")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+
+        let controller = NSFetchedResultsController(
+            fetchRequest: fetchRequest,
+            managedObjectContext: CoreDataService.shared.backgroundContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+        controller.delegate = self
+        return controller
+    }()
+    
     //MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -42,9 +97,11 @@ final class LikedPostsViewController:UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadUserInfo()
-        fetchLikedPosts()
-        setupUI()
+        DispatchQueue.main.async {
+            self.loadUserInfo()
+            self.fetchLikedPosts()
+            self.setupUI()
+        }
     }
 
     init(profileViewModel: ProfileViewModel) {
@@ -66,20 +123,31 @@ final class LikedPostsViewController:UIViewController {
     }
     
     private func fetchLikedPosts() {
-        coreDataService.fetchLikedPosts { [weak self] likedPosts in
-            guard let self = self else { return }
+        do {
+            try fetchedResultsController.performFetch()
+            if let postEntities = fetchedResultsController.fetchedObjects {
+                let likedPosts: [Post] = postEntities.compactMap { postEntity in
+                    guard let id = postEntity.id else {
+                        print("Error: Found a PostEntity with nil id.")
+                        return nil
+                    }
 
-            DispatchQueue.main.async {
-                self.likedPosts = likedPosts
-                self.tableView.reloadData()
-
-                print("Saved posts id's:")
-                likedPosts.forEach { post in
-                    print("\(post.id)")
+                    return Post(id: id,
+                                author: postEntity.author ?? "",
+                                description: postEntity.postText ?? "",
+                                image: postEntity.image ?? "",
+                                likes: Int(postEntity.likes),
+                                views: Int(postEntity.views))
                 }
+
+                self.likedPosts = likedPosts
+                tableView.reloadData()
             }
+        } catch {
+            print("Error fetching liked posts: \(error.localizedDescription)")
         }
     }
+
     
     private func loadUserInfo() {
         bAuth = profileViewModel.currentUser != nil
@@ -166,26 +234,22 @@ extension LikedPostsViewController: UITableViewDataSource {
 
 
 extension LikedPostsViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
             guard let self = self else { return }
-            let postToDelete = self.likedPosts[indexPath.row]
-
-            self.coreDataService.deletePostInBackground(postToDelete) {
-                DispatchQueue.main.async {
-                    self.likedPosts = self.likedPosts.filter { $0.id != postToDelete.id }
-                    self.tableView.reloadData()
+            let postEntityToDelete = self.fetchedResultsController.object(at: indexPath)
+            
+            if let postToDelete = postEntityToDelete.toPost() {
+                self.coreDataService.deletePostInBackground(postToDelete) {
+                    completionHandler(true)
                 }
-                
-                completionHandler(true)
             }
         }
-        deleteAction.backgroundColor = .red
-
+        deleteAction.backgroundColor = UIColor.red
+        
         let swipeConfig = UISwipeActionsConfiguration(actions: [deleteAction])
         swipeConfig.performsFirstActionWithFullSwipe = false
-
+        
         return swipeConfig
     }
 }
