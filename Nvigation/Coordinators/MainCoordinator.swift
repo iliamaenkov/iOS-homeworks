@@ -11,10 +11,11 @@ enum AppFlow {
     case feed
     case profile
     case liked
+    case map
 }
 
 final class MainCoordinator: MainBaseCoordinator {
-    
+
     var profileModel: ProfileViewModel
     var feedModel: FeedViewModel
     var parentCoordinator: MainBaseCoordinator?
@@ -22,6 +23,7 @@ final class MainCoordinator: MainBaseCoordinator {
     var feedCoordinator: FeedBaseCoordinator
     var profileCoordinator: ProfileBaseCoordinator
     var likedCoordinator: LikedBaseCoordinator
+    var mapCoordinator: MapBaseCoordinator
     
     lazy var rootViewController: UIViewController = UITabBarController()
     
@@ -31,6 +33,7 @@ final class MainCoordinator: MainBaseCoordinator {
         self.feedCoordinator = FeedCoordinator(feedViewModel: feedModel)
         self.profileCoordinator = ProfileCoordinator(profileModel: profileModel)
         self.likedCoordinator = LikedCoordinator(profileModel: profileModel)
+        self.mapCoordinator = MapCoordinator()
     }
     
     func start() -> UIViewController {
@@ -60,8 +63,17 @@ final class MainCoordinator: MainBaseCoordinator {
                 systemName: "heart.circle.fill"),
             tag: 2
         )
+        
+        let mapViewController = mapCoordinator.start()
+        mapCoordinator.parentCoordinator = self
+        mapViewController.tabBarItem = UITabBarItem(
+            title: "Map",
+            image: UIImage(
+                systemName: "map.fill"),
+            tag: 3
+        )
         UITabBar.appearance().tintColor = .black
-        (rootViewController as? UITabBarController)?.viewControllers = [feedViewController, profileViewController, likedViewController]
+        (rootViewController as? UITabBarController)?.viewControllers = [feedViewController, profileViewController, likedViewController, mapViewController]
         
         return rootViewController
     }
@@ -74,6 +86,8 @@ final class MainCoordinator: MainBaseCoordinator {
             (rootViewController as? UITabBarController)?.selectedIndex = 1
         case .liked:
             (rootViewController as? UITabBarController)?.selectedIndex = 2
+        case .map:
+            (rootViewController as? UITabBarController)?.selectedIndex = 3
         }
     }
     
