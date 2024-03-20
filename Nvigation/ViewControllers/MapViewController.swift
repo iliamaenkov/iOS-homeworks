@@ -11,7 +11,7 @@ import CoreLocation
 
 final class MapViewController: UIViewController {
     
-    var locationManager = CLLocationManager()
+    var locationService = LocationService()
     var destinationCoordinate: CLLocationCoordinate2D?
     
     //MARK: - UI
@@ -90,13 +90,13 @@ final class MapViewController: UIViewController {
         view.addSubview(searchButton)
         
         setupConstraints()
-        checkLocationAuthorization()
         setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        requestLocationAuthorization()
+        locationService.requestAuthorization()
+        locationService.startUpdatingLocation()
     }
     
     //MARK: - Methods
@@ -113,12 +113,9 @@ final class MapViewController: UIViewController {
         segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
         locationButton.addTarget(self, action: #selector(centerMapOnUser), for: .touchUpInside)
         searchButton.addTarget(self, action: #selector(searchLocation), for: .touchUpInside)
-    }
-    
-    private func requestLocationAuthorization() {
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+        
+        // Location service delegate
+        locationService.delegate = self
     }
     
     private func setupConstraints() {
@@ -146,20 +143,6 @@ final class MapViewController: UIViewController {
         searchButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(45)
             make.centerX.equalTo(clearButton.snp.leading).offset(-20)
-        }
-    }
-    
-    private func checkLocationAuthorization() {
-        switch CLLocationManager.authorizationStatus() {
-        case .authorizedWhenInUse, .authorizedAlways:
-            locationManager.startUpdatingLocation()
-        case .notDetermined:
-            print("Location is not found")
-        case .denied, .restricted:
-            showLocationAccessDeniedAlert()
-            print("Location access restricted")
-        @unknown default:
-            break
         }
     }
     
@@ -299,19 +282,22 @@ final class MapViewController: UIViewController {
 
 //MARK: - Extensions
 
-extension MapViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+extension MapViewController: LocationServiceDelegate {
+    func locationService(_ service: LocationService, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(region, animated: true)
     }
 
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    func locationService(_ service: LocationService, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse || status == .authorizedAlways {
-            locationManager.startUpdatingLocation()
+            locationService.startUpdatingLocation()
+        } else {
+            showLocationAccessDeniedAlert()
         }
     }
 }
+
 
 
 extension MapViewController: MKMapViewDelegate {

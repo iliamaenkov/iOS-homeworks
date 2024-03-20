@@ -33,6 +33,7 @@
 		3F463EF22ADF2A3300FA4414 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F463EF12ADF2A3300FA4414 /* Photo.swift */; };
 		3F47A24B2BA885BE00F87D25 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47A24A2BA885BE00F87D25 /* MapCoordinator.swift */; };
 		3F47A24D2BA8879000F87D25 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47A24C2BA8879000F87D25 /* MapViewController.swift */; };
+		3F47A24F2BAAC87300F87D25 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47A24E2BAAC87300F87D25 /* LocationService.swift */; };
 		3F55383B2B35C3790069A076 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55383A2B35C3790069A076 /* MainCoordinator.swift */; };
 		3F55383D2B35C3870069A076 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55383C2B35C3870069A076 /* BaseCoordinator.swift */; };
 		3F55383F2B35C6430069A076 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55383E2B35C6430069A076 /* ProfileCoordinator.swift */; };
@@ -126,6 +127,7 @@
 		3F463EF12ADF2A3300FA4414 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		3F47A24A2BA885BE00F87D25 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		3F47A24C2BA8879000F87D25 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		3F47A24E2BAAC87300F87D25 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		3F55383A2B35C3790069A076 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		3F55383C2B35C3870069A076 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		3F55383E2B35C6430069A076 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				3F418ABF2B5FDC3B00710FC4 /* CheckerService.swift */,
+				3F47A24E2BAAC87300F87D25 /* LocationService.swift */,
 				3FB100522B8DCC400096BF26 /* DataBase */,
 				3FB100442B8CE8C80096BF26 /* Factory */,
 				3FB100432B8CE8BB0096BF26 /* Network */,
@@ -566,6 +569,7 @@
 				3F55383B2B35C3790069A076 /* MainCoordinator.swift in Sources */,
 				3F55383D2B35C3870069A076 /* BaseCoordinator.swift in Sources */,
 				3F55383F2B35C6430069A076 /* ProfileCoordinator.swift in Sources */,
+				3F47A24F2BAAC87300F87D25 /* LocationService.swift in Sources */,
 				3FE2553E2B17AC6C008AAB02 /* LoginFactory.swift in Sources */,
 				3F12237B2ACAC1F6006DEA3F /* SceneDelegate.swift in Sources */,
 				3F060EAD2ADC79E3000ACC49 /* PostTableViewCell.swift in Sources */,
