@@ -9,12 +9,6 @@ import UIKit
 import StorageService
 import CoreData
 
-extension String {
-    var localize: String {
-        NSLocalizedString(self, tableName: "LocalizableDict", comment: "")
-    }
-}
-
 final class PostTableViewCell: UITableViewCell {
     
     private let coreDataService = CoreDataService.shared

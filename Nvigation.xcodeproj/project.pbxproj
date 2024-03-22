@@ -37,6 +37,7 @@
 		3F47A2C52BACA71600F87D25 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 3F47A2C42BACA71600F87D25 /* Localizable.xcstrings */; };
 		3F47A2DA2BAD813400F87D25 /* LocalizableDict.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 3F47A2D82BAD813400F87D25 /* LocalizableDict.stringsdict */; };
 		3F47A2E62BAD86C100F87D25 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 3F47A2E52BAD86C100F87D25 /* InfoPlist.xcstrings */; };
+		3F47A2E92BADEF7000F87D25 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47A2E82BADEF7000F87D25 /* Extensions.swift */; };
 		3F55383B2B35C3790069A076 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55383A2B35C3790069A076 /* MainCoordinator.swift */; };
 		3F55383D2B35C3870069A076 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55383C2B35C3870069A076 /* BaseCoordinator.swift */; };
 		3F55383F2B35C6430069A076 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F55383E2B35C6430069A076 /* ProfileCoordinator.swift */; };
@@ -135,6 +136,7 @@
 		3F47A2DB2BAD814800F87D25 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/LocalizableDict.stringsdict; sourceTree = "<group>"; };
 		3F47A2E42BAD85EB00F87D25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F47A2E52BAD86C100F87D25 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		3F47A2E82BADEF7000F87D25 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3F55383A2B35C3790069A076 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		3F55383C2B35C3870069A076 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		3F55383E2B35C6430069A076 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 		3F47A2C62BACA72100F87D25 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
+				3F47A2E82BADEF7000F87D25 /* Extensions.swift */,
 				3F47A2C42BACA71600F87D25 /* Localizable.xcstrings */,
 				3F47A2D82BAD813400F87D25 /* LocalizableDict.stringsdict */,
 				3F47A2E52BAD86C100F87D25 /* InfoPlist.xcstrings */,
@@ -605,6 +608,7 @@
 				3F060EAA2ADC6A93000ACC49 /* ProfilePosts.swift in Sources */,
 				3F1223912ACB5DB4006DEA3F /* InfoViewController.swift in Sources */,
 				3F2459CB2AD87F27009F0110 /* CustomButton.swift in Sources */,
+				3F47A2E92BADEF7000F87D25 /* Extensions.swift in Sources */,
 				3F5538412B35C6520069A076 /* FeedCoordinator.swift in Sources */,
 				3F2459972AD02E9F009F0110 /* TextFieldWithPadding.swift in Sources */,
 				3F2459992AD47E29009F0110 /* LogInViewController.swift in Sources */,
