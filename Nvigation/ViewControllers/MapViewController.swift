@@ -25,7 +25,7 @@ final class MapViewController: UIViewController {
     
     private let clearButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Clear", for: .normal)
+        button.setTitle(NSLocalizedString("Clear", comment: "Очистить"), for: .normal)
         button.backgroundColor = .black
         button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         button.layer.cornerRadius = 4
@@ -38,7 +38,7 @@ final class MapViewController: UIViewController {
     
     private let buildRouteButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Route", for: .normal)
+        button.setTitle(NSLocalizedString("Route", comment: "Маршрут"), for: .normal)
         button.backgroundColor = .black
         button.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         button.layer.cornerRadius = 4
@@ -68,7 +68,7 @@ final class MapViewController: UIViewController {
     }()
     
     private let segmentedControl: UISegmentedControl = {
-        let items = ["Standard", "Satellite", "Hybrid"]
+        let items = [NSLocalizedString("Standart", comment: "Обычный"), NSLocalizedString("Satellite", comment: "Спутник"), NSLocalizedString("Hybrid", comment: "Гибрид")]
         let segmentedControl = UISegmentedControl(items: items)
         
         segmentedControl.selectedSegmentIndex = 0
@@ -157,17 +157,17 @@ final class MapViewController: UIViewController {
     }
     
     @objc private func searchLocation() {
-        let alertController = UIAlertController(title: "Input coordinates", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Input coordinates", comment: "Введите координаты"), message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in
-            textField.placeholder = "Latitude"
+            textField.placeholder = NSLocalizedString("Latitude", comment: "Широта")
             textField.keyboardType = .decimalPad
         }
         alertController.addTextField { textField in
-            textField.placeholder = "Longitude"
+            textField.placeholder = NSLocalizedString("Longitude", comment: "Долгота")
             textField.keyboardType = .decimalPad
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Отмена"), style: .cancel)
         let okAction = UIAlertAction(title: "ОК", style: .default) { [weak self] _ in
             guard let latitudeText = alertController.textFields?.first?.text,
                   let longitudeText = alertController.textFields?.last?.text,
@@ -185,15 +185,15 @@ final class MapViewController: UIViewController {
     }
     
     private func showLocationAccessDeniedAlert() {
-        let alertController = UIAlertController(title: "Location Access Denied",
-                                                message: "Please allow access to your location in Settings to use this feature.",
+        let alertController = UIAlertController(title: NSLocalizedString("Location Access Denied", comment: "Доступ к геолокации запрещен"),
+                                                message: NSLocalizedString("Please allow access to your location in Settings to use this feature.", comment: "Дайте разрешение на использование локации, чтобы использовать карту"),
                                                 preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Settings", style: .default) { _ in
+        let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: "Настройки"), style: .default) { _ in
             if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(settingsURL)
             }
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Отмена"), style: .cancel)
         alertController.addAction(settingsAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
@@ -255,7 +255,7 @@ final class MapViewController: UIViewController {
             guard let self = self else { return }
             if let error = error {
                 DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Error", message: "Can't find the way: \(error.localizedDescription)", preferredStyle: .alert)
+                    let alert = UIAlertController(title: NSLocalizedString("Error", comment: "Ошибка"), message: NSLocalizedString("Can't find the way: ", comment: "Не могу построить маршрут: ") + "\(error.localizedDescription)", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "ОК", style: .default))
                     self.present(alert, animated: true)
                 }

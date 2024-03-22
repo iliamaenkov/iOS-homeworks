@@ -113,8 +113,8 @@ final class PostTableViewCell: UITableViewCell {
         authorLabel.text = post.author
         descriptionText.text = post.description
         postImageView.image = UIImage(named: post.image ?? "Empty")
-        likesLabel.text = "Likes: \(post.likes)"
-        viewsLabel.text = "Views: \(post.views)"
+        likesLabel.text = String.localizedStringWithFormat("Likes_key".localize, post.likes)
+        viewsLabel.text = String.localizedStringWithFormat("Views_key".localize, post.views)
         isLiked = coreDataService.isPostSaved(post)
         updateLikeStatus()
     }

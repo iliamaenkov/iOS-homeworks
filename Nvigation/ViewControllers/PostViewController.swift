@@ -13,7 +13,7 @@ final class PostViewController: UIViewController {
     var postTitle: PostTitle?
     var post: Post?
     
-    private static let defaultTitle = "Post"
+    private static let defaultTitle = NSLocalizedString("Post", comment: "Пост")
     private static let infoButtonImage = UIImage(systemName: "arrowshape.turn.up.forward.circle")
     
     // MARK: - UI Elements

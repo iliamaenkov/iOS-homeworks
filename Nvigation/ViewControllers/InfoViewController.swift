@@ -17,7 +17,7 @@ class InfoViewController: UIViewController {
     // MARK: - UI Elements
     
     private lazy var showAlertButton: CustomButton = {
-        let button = CustomButton(title: "Show Alert", titleColor: .white) { [weak self] in
+        let button = CustomButton(title: NSLocalizedString("Show Alert", comment: "Показать предупреждение"), titleColor: .white) { [weak self] in
             self?.showInfoAlert()
         }
         return button
@@ -77,7 +77,7 @@ class InfoViewController: UIViewController {
     private func setupConstraints() {
         showAlertButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(70)
+            make.height.equalTo(50)
             make.leading.equalTo(view).offset(16)
             make.trailing.equalTo(view).offset(-16)
         }
@@ -109,7 +109,7 @@ class InfoViewController: UIViewController {
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
         headerLabel.font = UIFont.boldSystemFont(ofSize: 16)
         headerLabel.textColor = UIColor.white
-        headerLabel.text = "Tatooine residents names"
+        headerLabel.text = NSLocalizedString("Tatooine residents names", comment: "Имена жителей Татуина")
 
         headerView.addSubview(headerLabel)
 
@@ -163,7 +163,7 @@ class InfoViewController: UIViewController {
                 DataMapper.map(Planet.self, from: data) { (result: Result<Planet, NetworkError>) in
                     switch result {
                     case .success(let planet):
-                        self?.planetLabel.text = "Orbital Period: \(planet.orbitalPeriod)"
+                        self?.planetLabel.text = NSLocalizedString("Orbital Period: ", comment: "Орбитальный период: ") + "\(planet.orbitalPeriod)"
                         self?.fetchResidents(for: planet)
                     case .failure(let error):
                         print("Error decoding JSON: \(error)")
@@ -220,8 +220,8 @@ class InfoViewController: UIViewController {
     
     @objc func showInfoAlert() {
         let alertController = UIAlertController(
-            title: "Alert Window",
-            message: "Alert Message",
+            title: NSLocalizedString("Alert window", comment: "Окно предупреждения"),
+            message: NSLocalizedString("Alert message", comment: "Предупреждающее сообщение"),
             preferredStyle: .alert
         )
         
@@ -229,7 +229,7 @@ class InfoViewController: UIViewController {
             print("OK button tapped")
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Отмена"), style: .cancel) { _ in
             print("Cancel button tapped")
         }
         

@@ -51,7 +51,7 @@ final class ProfileHeaderView: UIView {
     }()
     
     private lazy var setStatusButton: CustomButton = {
-        let button = CustomButton(title: "Set status", titleColor: .white) { [weak self] in
+        let button = CustomButton(title: NSLocalizedString("Set status", comment: "Установить статус"), titleColor: .white) { [weak self] in
             self?.buttonPressed()
         }
         return button
@@ -59,7 +59,7 @@ final class ProfileHeaderView: UIView {
     
     private let paddedTextField: TextFieldWithPadding = {
         let textField = TextFieldWithPadding()
-        textField.placeholder = "Set status..."
+        textField.placeholder = NSLocalizedString("Set status...", comment: "Усиановить статус...")
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 12

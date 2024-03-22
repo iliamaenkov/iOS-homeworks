@@ -15,7 +15,7 @@ final class FeedView: UIView {
     var onResultLabelTapped: (() -> Void)?
     
     private lazy var checkGuessButton: CustomButton = {
-        let button = CustomButton(title: "Check", titleColor: .white) { [weak self] in
+        let button = CustomButton(title: NSLocalizedString("Check", comment: "Проверить"), titleColor: .white) { [weak self] in
             self?.tapCheckButton()
         }
         return button
@@ -25,7 +25,7 @@ final class FeedView: UIView {
         let label = UILabel()
         label.backgroundColor = .black
         label.layer.masksToBounds = true
-        label.text = "View post"
+        label.text = NSLocalizedString("View post", comment: "Посмотреть пост")
         label.textColor = .white
         label.textAlignment = .center
         label.layer.cornerRadius = 10

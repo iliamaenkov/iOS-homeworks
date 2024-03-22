@@ -63,7 +63,7 @@ final class PhotosViewController: UIViewController {
    //MARK: - Private
     
     private func setupUI() {
-        title = "Photo Gallery"
+        title = NSLocalizedString("Photo gallery", comment: "Фото галерея")
         view.addSubview(photosCollectionView)
         photosCollectionView.dataSource = self
         photosCollectionView.delegate = self
@@ -130,7 +130,7 @@ extension PhotosViewController {
         let start = Date()
         
         let qos: QualityOfService = .utility
-        let filter: ColorFilter = .noir
+        let filter: ColorFilter = .colorInvert
         
         imageProcessor.processImagesOnThread(
             sourceImages: photoGallery,

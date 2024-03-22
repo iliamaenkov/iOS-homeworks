@@ -66,7 +66,7 @@ final class LogInViewController: UIViewController {
     private let logInTextField: TextFieldWithPadding = {
         let textField = TextFieldWithPadding()
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "User email"
+        textField.placeholder = NSLocalizedString("User email", comment: "Почта пользователя")
         textField.keyboardType = .emailAddress
        
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +76,7 @@ final class LogInViewController: UIViewController {
     private let passwordTextField: TextFieldWithPadding = {
         let textField = TextFieldWithPadding()
         textField.backgroundColor = .systemGray6
-        textField.placeholder = "Password"
+        textField.placeholder = NSLocalizedString("Password", comment: "Пароль")
         textField.isSecureTextEntry = true
 
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -84,14 +84,14 @@ final class LogInViewController: UIViewController {
     }()
     
     private lazy var logInButton: CustomButton = {
-        let button = CustomButton(title: "Log In", titleColor: .white) { [weak self] in
+        let button = CustomButton(title: NSLocalizedString("Log In", comment: "Войти"), titleColor: .white) { [weak self] in
             self?.tapLogIn()
         }
         return button
     }()
     
     private lazy var signUpButton: CustomButton = {
-        let button = CustomButton(title: "Sign Up", titleColor: .white) { [weak self] in
+        let button = CustomButton(title: NSLocalizedString("Sign Up", comment: "Зарегистрироваться"), titleColor: .white) { [weak self] in
             self?.tapSignUp()
         }
         return button
@@ -230,10 +230,10 @@ final class LogInViewController: UIViewController {
     
     private func tapLogIn() {
         guard let userLogin = logInTextField.text, !userLogin.isEmpty else {
-            return displayErrorAlert(message: "Введите логин")
+            return displayErrorAlert(message: NSLocalizedString("Enter login", comment: "Введите логин"))
         }
         guard let userPassword = passwordTextField.text, !userPassword.isEmpty else {
-            return displayErrorAlert(message: "Введите пароль")
+            return displayErrorAlert(message: NSLocalizedString("Enter password", comment: "Введите пароль"))
         }
         
         loginDelegate?.check(login: userLogin, password: userPassword) { [weak self] result in
@@ -253,9 +253,9 @@ final class LogInViewController: UIViewController {
             case .failure(let error):
                 switch error {
                 case .invalidCredential:
-                    self.displayErrorAlert(message: "Некорректные данные")
+                    self.displayErrorAlert(message: NSLocalizedString("Incorrect data", comment: "Некорректные данные"))
                 case .unknown:
-                    self.displayErrorAlert(message: "Ошибка аутентификации")
+                    self.displayErrorAlert(message: NSLocalizedString("Auth error", comment: "Ошибка аутентификации"))
                 }
             }
         }
@@ -263,17 +263,17 @@ final class LogInViewController: UIViewController {
 
     private func tapSignUp() {
         guard let userLogin = logInTextField.text, !userLogin.isEmpty else {
-            return displayErrorAlert(message: "Введите логин")
+            return displayErrorAlert(message: NSLocalizedString("Enter login", comment: "Введите логин"))
         }
         guard let userPassword = passwordTextField.text, !userPassword.isEmpty else {
-            return displayErrorAlert(message: "Введите пароль")
+            return displayErrorAlert(message: NSLocalizedString("Enter password", comment: "Введите пароль"))
         }
         
         loginDelegate?.signUp(userLogin, userPassword) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success:
-                let currentUser = User(login: userLogin, password: userPassword, fullName: "Kenobi", avatar: UIImage(named: "Kenobi")!, status: "Online")
+                let currentUser = User(login: userLogin, password: userPassword, fullName: "Kenobi", avatar: UIImage(named: "Kenobi")!, status: NSLocalizedString("Online", comment: "Онлайн"))
                 self.viewModel.currentUser = currentUser
                 self.viewModel.state = .loaded(currentUser)
                 self.viewModel.showProfile?()
@@ -281,9 +281,9 @@ final class LogInViewController: UIViewController {
             case .failure(let error):
                 switch error {
                 case .invalidCredential:
-                    self.displayErrorAlert(message: "Некорректные данные")
+                    self.displayErrorAlert(message: NSLocalizedString("Incorrect data", comment: "Некорректные данные"))
                 case .unknown:
-                    self.displayErrorAlert(message: "Ошибка аутентификации")
+                    self.displayErrorAlert(message: NSLocalizedString("Auth error", comment: "Ошибка аутентификации"))
                 }
             }
         }
@@ -291,7 +291,7 @@ final class LogInViewController: UIViewController {
 
     public func displayErrorAlert(message: String) {
         let alert = UIAlertController(
-            title: "Ошибка",
+            title: NSLocalizedString("Error", comment: "Ошибка"),
             message: message,
             preferredStyle: .alert
         )
