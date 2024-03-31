@@ -25,7 +25,7 @@ class InfoViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = lightDark
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.sizeToFit()
@@ -35,7 +35,7 @@ class InfoViewController: UIViewController {
     
     private lazy var planetLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = lightDark
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.sizeToFit()
@@ -57,7 +57,7 @@ class InfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = inverseLightDark
         
         view.addSubview(showAlertButton)
         view.addSubview(titleLabel)

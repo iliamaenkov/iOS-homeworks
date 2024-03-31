@@ -1,5 +1,5 @@
 //
-//  Extensions.swift
+//  String.swift
 //  Nvigation
 //
 //  Created by Ilya Maenkov on 22.03.2024.

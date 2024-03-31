@@ -72,7 +72,7 @@ final class MainCoordinator: MainBaseCoordinator {
                 systemName: "map.fill"),
             tag: 3
         )
-        UITabBar.appearance().tintColor = .black
+        UITabBar.appearance().tintColor = lightDark
         (rootViewController as? UITabBarController)?.viewControllers = [feedViewController, profileViewController, likedViewController, mapViewController]
         
         return rootViewController

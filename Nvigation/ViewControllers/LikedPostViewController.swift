@@ -119,7 +119,9 @@ final class LikedPostsViewController:UIViewController {
         let searchButton = UIBarButtonItem(title: NSLocalizedString("Search", comment: "Поиск"), style: .plain, target: self, action: #selector(showSearchAlert))
         let clearButton = UIBarButtonItem(title: NSLocalizedString("Clear", comment: "Очистить"), style: .plain, target: self, action: #selector(clearFilter))
         navigationItem.rightBarButtonItem = searchButton
+        navigationItem.rightBarButtonItem?.tintColor = lightDark
         navigationItem.leftBarButtonItem = clearButton
+        navigationItem.leftBarButtonItem?.tintColor = lightDark
     }
     
     private func fetchLikedPosts() {

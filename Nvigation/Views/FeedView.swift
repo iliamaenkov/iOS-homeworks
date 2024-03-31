@@ -23,10 +23,10 @@ final class FeedView: UIView {
     
     lazy var resultLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .black
+        label.backgroundColor = lightDark
         label.layer.masksToBounds = true
         label.text = NSLocalizedString("View post", comment: "Посмотреть пост")
-        label.textColor = .white
+        label.textColor = inverseLightDark
         label.textAlignment = .center
         label.layer.cornerRadius = 10
         label.isUserInteractionEnabled = false
@@ -41,10 +41,10 @@ final class FeedView: UIView {
 //        textField.placeholder = "Enter word"
         textField.text = "12"
         textField.font = UIFont.systemFont(ofSize: 15)
-        textField.backgroundColor = .white
+        textField.backgroundColor = .systemGray6
         textField.layer.cornerRadius = 10
         textField.layer.borderWidth = 0.5
-        textField.layer.borderColor = UIColor.systemGray.cgColor
+        textField.layer.borderColor = UIColor.systemGray4.cgColor
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField
