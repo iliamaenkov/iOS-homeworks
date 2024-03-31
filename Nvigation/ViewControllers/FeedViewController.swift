@@ -51,8 +51,8 @@ final class FeedViewController: UIViewController {
         }
         
         viewModel.resetFeed = { [weak self] in
-            self?.feedView.resultLabel.backgroundColor = .black
-            self?.feedView.guessTextField.text = ""
+            self?.feedView.resultLabel.backgroundColor = lightDark
+            self?.feedView.guessTextField.text = "12"
             self?.feedView.setButtonInteractionEnabled(false)
         }
     }

@@ -50,5 +50,6 @@ final class ProfileCoordinator: ProfileBaseCoordinator {
         backButton.title = NSLocalizedString("Back", comment: "Назад")
         navigationRootViewController?.navigationItem.backBarButtonItem = backButton
         navigationRootViewController?.pushViewController(photosViewController, animated: true)
+        
     }
 }

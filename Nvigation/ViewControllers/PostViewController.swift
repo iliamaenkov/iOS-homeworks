@@ -41,7 +41,7 @@ final class PostViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.rightBarButtonItem = infoButton
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = lightDark
         navigationController?.isNavigationBarHidden = false
 
     }
