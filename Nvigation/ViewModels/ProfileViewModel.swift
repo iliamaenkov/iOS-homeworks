@@ -31,7 +31,7 @@ final class ProfileViewModel: ProfileViewModelOutput {
     var showPhotoGallery: Action?
     var currentUser: User?
     
-    private let service: CheckerService?
+    private let service: CheckerServiceProtocol?
     var currentState: ((State) -> Void)?
     
     var state: State = .initial {
@@ -41,7 +41,7 @@ final class ProfileViewModel: ProfileViewModelOutput {
         }
     }
     
-    init(service: CheckerService) {
+    init(service: CheckerServiceProtocol) {
         self.service = service
     }
     
