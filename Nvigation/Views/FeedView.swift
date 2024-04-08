@@ -15,7 +15,7 @@ final class FeedView: UIView {
     var onResultLabelTapped: (() -> Void)?
     
     private lazy var checkGuessButton: CustomButton = {
-        let button = CustomButton(title: "Check", titleColor: .white) { [weak self] in
+        let button = CustomButton(title: NSLocalizedString("Check", comment: "Проверить"), titleColor: .white) { [weak self] in
             self?.tapCheckButton()
         }
         return button
@@ -23,10 +23,10 @@ final class FeedView: UIView {
     
     lazy var resultLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .black
+        label.backgroundColor = lightDark
         label.layer.masksToBounds = true
-        label.text = "View post"
-        label.textColor = .white
+        label.text = NSLocalizedString("View post", comment: "Посмотреть пост")
+        label.textColor = inverseLightDark
         label.textAlignment = .center
         label.layer.cornerRadius = 10
         label.isUserInteractionEnabled = false
@@ -41,10 +41,10 @@ final class FeedView: UIView {
 //        textField.placeholder = "Enter word"
         textField.text = "12"
         textField.font = UIFont.systemFont(ofSize: 15)
-        textField.backgroundColor = .white
+        textField.backgroundColor = .systemGray6
         textField.layer.cornerRadius = 10
         textField.layer.borderWidth = 0.5
-        textField.layer.borderColor = UIColor.systemGray.cgColor
+        textField.layer.borderColor = UIColor.systemGray4.cgColor
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         return textField

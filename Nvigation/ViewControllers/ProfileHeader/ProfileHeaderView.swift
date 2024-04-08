@@ -37,7 +37,7 @@ final class ProfileHeaderView: UIView {
     private let fullNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18.0)
-        label.textColor = .black
+        label.textColor = lightDark
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -45,13 +45,13 @@ final class ProfileHeaderView: UIView {
     private let statusLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
+        label.textColor = lightDark
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var setStatusButton: CustomButton = {
-        let button = CustomButton(title: "Set status", titleColor: .white) { [weak self] in
+        let button = CustomButton(title: NSLocalizedString("Set status", comment: "Установить статус"), titleColor: .white) { [weak self] in
             self?.buttonPressed()
         }
         return button
@@ -59,13 +59,14 @@ final class ProfileHeaderView: UIView {
     
     private let paddedTextField: TextFieldWithPadding = {
         let textField = TextFieldWithPadding()
-        textField.placeholder = "Set status..."
+        textField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("Set status...", comment: "Усиановить статус..."), attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         textField.font = UIFont.systemFont(ofSize: 15)
         textField.backgroundColor = .white
         textField.layer.cornerRadius = 12
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.black.cgColor
         textField.translatesAutoresizingMaskIntoConstraints = false
+        
         return textField
     }()
     

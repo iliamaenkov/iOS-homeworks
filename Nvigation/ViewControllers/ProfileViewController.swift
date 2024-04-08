@@ -122,6 +122,19 @@ final class ProfileViewController: UIViewController {
             make.edges.equalTo(view)
         }
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+
+            if traitCollection.userInterfaceStyle == .dark {
+                self.tabBarController?.tabBar.barTintColor = .black
+            } else {
+                self.tabBarController?.tabBar.barTintColor = .white
+            }
+        }
+    }
 }
 
 //MARK: - ProfileViewController Extensions

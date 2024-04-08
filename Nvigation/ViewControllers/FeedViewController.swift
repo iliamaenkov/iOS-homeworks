@@ -51,8 +51,8 @@ final class FeedViewController: UIViewController {
         }
         
         viewModel.resetFeed = { [weak self] in
-            self?.feedView.resultLabel.backgroundColor = .black
-            self?.feedView.guessTextField.text = ""
+            self?.feedView.resultLabel.backgroundColor = lightDark
+            self?.feedView.guessTextField.text = "12"
             self?.feedView.setButtonInteractionEnabled(false)
         }
     }
@@ -70,7 +70,7 @@ final class FeedViewController: UIViewController {
     private func handleCheck(word: String) {
         guard !word.isEmpty else {
             // Показать алерт
-            showAlert(message: "Введите контрольное слово.")
+            showAlert(message: NSLocalizedString("Enter the code word.", comment: "Введите контрольное слово."))
             feedView.setButtonInteractionEnabled(false)
             return
         }
@@ -86,7 +86,7 @@ final class FeedViewController: UIViewController {
     }
     
     func showAlert(message: String) {
-        let alertController = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Ошибка"), message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }

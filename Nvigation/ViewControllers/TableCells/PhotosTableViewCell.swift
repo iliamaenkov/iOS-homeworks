@@ -8,7 +8,7 @@
 import UIKit
 
 final class PhotosTableViewCell: UITableViewCell {
-    
+
     private var photos: [Photo] = []
     static let id = "PhotoTableCell"
     
@@ -35,9 +35,9 @@ final class PhotosTableViewCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.textColor = .black
+        label.textColor = lightDark
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Photos"
+        label.text = NSLocalizedString("Photos", comment: "Фото")
         
         return label
     }()
@@ -45,7 +45,7 @@ final class PhotosTableViewCell: UITableViewCell {
     private lazy var arrowImage: UIImageView = {
         let arrow = UIImageView()
         arrow.translatesAutoresizingMaskIntoConstraints = false
-        arrow.image = UIImage(systemName: "arrow.forward")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        arrow.image = UIImage(systemName: "arrow.forward")?.withTintColor(lightDark, renderingMode: .alwaysOriginal)
         arrow.contentMode = .scaleAspectFit
         return arrow
     }()

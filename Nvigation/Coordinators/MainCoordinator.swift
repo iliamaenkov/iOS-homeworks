@@ -11,10 +11,11 @@ enum AppFlow {
     case feed
     case profile
     case liked
+    case map
 }
 
 final class MainCoordinator: MainBaseCoordinator {
-    
+
     var profileModel: ProfileViewModel
     var feedModel: FeedViewModel
     var parentCoordinator: MainBaseCoordinator?
@@ -22,6 +23,7 @@ final class MainCoordinator: MainBaseCoordinator {
     var feedCoordinator: FeedBaseCoordinator
     var profileCoordinator: ProfileBaseCoordinator
     var likedCoordinator: LikedBaseCoordinator
+    var mapCoordinator: MapBaseCoordinator
     
     lazy var rootViewController: UIViewController = UITabBarController()
     
@@ -31,13 +33,14 @@ final class MainCoordinator: MainBaseCoordinator {
         self.feedCoordinator = FeedCoordinator(feedViewModel: feedModel)
         self.profileCoordinator = ProfileCoordinator(profileModel: profileModel)
         self.likedCoordinator = LikedCoordinator(profileModel: profileModel)
+        self.mapCoordinator = MapCoordinator()
     }
     
     func start() -> UIViewController {
         let feedViewController = feedCoordinator.start()
         feedCoordinator.parentCoordinator = self
         feedViewController.tabBarItem = UITabBarItem(
-            title: "Feed",
+            title: NSLocalizedString("Feed", comment: "Лента"),
             image: UIImage(
                 systemName: "house.fill"),
             tag: 0
@@ -46,7 +49,7 @@ final class MainCoordinator: MainBaseCoordinator {
         let profileViewController = profileCoordinator.start()
         profileCoordinator.parentCoordinator = self
         profileViewController.tabBarItem = UITabBarItem(
-            title: "Profile",
+            title: NSLocalizedString("Profile", comment: "Профиль"),
             image: UIImage(
                 systemName: "person.fill"),
             tag: 1
@@ -55,13 +58,22 @@ final class MainCoordinator: MainBaseCoordinator {
         let likedViewController = likedCoordinator.start()
         likedCoordinator.parentCoordinator = self
         likedViewController.tabBarItem = UITabBarItem(
-            title: "Liked",
+            title: NSLocalizedString("Liked", comment: "Понравилось"),
             image: UIImage(
                 systemName: "heart.circle.fill"),
             tag: 2
         )
-        UITabBar.appearance().tintColor = .black
-        (rootViewController as? UITabBarController)?.viewControllers = [feedViewController, profileViewController, likedViewController]
+        
+        let mapViewController = mapCoordinator.start()
+        mapCoordinator.parentCoordinator = self
+        mapViewController.tabBarItem = UITabBarItem(
+            title: NSLocalizedString("Map", comment: "Карта"),
+            image: UIImage(
+                systemName: "map.fill"),
+            tag: 3
+        )
+        UITabBar.appearance().tintColor = lightDark
+        (rootViewController as? UITabBarController)?.viewControllers = [feedViewController, profileViewController, likedViewController, mapViewController]
         
         return rootViewController
     }
@@ -74,6 +86,8 @@ final class MainCoordinator: MainBaseCoordinator {
             (rootViewController as? UITabBarController)?.selectedIndex = 1
         case .liked:
             (rootViewController as? UITabBarController)?.selectedIndex = 2
+        case .map:
+            (rootViewController as? UITabBarController)?.selectedIndex = 3
         }
     }
     

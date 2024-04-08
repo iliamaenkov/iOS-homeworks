@@ -89,7 +89,7 @@ final class LikedPostsViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Liked Posts"
+        navigationItem.title = NSLocalizedString("Liked posts", comment: "Понравившиеся посты")
         view.addSubview(tableView)
         tuneTableView()
         setupContraints()
@@ -116,10 +116,12 @@ final class LikedPostsViewController:UIViewController {
     //MARK: Private methods
     
     private func setupUI() {
-        let searchButton = UIBarButtonItem(title: "Search", style: .plain, target: self, action: #selector(showSearchAlert))
-        let clearButton = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearFilter))
+        let searchButton = UIBarButtonItem(title: NSLocalizedString("Search", comment: "Поиск"), style: .plain, target: self, action: #selector(showSearchAlert))
+        let clearButton = UIBarButtonItem(title: NSLocalizedString("Clear", comment: "Очистить"), style: .plain, target: self, action: #selector(clearFilter))
         navigationItem.rightBarButtonItem = searchButton
+        navigationItem.rightBarButtonItem?.tintColor = lightDark
         navigationItem.leftBarButtonItem = clearButton
+        navigationItem.leftBarButtonItem?.tintColor = lightDark
     }
     
     private func fetchLikedPosts() {
@@ -167,12 +169,12 @@ final class LikedPostsViewController:UIViewController {
     }
     
     @objc private func showSearchAlert() {
-        let alertController = UIAlertController(title: "Search by Author", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Search by Author", comment: "Искать по автору"), message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in
-            textField.placeholder = "Enter author's name"
+            textField.placeholder = NSLocalizedString("Enter author's name", comment: "Введите имя автора")
         }
         
-        let applyAction = UIAlertAction(title: "Apply", style: .default) { [weak self] _ in
+        let applyAction = UIAlertAction(title: NSLocalizedString("Apply", comment: "Применить"), style: .default) { [weak self] _ in
             guard let self = self,
                   let authorName = alertController.textFields?.first?.text?.trimmingCharacters(in: .whitespacesAndNewlines)
             else {
@@ -184,7 +186,7 @@ final class LikedPostsViewController:UIViewController {
             }
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Отмена"), style: .cancel, handler: nil)
         
         alertController.addAction(applyAction)
         alertController.addAction(cancelAction)
@@ -212,13 +214,13 @@ extension LikedPostsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if !bAuth {
             let cell = UITableViewCell()
-            cell.textLabel?.text = "Has to be logged in"
+            cell.textLabel?.text = NSLocalizedString("Has to be logged in", comment: "Необходимо авторизироваться")
             return cell
         }
 
         if likedPosts.isEmpty {
             let cell = UITableViewCell()
-            cell.textLabel?.text = "No posts liked"
+            cell.textLabel?.text = NSLocalizedString("No posts liked", comment: "Нет понравившихся постов")
             return cell
         }
 
@@ -235,7 +237,7 @@ extension LikedPostsViewController: UITableViewDataSource {
 
 extension LikedPostsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Delete", comment: "Удалить")) { [weak self] (_, _, completionHandler) in
             guard let self = self else { return }
             let postEntityToDelete = self.fetchedResultsController.object(at: indexPath)
             

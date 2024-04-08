@@ -38,7 +38,7 @@ final class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.numberOfLines = 2
-        label.textColor = .black
+        label.textColor = lightDark
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -70,7 +70,7 @@ final class PostTableViewCell: UITableViewCell {
     private lazy var likesLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .black
+        label.textColor = lightDark
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -79,7 +79,7 @@ final class PostTableViewCell: UITableViewCell {
     private lazy var viewsLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .black
+        label.textColor = lightDark
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -113,8 +113,8 @@ final class PostTableViewCell: UITableViewCell {
         authorLabel.text = post.author
         descriptionText.text = post.description
         postImageView.image = UIImage(named: post.image ?? "Empty")
-        likesLabel.text = "Likes: \(post.likes)"
-        viewsLabel.text = "Views: \(post.views)"
+        likesLabel.text = String.localizedStringWithFormat("Likes_key".localize, post.likes)
+        viewsLabel.text = String.localizedStringWithFormat("Views_key".localize, post.views)
         isLiked = coreDataService.isPostSaved(post)
         updateLikeStatus()
     }

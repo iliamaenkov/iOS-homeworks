@@ -1,0 +1,551 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Alert message" : {
+      "comment" : "Предупреждающее сообщение",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Предупреждающее сообщение"
+          }
+        }
+      }
+    },
+    "Alert window" : {
+      "comment" : "Окно предупреждения",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Окно предупреждения"
+          }
+        }
+      }
+    },
+    "Apply" : {
+      "comment" : "Применить",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Применить"
+          }
+        }
+      }
+    },
+    "Auth error" : {
+      "comment" : "Ошибка аутентификации",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка аутентификации"
+          }
+        }
+      }
+    },
+    "Back" : {
+      "comment" : "Назад",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назад"
+          }
+        }
+      }
+    },
+    "Can't find the way: " : {
+      "comment" : "Не могу построить маршрут: ",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не могу построить маршрут: "
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "comment" : "Отмена",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отмена"
+          }
+        }
+      }
+    },
+    "Check" : {
+      "comment" : "Проверить",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Проверить"
+          }
+        }
+      }
+    },
+    "Clear" : {
+      "comment" : "Очистить",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистить"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "comment" : "Удалить",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить"
+          }
+        }
+      }
+    },
+    "Enter author's name" : {
+      "comment" : "Введите имя автора",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите имя автора"
+          }
+        }
+      }
+    },
+    "Enter login" : {
+      "comment" : "Введите логин",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите логин"
+          }
+        }
+      }
+    },
+    "Enter password" : {
+      "comment" : "Введите пароль",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите пароль"
+          }
+        }
+      }
+    },
+    "Enter the code word." : {
+      "comment" : "Введите контрольное слово.",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите контрольное слово."
+          }
+        }
+      }
+    },
+    "Error" : {
+      "comment" : "Ошибка",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка"
+          }
+        }
+      }
+    },
+    "Feed" : {
+      "comment" : "Лента",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лента"
+          }
+        }
+      }
+    },
+    "Has to be logged in" : {
+      "comment" : "Необходимо авторизироваться",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Необходимо авторизироваться"
+          }
+        }
+      }
+    },
+    "Hybrid" : {
+      "comment" : "Гибрид",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Гибрид"
+          }
+        }
+      }
+    },
+    "Incorrect data" : {
+      "comment" : "Некорректные данные",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Некорректные данные"
+          }
+        }
+      }
+    },
+    "Input coordinates" : {
+      "comment" : "Введите координаты",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите координаты"
+          }
+        }
+      }
+    },
+    "Latitude" : {
+      "comment" : "Широта",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Широта"
+          }
+        }
+      }
+    },
+    "Liked" : {
+      "comment" : "Понравилось",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Понравилось"
+          }
+        }
+      }
+    },
+    "Liked posts" : {
+      "comment" : "Понравившиеся посты",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Понравившиеся посты"
+          }
+        }
+      }
+    },
+    "Location Access Denied" : {
+      "comment" : "Доступ к геолокации запрещен",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Доступ к геолокации запрещен"
+          }
+        }
+      }
+    },
+    "Log In" : {
+      "comment" : "Войти",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Войти"
+          }
+        }
+      }
+    },
+    "Longitude" : {
+      "comment" : "Долгота",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Долгота"
+          }
+        }
+      }
+    },
+    "Map" : {
+      "comment" : "Карта",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карта"
+          }
+        }
+      }
+    },
+    "No posts liked" : {
+      "comment" : "Нет понравившихся постов",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет понравившихся постов"
+          }
+        }
+      }
+    },
+    "Online" : {
+      "comment" : "Онлайн",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Онлайн"
+          }
+        }
+      }
+    },
+    "Orbital Period: " : {
+      "comment" : "Орбитальный период: ",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Орбитальный период: "
+          }
+        }
+      }
+    },
+    "Password" : {
+      "comment" : "Пароль",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль"
+          }
+        }
+      }
+    },
+    "Photo gallery" : {
+      "comment" : "Фото галерея",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фото галерея"
+          }
+        }
+      }
+    },
+    "Photos" : {
+      "comment" : "Фото",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фото"
+          }
+        }
+      }
+    },
+    "Please allow access to your location in Settings to use this feature." : {
+      "comment" : "Дайте разрешение на использование локации, чтобы использовать карту",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дайте разрешение на использование локации, чтобы использовать карту"
+          }
+        }
+      }
+    },
+    "Post" : {
+      "comment" : "Пост",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пост"
+          }
+        }
+      }
+    },
+    "Profile" : {
+      "comment" : "Профиль",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профиль"
+          }
+        }
+      }
+    },
+    "Route" : {
+      "comment" : "Маршрут",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Маршрут"
+          }
+        }
+      }
+    },
+    "Satellite" : {
+      "comment" : "Спутник",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Спутник"
+          }
+        }
+      }
+    },
+    "Search" : {
+      "comment" : "Поиск",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск"
+          }
+        }
+      }
+    },
+    "Search by Author" : {
+      "comment" : "Искать по автору",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Искать по автору"
+          }
+        }
+      }
+    },
+    "Set status" : {
+      "comment" : "Установить статус",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Установить статус"
+          }
+        }
+      }
+    },
+    "Set status..." : {
+      "comment" : "Усиановить статус...",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Усиановить статус..."
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "comment" : "Настройки",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настройки"
+          }
+        }
+      }
+    },
+    "Show Alert" : {
+      "comment" : "Показать предупреждение",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать предупреждение"
+          }
+        }
+      }
+    },
+    "Sign Up" : {
+      "comment" : "Зарегистрироваться",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зарегистрироваться"
+          }
+        }
+      }
+    },
+    "Standart" : {
+      "comment" : "Обычный",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обычный"
+          }
+        }
+      }
+    },
+    "Tatooine residents names" : {
+      "comment" : "Имена жителей Татуина",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Имена жителей Татуина"
+          }
+        }
+      }
+    },
+    "User email" : {
+      "comment" : "Почта пользователя",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Почта пользователя"
+          }
+        }
+      }
+    },
+    "View post" : {
+      "comment" : "Посмотреть пост",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Посмотреть пост"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

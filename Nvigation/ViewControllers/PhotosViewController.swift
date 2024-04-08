@@ -28,7 +28,7 @@ final class PhotosViewController: UIViewController {
     lazy var photosCollectionView: UICollectionView = {
         let photos = UICollectionView(frame: .zero, collectionViewLayout: layout)
         photos.translatesAutoresizingMaskIntoConstraints = false
-        photos.backgroundColor = .white
+        photos.backgroundColor = inverseLightDark
         photos.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell")
         return photos
     }()
@@ -58,12 +58,16 @@ final class PhotosViewController: UIViewController {
         }, completion: { context in })
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.tintColor = lightDark
+    }
     
     
    //MARK: - Private
     
     private func setupUI() {
-        title = "Photo Gallery"
+        title = NSLocalizedString("Photo gallery", comment: "Фото галерея")
         view.addSubview(photosCollectionView)
         photosCollectionView.dataSource = self
         photosCollectionView.delegate = self
@@ -73,15 +77,21 @@ final class PhotosViewController: UIViewController {
     
     private func setupConstraints() {
         photosCollectionView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalTo(view)
         }
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.tintColor = .black
-        navigationController?.isNavigationBarHidden = false
-
+            if traitCollection.userInterfaceStyle == .dark {
+                self.tabBarController?.tabBar.barTintColor = .black
+            } else {
+                self.tabBarController?.tabBar.barTintColor = .white
+            }
+        }
     }
 }
 
@@ -130,7 +140,7 @@ extension PhotosViewController {
         let start = Date()
         
         let qos: QualityOfService = .utility
-        let filter: ColorFilter = .noir
+        let filter: ColorFilter = .colorInvert
         
         imageProcessor.processImagesOnThread(
             sourceImages: photoGallery,

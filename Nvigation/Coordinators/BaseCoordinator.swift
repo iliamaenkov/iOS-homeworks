@@ -45,9 +45,14 @@ protocol LikedBaseCoordinator: Coordinator {
 
 }
 
+protocol MapBaseCoordinator: Coordinator {
+
+}
+
 protocol MainBaseCoordinator: Coordinator {
     var feedCoordinator: FeedBaseCoordinator { get }
     var profileCoordinator: ProfileBaseCoordinator { get }
     var likedCoordinator: LikedBaseCoordinator { get }
+    var mapCoordinator: MapBaseCoordinator { get }
     func moveTo(flow: AppFlow)
 }
