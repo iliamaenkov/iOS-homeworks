@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1520"
-   version = "1.7">
+   version = "2.2">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -17,6 +17,29 @@
                BlueprintIdentifier = "3F1223742ACAC1F6006DEA3F"
                BuildableName = "Nvigation.app"
                BlueprintName = "Nvigation"
+               ReferencedContainer = "container:Nvigation.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <AutocreatedTestPlanReference>
+            </AutocreatedTestPlanReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3F6231192BC5D8F500F58BF7"
+               BuildableName = "NvigationTests.xctest"
+               BlueprintName = "NvigationTests"
                ReferencedContainer = "container:Nvigation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -37,6 +60,17 @@
                BlueprintIdentifier = "3F9CAE1A2B07BDF700CB4D43"
                BuildableName = "StorageServiceTests.xctest"
                BlueprintName = "StorageServiceTests"
+               ReferencedContainer = "container:Nvigation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3F6231192BC5D8F500F58BF7"
+               BuildableName = "NvigationTests.xctest"
+               BlueprintName = "NvigationTests"
                ReferencedContainer = "container:Nvigation.xcodeproj">
             </BuildableReference>
          </TestableReference>

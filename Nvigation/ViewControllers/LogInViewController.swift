@@ -63,7 +63,7 @@ final class LogInViewController: UIViewController {
         return view
     }()
     
-    private let logInTextField: TextFieldWithPadding = {
+    let logInTextField: TextFieldWithPadding = {
         let textField = TextFieldWithPadding()
         textField.backgroundColor = .systemGray6
         textField.placeholder = NSLocalizedString("User email", comment: "Почта пользователя")
@@ -73,7 +73,7 @@ final class LogInViewController: UIViewController {
         return textField
     }()
     
-    private let passwordTextField: TextFieldWithPadding = {
+    let passwordTextField: TextFieldWithPadding = {
         let textField = TextFieldWithPadding()
         textField.backgroundColor = .systemGray6
         textField.placeholder = NSLocalizedString("Password", comment: "Пароль")
@@ -228,7 +228,7 @@ final class LogInViewController: UIViewController {
     
     // MARK: - Actions
     
-    private func tapLogIn() {
+    func tapLogIn() {
         guard let userLogin = logInTextField.text, !userLogin.isEmpty else {
             return displayErrorAlert(message: NSLocalizedString("Enter login", comment: "Введите логин"))
         }
@@ -261,7 +261,7 @@ final class LogInViewController: UIViewController {
         }
     }
 
-    private func tapSignUp() {
+    func tapSignUp() {
         guard let userLogin = logInTextField.text, !userLogin.isEmpty else {
             return displayErrorAlert(message: NSLocalizedString("Enter login", comment: "Введите логин"))
         }
