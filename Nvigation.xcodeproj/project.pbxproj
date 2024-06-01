@@ -68,6 +68,7 @@
 		3FE255552B21DCBA008AAB02 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE255542B21DCBA008AAB02 /* FeedViewModel.swift */; };
 		3FFB97B52B50429A00335920 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFB97B42B50429A00335920 /* NetworkManager.swift */; };
 		3FFF9DA12BDA513E00609F6A /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF9DA02BDA513E00609F6A /* LocalNotificationsService.swift */; };
+		3FFF9DA42BE49AFB00609F6A /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFF9DA32BE49AFB00609F6A /* LocalAuthorizationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,7 @@
 		3FE255542B21DCBA008AAB02 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		3FFB97B42B50429A00335920 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3FFF9DA02BDA513E00609F6A /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
+		3FFF9DA32BE49AFB00609F6A /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -448,6 +450,7 @@
 		3FFB97B32B50426F00335920 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3FFF9DA22BE49AD600609F6A /* AuthorizationService */,
 				3FFF9D9F2BDA511800609F6A /* NotificationService */,
 				3F418ABF2B5FDC3B00710FC4 /* CheckerService.swift */,
 				3F47A24E2BAAC87300F87D25 /* LocationService.swift */,
@@ -464,6 +467,14 @@
 				3FFF9DA02BDA513E00609F6A /* LocalNotificationsService.swift */,
 			);
 			path = NotificationService;
+			sourceTree = "<group>";
+		};
+		3FFF9DA22BE49AD600609F6A /* AuthorizationService */ = {
+			isa = PBXGroup;
+			children = (
+				3FFF9DA32BE49AFB00609F6A /* LocalAuthorizationService.swift */,
+			);
+			path = AuthorizationService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -688,6 +699,7 @@
 				3F884C872B56BE37006B0DCA /* NetworkClient.swift in Sources */,
 				3FB100512B8DBB630096BF26 /* LikedCoordinator.swift in Sources */,
 				3FB100572B8DD0140096BF26 /* CoreDataService.swift in Sources */,
+				3FFF9DA42BE49AFB00609F6A /* LocalAuthorizationService.swift in Sources */,
 				3F176F1E2AE0321E00012995 /* PreviewCollectionViewCell.swift in Sources */,
 				3F060EAA2ADC6A93000ACC49 /* ProfilePosts.swift in Sources */,
 				3F1223912ACB5DB4006DEA3F /* InfoViewController.swift in Sources */,
@@ -904,6 +916,7 @@
 				DEVELOPMENT_TEAM = M7KU2658YA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Nvigation/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow the Face ID login for users";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To use map please allow location usage";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -933,6 +946,7 @@
 				DEVELOPMENT_TEAM = M7KU2658YA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Nvigation/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow the Face ID login for users";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To use map please allow location usage";
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

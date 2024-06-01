@@ -172,6 +172,17 @@
         }
       }
     },
+    "Face ID" : {
+      "comment" : "Войти с биометрией",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Войти с биометрией"
+          }
+        }
+      }
+    },
     "Feed" : {
       "comment" : "Лента",
       "localizations" : {
