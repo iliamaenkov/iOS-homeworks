@@ -97,6 +97,13 @@ final class LogInViewController: UIViewController {
         return button
     }()
     
+    private lazy var faceIDButton: CustomButton = {
+        let button = CustomButton(title: NSLocalizedString("Face ID", comment: "Войти с биометрией"), titleColor: .white) { [weak self] in
+            self?.tapFaceID()
+        }
+        return button
+    }()
+    
     // MARK: - Init
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
@@ -173,6 +180,7 @@ final class LogInViewController: UIViewController {
         contentView.addSubview(stackView)
         contentView.addSubview(logInButton)
         contentView.addSubview(signUpButton)
+        contentView.addSubview(faceIDButton)
         stackView.addArrangedSubview(logInTextField)
         stackView.addArrangedSubview(separatorView)
         stackView.addArrangedSubview(passwordTextField)
@@ -214,7 +222,14 @@ final class LogInViewController: UIViewController {
             make.top.equalTo(logInButton.snp.bottom).offset(8)
             make.leading.trailing.equalTo(scrollView).inset(16)
             make.height.equalTo(50)
-            make.bottom.equalTo(scrollView)
+        }
+        
+        faceIDButton.snp.makeConstraints { make in
+            make.centerX.equalTo(scrollView)
+            make.top.equalTo(signUpButton.snp.bottom).offset(8)
+            make.leading.trailing.equalTo(scrollView).inset(16)
+            make.height.equalTo(50)
+            make.bottom.equalTo(contentView).offset(-16)
         }
 
         logInTextField.snp.makeConstraints { make in
@@ -287,6 +302,18 @@ final class LogInViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func tapFaceID() {
+        LocalAuthorizationService.defaultService.authorizeIfPossible { [weak self] success in
+              guard let self = self else { return }
+              if success {
+                  viewModel.loadUser()
+                  viewModel.showProfile?()
+              } else {
+                  print("FaceID authentication failed")
+              }
+          }
     }
 
     public func displayErrorAlert(message: String) {
